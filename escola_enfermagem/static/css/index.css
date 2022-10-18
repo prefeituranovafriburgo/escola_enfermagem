@@ -1,0 +1,19 @@
+#banner{
+    height: 500px;
+}
+
+#banner h1{
+    font-size: 90pt;
+    color: #76D5CB;
+}
+
+main{
+    background-color: var(--main-color);
+    background-image: url(/static/images/bg-uerj.jpg);
+    /* background-image: url(/static/images/uerj-bg.jpg); */
+    /* background-image: url(/static/images/bg2.jpeg); */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: rgb(255, 255, 255);
+}

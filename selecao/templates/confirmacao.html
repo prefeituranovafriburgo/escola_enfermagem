@@ -1,0 +1,56 @@
+{% load template_filters %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Inscrição do Processo Seletivo para Curso de Técnico em Enfermagem</title>
+        <style type="text/css">
+            .titulo {
+                float: left;
+                font-weight: bold;
+            }
+            .numero {
+                float: right;
+            }
+        </style>
+    </head>
+
+    <body>
+        <img src="{% static "logo_prefeitura_transparente.png" %}" alt="Logo PMNF" title="Logo Cáritas"  style="margin:20px 0 0 15px;position: relative;left: 5px;" width="300px" />
+        <br>
+        <b>PROCESSO SELETIVO PARA CURSO DE TÉCNICO EM ENFERMAGEM 2021</b><br>
+        <b>Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima</b><br>
+        <BR>
+        <div class="titulo">COMPROVANTE DE INSCRIÇÃO - N° {{ alocacao.candidato.id }}</div><br>
+        <br>
+        Nome: {{ alocacao.candidato.nome }}<br>
+        Data Nascimento: {{ alocacao.candidato.dt_nascimento | date:"SHORT_DATE_FORMAT" }}<br>
+        CPF: {{ alocacao.candidato.cpf | formata_cpf }}<br>
+        Celular: {{ alocacao.candidato.celular | formata_tel }}<br>
+        Telefone: {{ alocacao.candidato.tel | formata_tel }}<br>
+        E-Mail: {{ alocacao.candidato.email }}<br>
+        Possui deficiência? {% if alocacao.candidato.deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
+        Indique qual deficiência? {{ alocacao.candidato.qual_deficiencia }}<br>
+        Informe se necessita de alguma condição especial para a realização da prova: {{ alocacao.candidato.necessidade }}<br>
+        Data Cadastro: {{ alocacao.candidato.dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
+        IP: {{ alocacao.candidato.ip }}<br>
+        <br>
+        Local: Colégio Estadual Professor Jamil El Jaick<br>
+        Endereço: Rua Dr. Euclides Solon de Pontes, 33, Centro, Nova Friburgo.<br>
+        Data: 31/10/2021<br>
+        <b>Horário: {{ alocacao.sala.horario.horario }}h - sala {{ alocacao.sala.sala }}.</b><br>
+
+    </body>
+
+    <SCRIPT LANGUAGE="JavaScript">
+        window.print();
+        setTimeout(function(){
+            window.close();
+        },2000);
+    </SCRIPT>
+
+</html>

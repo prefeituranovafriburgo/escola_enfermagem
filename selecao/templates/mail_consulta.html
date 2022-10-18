@@ -1,0 +1,30 @@
+{% load template_filters %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Consulta a inscrição do Processo Seletivo para Curso de Técnico em Enfermagem</title>
+        <style type="text/css">
+            .titulo {
+                float: left;
+                font-weight: bold;
+            }
+            .numero {
+                float: right;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="titulo">FICHA DE INSCRIÇÃO</div> <div class="numero">N° {{ id }}</div><br>
+        <br>
+        Nome: {{ nome }}<br>
+        CPF: {{ cpf | formata_cpf }}<br>
+        E-Mail: {{ email }}<br>
+        Data Cadastro: {{ dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
+        IP: {{ ip }}<br>
+        <a href="https://enfermagem.pmnf.rj.gov.br/consulta_chave/{{ chave }}">Clique aqui para acessar o cadastro</a>
+    </body>
+</html>

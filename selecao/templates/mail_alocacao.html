@@ -1,0 +1,48 @@
+{% load template_filters %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Local e sala de realização da prova</title>
+        <style type="text/css">
+            .titulo {
+                float: left;
+                font-weight: bold;
+            }
+            .numero {
+                float: right;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="titulo">Local e sala de realização da prova:</div><br>
+        <br>
+Olá {{ nome }}, bom dia!<br>
+<br>
+Esperamos que esteja bem!<br>
+<br>
+Seguem algumas informações importantes sobre o processo seletivo para o curso de Técnico em Enfermagem da Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima.<br>
+<br>
+A prova será realizada no dia 31  de outubro de 2021, no Colégio Estadual Professor Jamil El Jaick, localizado na Rua Dr. Euclides Solon de Pontes, número 33, Centro, Nova Friburgo.<br>
+<br>
+A prova será aplicada nos seguintes horários: para os candidatos cujo nome se inicia com com a letra “A” até a letra “K” a prova será aplicada às 9h; para os candidatos cujo nome se inicia  com a letra “L” até a letra “Z” a prova será aplicada às 11h.<br>
+<br>
+<b>A sua prova será aplicada no seguinte horário: {{ horario }}h - sala {{ sala }}.</b><br>
+<br>
+<a href="https://enfermagem.pmnf.rj.gov.br/confirmacao/{{ chave }}">Clique aqui para imprimir o comprovante de inscrição que você deverá levar no dia da prova</a><br>
+<br>
+A prova terá a duração de 1h e 30min.<br>
+<br>
+Você deverá comparecer ao local designado para o processo seletivo, com antecedência de 30 minutos, munido do comprovante de inscrição, caneta de tinta azul ou preta, apresentando um documento de identificação que possua foto, conforme previsto no edital.<br>
+<br>
+Deverá, ainda, respeitar  os protocolos sanitários previstos no edital, sob pena de exclusão no processo seletivo.<br>
+<br>
+Desejamos uma ótima prova e boa sorte!<br>
+<br>
+Atenciosamente,<br>
+A Direção<br>
+    </body>
+</html>

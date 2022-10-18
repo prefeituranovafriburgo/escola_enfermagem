@@ -1,0 +1,95 @@
+{% load template_filters %}
+
+{% load static %}
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+    <head>
+        <!-- Meta tags Obrigatórias -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <link href="{% static 'css/jlb.css' %}" rel="stylesheet" type="text/css">
+
+        <title>Técnico em Enfermagem</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+
+    <body class="body">
+        <div class="container">
+
+            <style type="text/css">
+
+                .break { page-break-after: always; }
+
+            </style>
+
+            <br>
+            <div class="container">
+
+                {% for alocacao in alocacoes %}
+
+                    {% ifchanged alocacao.sala.id %}
+
+                        {%  if not forloop.first %}
+                            </table>
+                            <div class="break"></div>
+                        {% endif %}
+
+                        <div class="row">
+
+                            <div class="col-5">
+                                <img src="{% static "logo_prefeitura_transparente.png" %}" alt="Logo PMNF" title="Logo Cáritas"  style="margin:20px 0 0 15px;position: relative;left: 5px;" width="300px" />
+                            </div>
+
+                            <div class="col-7">
+                                <h3 class="display-6 text-bold text-md-left mb-1">Secretaria Municipal de Educação</h3>
+                                <h3 class="display-6 text-bold text-md-left mb-1">Escola Técnica de Auxiliar de Enfermagem</h3>
+                                <h5 class="display-8 text-bold text-md-left mb-1">Secretaria Municipal de Ciência, Tecnologia, Inovação<br>e Educação Profissionalizante e Superior</h5>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-10">
+                                <h3>Relação de candidatos:</h3>
+                            </div>
+                        </div>
+
+                        <table  class="table table-striped table-bordered">
+                    {% endifchanged %}
+
+
+                    <tr>
+                        <td>{{ alocacao.candidato.id }}</td>
+                        <td>Nome: {{ alocacao.candidato.nome }}</td>
+                        <td>Sala: {{ alocacao.sala.sala }}<br>Horário: {{ alocacao.sala.horario.horario }}</td>
+                    </tr>
+
+                {% endfor %}
+
+                </table>
+
+            </div>
+
+            <SCRIPT LANGUAGE="JavaScript">
+                window.print();
+                setTimeout(function(){
+                    window.close();
+                },2000);
+            </SCRIPT>
+
+        </div>
+
+        <!-- JavaScript (Opcional) -->
+        <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>

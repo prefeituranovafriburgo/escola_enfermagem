@@ -1,0 +1,47 @@
+{% load template_filters %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Inscrição do Processo Seletivo para Curso de Técnico em Enfermagem</title>
+        <style type="text/css">
+            .titulo {
+                float: left;
+                font-weight: bold;
+            }
+            .numero {
+                float: right;
+            }
+        </style>
+    </head>
+
+    <body>
+        <img src="{% static "logo_prefeitura_transparente.png" %}" alt="Logo PMNF" title="Logo Cáritas"  style="margin:20px 0 0 15px;position: relative;left: 5px;" width="300px" />
+<br>
+        <div class="titulo">FICHA DE INSCRIÇÃO</div> <div class="numero">N° {{ candidato.id }}</div><br>
+        <br>
+        Nome: {{ candidato.nome }}<br>
+        Data Nascimento: {{ candidato.dt_nascimento | date:"SHORT_DATE_FORMAT" }}<br>
+        CPF: {{ candidato.cpf | formata_cpf }}<br>
+        Celular: {{ candidato.celular | formata_tel }}<br>
+        Telefone: {{ candidato.tel | formata_tel }}<br>
+        E-Mail: {{ candidato.email }}<br>
+        Possui deficiência? {% if candidato.deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
+        Indique qual deficiência? {{ candidato.qual_deficiencia }}<br>
+        Informe se necessita de alguma condição especial para a realização da prova: {{ candidato.necessidade }}<br>
+        Data Cadastro: {{ candidato.dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
+        IP: {{ candidato.ip }}<br>
+    </body>
+
+    <SCRIPT LANGUAGE="JavaScript">
+        window.print();
+        setTimeout(function(){
+            window.close();
+        },2000);
+    </SCRIPT>
+
+</html>

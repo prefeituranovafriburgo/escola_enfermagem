@@ -1,0 +1,57 @@
+{% extends 'template.html' %}
+{% load bootstrap5 %}
+{% load static%}
+{% block title %}ENFERMAGEM - EDITAIS{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cursos.css' %}">
+<script src="{% static 'js/cursos.js' %}"></script>
+{% endblock %}
+{% block editais %}fw-bold{% endblock %}
+{% block main %}
+<div class="row">
+    <div class="col d-flex py-5"> 
+        <div class="row w-100">
+            <div class="col-10 pb-4 m-auto bg-white">
+                <div class="row py-3 px-4">
+                    <div class="col bg p-5">
+                        <h1 class="display-4 text-center">EDITAIS</h1>
+                    </div>
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col px-4">
+                        <table class="table table-striped">
+                            <tbody class="border-0">
+                                {% for edital in editais %}
+                                <tr class="border-0">
+                                    <td class="d-flex border-0">
+                                        <span class="text-dark text-uppercase text-justify mt-4 mx-auto my-auto pb-3">
+                                            <b>{{edital.nome}} - {{edital.mes}}/{{edital.ano}}</b>
+                                        </span>       
+                                        <a class="btn btn-primary my-auto ms-auto" href="/edital/{{edital.id}}">
+                                            <!-- Download do edital em PDF -->
+                                            Visualizar<i class="fa-regular fa-eye ms-2"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col px-4 text-dark">
+                                    
+                        </div>                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL -->
+
+{% endblock %}

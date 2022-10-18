@@ -1,0 +1,35 @@
+
+main{
+    /* background-color: rgb(0, 0, 0); */
+    background-image: url('/static/images/bg-uerj.jpg');
+    background-size: cover;
+
+    color: rgb(255, 255, 255);
+}
+
+.bg{
+    background-color: #104a74;
+}
+.painel{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.painel a{
+    padding: 20px 0px;
+    width: 100%;
+    background-color: blue;
+    border: 0.5px solid white;    
+    text-decoration: none;
+    text-align: center;
+    font-size: 14pt;
+    color: white;
+}
+
+.painel .ativo{
+    background-color: #104a74;
+}
+
+.painel a:hover{
+    background-color: #104a74;
+}

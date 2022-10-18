@@ -1,0 +1,107 @@
+{% extends 'template.html' %}
+{% load bootstrap5 %}
+{% load static%}
+{% block title %}EDITAL - {{edital.nome}}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cursos.css' %}">
+<script src="{% static 'js/cursos.js' %}"></script>
+{% endblock %}
+{% block editais %}fw-bold{% endblock %}
+{% block main %}
+<div class="row" id="edital">
+    <div class="col d-flex py-5"> 
+        <div class="row w-100">
+            <div class="col-10 pb-4 m-auto bg-white">
+                <div class="row py-3 px-4">
+                    <div class="col bg p-5">
+                        <h1 class="display-4 text-center">INFORMAÇÕES DO EDITAL</h1>
+                    </div>
+                </div>                
+                
+                <div class="row d-flex">
+                    <div class="col d-flex flex-column px-4 pt-5 text-dark text-justify mx-auto" style="font-size: 16pt; max-width: 900px;">
+                        <h1 class="text-center mb-3">{{edital.nome}}</h1>
+                        <a style="font-size: 10pt;" class="mx-auto" target="_blank" href="{{edital.link_diario_oficial}}">Link p/ publicação no Diário Oficial do Município</a>
+                        <!-- <p class="mt-5" >O processo seletivo para o curso de Técnico em Enfermagem, da Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima, ofereceu 20 (vinte) vagas, no turno da noite. O resultado foi publicado no Diário Oficial do Município no dia 08 de dezembro, e também pode ser baixado do link acima.</p>
+                        <p>Os primeiros 20 colocados deverão efetivar suas matrículas entre os dias 02/02/2022 e 03/02/2022, das 14h às 20h na secretaria da Escola.</p>
+                        <p>Somente serão realizadas matrículas dos candidatos que apresentarem toda a documentação em cópia simples e legível, junto com o documento original no ato da matrícula, conforme previsto em edital.</p>                        
+                        <p>No ato da matrícula, o aluno deverá assinar termo de compromisso da disponibilidade de cumprimento de 600 horas de estágio concomitante ao período de aulas do curso, que será realizado de segunda a sexta-feira, manhã e/ou tarde.</p>
+                        <p>Encerrado o período de matrícula em 1ª chamada, se houver vagas excedentes, as mesmas serão oferecidas aos demais candidatos por ordem classificatória.</p> -->
+                        <div class="pt-4">
+                            {% for linha in descricao %}
+                                <p>{{linha}}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                </div>
+                {% if exibir_resultado %}
+                <div class="row">                    
+                    <div class="col px-4 text-dark mx-auto d-flex flex-column" style="font-size: 16pt; max-width: 900px;">
+                        <hr>
+                            <h3 class="mb-5">RESULTADO</h3>
+                            <a href="{{edital.link_resultado}}" class="btn btn-success mx-auto mb-5 px-5 py-3">
+                                Visualizar resultado
+                            </a>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col px-4 text-dark mx-auto" style="font-size: 16pt; max-width: 900px;">
+                        <hr>
+                        <h3 class="mb-2">DOWNLOADS</h3>
+                        <ul class="my-4">
+                            {% for download in downloads %}
+                            <li>
+                                <a target="_blank" href="{{download.link}}" style="font-size: 12pt;">
+                                    <i class="fa-solid fa-eye me-3"></i>{{download.nome}}
+                                </a>
+                            </li>
+                            {% endfor %}
+                                                       
+                        </ul>
+                        <hr>
+                    </div>
+                </div>
+                {% if inscricao %}
+                <div class="row">
+                    <div class="col px-4 text-dark mx-auto d-flex flex-column" style="font-size: 16pt; max-width: 900px;">
+                        <h3 class="mb-5">INSCRIÇÃO</h3>
+                        <button class="btn btn-info mb-5 mx-auto px-5 py-3" style="background-color: #77D5CA;">INSCREVER-SE</button>                        
+                    </div>
+                </div>
+                {% elif encerrar_inscricao %}
+                <div class="row">
+                    <div class="col px-4 text-dark mx-auto d-flex flex-column" style="font-size: 16pt; max-width: 900px;">
+                        <h3 class="mb-4">INSCRIÇÃO ENCERRADA</h3>
+                        <h5 class="mb-5 text-center">Clique <a href="#" style="text-decoration: none;">AQUI</a> para baixar informações sobre local e horário do processo seletivo.</h5>
+                    </div>
+                </div>
+                {% else %}
+                <div class="row">
+                    <div class="col px-4 text-dark mx-auto d-flex flex-column" style="font-size: 16pt; max-width: 900px;">
+                        <h3 class="mb-2">INSCRIÇÃO</h3>
+                        <h5 class="text-center mb-5">{{ edital.dt_inicio_inscricao }}<br>até<br>{{ edital.dt_final_inscricao }}</h5>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    #edital .text-justify p:first-child{
+        margin-top: 30px;
+    }
+    #edital .text-justify p{
+        text-indent: 50px;
+        margin-bottom: 30px;
+    }
+    #edital .text-justify ul{
+        margin-bottom: 20px;    
+    }
+    #edital .text-justify ul li{
+        list-style: circle !important;
+</style>
+
+{% endblock %}

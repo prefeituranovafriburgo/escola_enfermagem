@@ -1,0 +1,20 @@
+{% extends "cab.html" %}
+
+{% load static %}
+
+{% block cab %}
+<br>
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <h3>Cadastro realizado com sucesso. Disponibilizaremos em breve, aqui no site e por e-mail, o local de realização da prova.</h3>
+            <br>
+            <h5>Enviamos o protocolo de inscrição via e-mail para o endereço cadastrado. Caso queira imprimir, clique <a href="{% url 'selecao:imprime' chave %}" target="_blank"><span style="cursor:pointer;text-decoration:underline;color:#0000ff;">AQUI.</span></a></h5>
+        </div>
+    </div>
+
+</div>
+<br>
+
+{% endblock %}

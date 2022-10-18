@@ -1,0 +1,1416 @@
+<!doctype html>
+{% load static %}
+<html>
+    <head>
+            <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prefeitura Municipal de Nova Friburgo - RJ</title>
+
+    <link rel="shortcut icon" href="https://www.pmnf.rj.gov.br/imagens/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://www.pmnf.rj.gov.br/imagens/favicon.ico" type="image/x-icon">
+
+    <meta name="generator" content="">
+    <meta name="description" content="Prefeitura Municipal de Nova Friburgo - RJ">
+    <meta name="abstract" content="Prefeitura Municipal de Nova Friburgo - RJ">
+    <meta name="keywords" content="Prefeitura Municipal de Nova Friburgo - RJ">
+
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="http://novafriburgo.rj.gov.br/noticiasView/?id=1504" rel="canonical">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://www.pmnf.rj.gov.br/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://www.pmnf.rj.gov.br/css/variaveis.css" rel="stylesheet">
+
+    <!-- Owl Stylesheets -->
+    <link rel="stylesheet" href="https://www.pmnf.rj.gov.br/js/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://www.pmnf.rj.gov.br/js/owlcarousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://www.pmnf.rj.gov.br/js/carouselAutoPlay/owl-carousel/owl.transitions.css">
+
+    <!-- Material Design Bootstrap -->
+    <link href="https://www.pmnf.rj.gov.br/css/mdb.min.css" rel="stylesheet">
+
+    <!-- Css Stylo Geral -->
+    <link href="https://www.pmnf.rj.gov.br/css/style.css" rel="stylesheet">
+    <link href="https://www.pmnf.rj.gov.br/css/modules/topo.css" rel="stylesheet">
+    <link href="https://www.pmnf.rj.gov.br/css/modules/responsive.css" rel="stylesheet">
+    <link href="https://www.pmnf.rj.gov.br/css/modules/home-servicos.css" rel="stylesheet">
+    <link href="https://www.pmnf.rj.gov.br/css/modules/footer.css" rel="stylesheet">
+
+    <link href="https://www.pmnf.rj.gov.br/css/unidades.administrativas.css" type="text/css" rel="stylesheet">
+    
+    <link href="https://www.pmnf.rj.gov.br/css/front/default.header.acessibilidade.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet"> 
+
+
+    <link href="https://www.pmnf.rj.gov.br/css/front/default.header.acessibilidade.css" type="text/css" rel="stylesheet">
+
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://www.pmnf.rj.gov.br/js/newsite/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://www.pmnf.rj.gov.br/js/newsite/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://www.pmnf.rj.gov.br/js/newsite/bootstrap.min.js"></script>
+    
+    <!-- MDB core JavaScript -->
+    <!-- <script type="text/javascript" src="/js/newsite/mdb.min.js"></script> -->
+
+    <!-- javascript -->
+    <script src="https://www.pmnf.rj.gov.br/js/owlcarousel/owl.carousel.js"></script>
+    <script src="https://www.pmnf.rj.gov.br/js/open-search/open-search.js" type="text/javascript"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="https://www.pmnf.rj.gov.br/bootstrap/dist/js/ie10-viewport-bug-workaround.js" type="text/javascript"></script>
+    <script src="https://www.pmnf.rj.gov.br/js/menu.js" type="text/javascript"></script>
+    
+    <link href="https://www.pmnf.rj.gov.br/js/slider-pro-master/css/slider-pro.css" rel="stylesheet" type="text/css"/>
+    <script src="https://www.pmnf.rj.gov.br/js/slider-pro-master/js/jquery.sliderPro.js" type="text/javascript"></script>
+    <link href="https://www.pmnf.rj.gov.br/js/slider-pro-master/css/examples.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Mensagem deslizante de mensagens -->
+    <script type="text/javascript" src="https://www.pmnf.rj.gov.br/js/jquery-sliding-message/jquery.slidingmessage.js"></script>
+    <script type="text/javascript" src="https://www.pmnf.rj.gov.br/js/jquery-sliding-message/showMsg.js"></script>
+    <script type="text/javascript" src="https://www.pmnf.rj.gov.br/js/jquery.validate.js"></script>
+    <script type="text/javascript" src="https://www.pmnf.rj.gov.br/js/jquery.form.js"></script>
+
+    <script src="https://www.pmnf.rj.gov.br/js/acessibilidade/acessibilidade.jquery.js" type="text/javascript"></script>
+    <!-- Fim Mensagem deslizante de mensagens -->
+
+   <!--  <script src="/js/jquery.fittext.js" type="text/javascript"></script> -->
+    
+
+    <!-- Script Geral -->
+    <script>
+        window.onscroll = function () {
+            myFunction();
+        };
+
+        function myFunction() {
+            if (document.body.scrollTop > 160 || document.documentElement.scrollTop > 160) {
+                document.getElementById("logoPequena").className = "logoPequenaEfeito";
+                document.getElementById("menu-topo").className = "navbar navbar-expand-lg navbar-dark scrolling-navbar fixed-top navbarCor";
+            } else {
+                document.getElementById("logoPequena").className = "";
+                document.getElementById("menu-topo").className = "navbar navbar-expand-lg navbar-dark scrolling-navbar";
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        var popOverSettings = {
+            container: 'body',
+            html: true,
+            selector: '.checksum-info',
+            trigger: 'focus'
+        };
+        $(document).ready(function ($) {
+            "use strict";
+            /*-------------------------------------------------*/
+            /* =  Search animation
+             /*-------------------------------------------------*/
+            var searchToggle = $('.open-search'),
+                inputAnime = $(".formulario-busca"),
+                body = $('body');
+
+            searchToggle.on('click', function (event) {
+                event.preventDefault();
+
+                if (inputAnime.hasClass('active')) {
+                    inputAnime.addClass('active');
+                } else {
+                    inputAnime.removeClass('active');
+                }
+            });
+
+            body.on('click', function () {
+                inputAnime.removeClass('active');
+            });
+
+            var elemBinds = $('.open-search, .formulario-busca');
+            elemBinds.bind('click', function (e) {
+                e.stopPropagation();
+            });
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            });
+        });
+
+        $(document).ready(function () {
+            $('.secretarias-home').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                dots: true,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            });
+            $('.servicos').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: false,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            });
+            $('#mais-noticias-home').owlCarousel({
+                loop: true,
+                margin: 15,
+                nav: true,
+                dots: false,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
+            $('#banner-fino-home').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: false,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 7000,
+                animateIn: 'fadeIn',
+                animateOut: 'fadeOut',
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            });
+            $('#licitacoes').owlCarousel({
+                loop: true,
+                margin: 20,
+                nav: true,
+                dots: false,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 10000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            });
+            $('#home-obras').owlCarousel({
+                loop: true,
+                margin: 20,
+                nav: true,
+                dots: false,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 10000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            });
+            $('#home-turismo').owlCarousel({
+                loop: true,
+                margin: 15,
+                nav: true,
+                dots: false,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 13000,
+                animateIn: 'fadeIn',
+                animateOut: 'fadeOut',
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            });
+            $('#videos-home').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: false,
+                responsiveClass: true,
+                autoplay: false,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            });
+            $('#galeria-home').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: false,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 7000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
+            $('#eventos-home').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                dots: true,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 7000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            });
+            $('#concursos-home').owlCarousel({
+                loop: true,
+                margin: 20,
+                nav: true,
+                dots: false,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 7000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            });
+            $('#galeria-imagens-noticiaview').owlCarousel({
+                loop: false,
+                margin: 10,
+                nav: true,
+                dots: false,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 7000,
+                responsive: {
+                    0: {
+                        items: 2
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 4
+                    }
+                }
+            });
+            $('.acessoRapido').owlCarousel({
+                loop: true,
+                margin: 5,
+                nav: true,
+                dots: false,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 6000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 2
+                    },
+                    1200: {
+                        items: 4
+                    }
+                }
+            });
+            $('#veja-mais').owlCarousel({
+                loop: true,
+                margin: 5,
+                nav: true,
+                dots: false,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 6000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    },
+                    1200: {
+                        items: 1
+                    }
+                }
+            });
+            $('#noticias').owlCarousel({
+                loop: false,
+                margin: 0,
+                nav: false,
+                dots: true,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            });
+            $('.pagina-transparencia').owlCarousel({
+                loop: true,
+                margin: 0,
+                nav: true,
+                dots: true,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    }
+                }
+            });
+            
+            $('body').popover(popOverSettings);
+            
+            wow = new WOW({
+                boxClass: 'wow', // default
+                animateClass: 'animated', // default
+                offset: 0, // default
+                mobile: true, // default
+                live: true // default
+            });
+            wow.init();
+        });
+    </script>
+    <!-- Script Geral -->
+
+    <!-- Window Locker -->
+    <script type="text/javascript" src="https://www.pmnf.rj.gov.br/js/spin/spin.min.js"></script>
+    <script type="text/javascript" src="https://www.pmnf.rj.gov.br/js/spin/spin-windowlock/spin-windowlock.js"></script>
+    <!-- /Window Locker -->
+
+    <script type="text/javascript" src="https://www.pmnf.rj.gov.br/js/plenus/popup-init.js"></script>
+
+    <style>
+        .wow {
+            visibility: hidden;
+        }
+    </style>
+        <link href="https://www.pmnf.rj.gov.br/js/lightbox/lightbox.min.css" rel="stylesheet">
+        <link href="https://www.pmnf.rj.gov.br/js/owlCarousel/owl.carousel.css" rel="stylesheet">
+        <link href="https://www.pmnf.rj.gov.br/js/owlCarousel/owl.theme.css" rel="stylesheet">
+
+<style type="text/css">
+form ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    align-content: left;
+}
+</style>
+
+
+    </head>
+
+    <SCRIPT LANGUAGE="JavaScript">
+        {% if messages %}
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        {% endif %}
+    </script>
+
+    <body>
+        <style>
+            #crc-noticias .item{
+                margin: 3px;
+            }
+            #crc-noticias .item img{
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+        </style>
+        <div>
+<div class="barra-acessibilidade hidden-xs" id="barra-acessibilidade">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="nome">
+                    <div class="icone"><span class="fa fa-wheelchair" aria-hidden="true"></span></div>
+                    Acessibilidade
+                </div>
+                <div class="fontes">
+                    <div class="alterar" id="increaseFont">A+</div>
+                    <div class="alterar" id="decreaseFont">A-</div>
+                </div>
+                <div class="contraste">
+                    <div class="alterar" id="changeColorAcess">Contraste</div>
+                </div>
+                <div class="contraste">
+                    <div class="alterar" id="resetFont" id="changeColorDefault"><i class="fa fa-refresh"
+                                                                                   aria-hidden="true"></i> Retornar
+                        acessibilidade
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="barra barra-topo-info">
+    <div class="container">
+        <div class="topo-info-box">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <ul class="list-atendimento-topo">
+                        <li>
+                            <i class="fa fa-clock-o"></i> Segunda a Sexta, das 09h às 18h                         </li>
+                    </ul>
+                </div>
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                    <ul class="list-menu-topo">
+                        <li class="acessibilidade">
+                            <a href="#" id="acessibilidade" title="Acessibilidade">
+                                <i class="fa fa-wheelchair"></i> Acessibilidade
+                            </a>
+                        </li>
+                        <li class="ouvidoria">
+                            <a href="https://falabr.cgu.gov.br/publico/RJ/NovaFriburgo/Manifestacao/RegistrarManifestacao" title="Ouvidoria">
+                                <i class="fa fa-comments"></i> Ouvidoria
+                            </a>
+                        </li>
+                        <li class="acessoinfo">
+                            <a href="http://novafriburgo-rj.portaltp.com.br/consultas/informacoes/acesso.aspx" title="Acesso a Informação">
+                                <img src="https://www.pmnf.rj.gov.br/imagens/servicos/box02.png" width="25" style="margin-right: -6px; margin-top: -2px;"/> &nbsp;Acesso à Informação
+                            </a>
+                        </li>
+                        <li class="portaltransp">
+                            <a href="http://transparencia.novafriburgo.rj.gov.br/portalTransparencia"
+                               title="Portal da Tranparência">
+                                <img src="https://www.pmnf.rj.gov.br/imagens/servicos/box01.png" width="28" style="margin-right: -3px; margin-top: -1px;"/> &nbsp;Portal da Transparência
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav id="menu-topo-2" class="navbar navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row" style="width: 100%;">
+
+            <!-- Navbar brand -->
+            <div id="logoPequena-2"><a href="/"><img src="https://www.pmnf.rj.gov.br/imagens/logoPequena.png" class="img-fluid"/></a></div>
+            <a class="navbar-brand d-lg-none" href="/"><img src="https://www.pmnf.rj.gov.br/imagens/logoPequena.png" class="img-fluid logo-pequena-fixa"/></a>
+
+            <!-- Collapse button -->
+            <button class="navbar-toggler ml-auto hidden-sm-up float-xs-right" type="button" data-toggle="collapse"
+                    data-target="#basicExampleNav" aria-controls="basicExampleNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="basicExampleNav">
+                <!-- Links -->
+                
+<ul class="navbar-nav mr-auto">
+<li class="nav-item dropdown" id="164">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Prefeitura
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="165" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/pagina/1_A-Cidade.html" class="dropdown-item">A Cidade</a></li>
+<li id="166" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/secretarias" class="dropdown-item">Secretarias</a></li>
+<li id="179" class="nav-item"> <a href="http://novafriburgo.rj.gov.br/gabinete/" class="dropdown-item">Gabinete do Prefeito</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="63">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Páginas
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="152" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/paginas-centralizadas/4_Ciencia-e-Tecnologia.html" class="dropdown-item">Ciência e Tecnologia</a></li>
+<li id="169" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/paginas-centralizadas/9_Controladoria-Geral.html" class="dropdown-item">Controladoria Geral</a></li>
+<li id="189" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/paginas-centralizadas/11_Cultura.html" target="_blank"  class="dropdown-item">Cultura</a></li>
+<li id="168" class="nav-item"> <a href="https://defesacivilnf.wixsite.com/home" target="_blank"  class="dropdown-item">Defesa Civil</a></li>
+<li id="194" class="nav-item"> <a href="https://smenf.wordpress.com/" target="_blank"  class="dropdown-item">Educação</a></li>
+<li id="159" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/paginas-centralizadas/10_Meio-Ambiente.html" target="_blank"  class="dropdown-item">Meio Ambiente</a></li>
+<li id="195" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/paginas-centralizadas/13_Ordem-e-Mobilidade-Urbana.html" class="dropdown-item">Ordem e Mobilidade Urbana</a></li>
+<li id="156" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/pagina/88_Planos.html" target="_blank"  class="dropdown-item">Planos</a></li>
+<li id="219" class="nav-item"> <a href="http://pmnf.rj.gov.br/paginas-centralizadas/14_Transporte-Publico.html" target="_blank"  class="dropdown-item">Transporte Público</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="8">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Imprensa
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="191" class="nav-item"> <a href="https://plenussistemas.dioenet.com.br/list/nova-friburgo" target="_blank"  class="dropdown-item">Diário Oficial Eletrônico</a></li>
+<li id="26" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/noticias/" class="dropdown-item">Notícias</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="10">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Servidor
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="222" class="nav-item"> <a href="https://efggblog.wixsite.com/site" target="_blank"  class="dropdown-item">EFGG - Escola Friburguense de Governança e Gestão</a></li>
+<li id="163" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/portal/" target="_blank"  class="dropdown-item">Portal do Servidor</a></li>
+<li id="221" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/almoxarifado/login" target="_blank"  class="dropdown-item">Solicitações de Materiais do Almoxarifado</a></li>
+<li id="78" class="nav-item"> <a href="https://webmail.pmnf.rj.gov.br/" class="dropdown-item">Webmail</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="136">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Cidadão
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="193" class="nav-item"> <a href="http://novafriburgo-rj.portaltp.com.br/consultas/documentos.aspx?id=132" target="_blank"  class="dropdown-item">Coronavírus (informações)</a></li>
+<li id="167" class="nav-item"> <a href="http://ecidade.pmnf.rj.gov.br:8060/matricula-online/" target="_blank"  class="dropdown-item">Cadastro Único de Espera da Rede Municipal de Ensino</a></li>
+<li id="220" class="nav-item"> <a href="https://docs.google.com/forms/d/e/1FAIpQLScNcwWym_5x5-PO5-GlKWuy8uc13uOBIHgLhR2PvbsECs4mqA/viewform" target="_blank"  class="dropdown-item">Cadastro de Cidadãos c/ Comorbidade p/ Vacinação contra a Covid 19</a></li>
+<li id="183" class="nav-item"> <a href="http://pmnf.rj.gov.br/pagina/82_Carta-de-Servicos-ao-Cidadao.html" target="_blank"  class="dropdown-item">Carta de Serviços ao Cidadão</a></li>
+<li id="198" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/certidao_retirada.php" target="_blank"  class="dropdown-item">Certidões</a></li>
+<li id="155" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/casadotrabalhador" target="_blank"  class="dropdown-item">Casa do Trabalhador</a></li>
+<li id="180" class="nav-item"> <a href="https://plenussistemas.dioenet.com.br/list/nova-friburgo" target="_blank"  class="dropdown-item">Diário Oficial Eletrônico</a></li>
+<li id="199" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/lancamentos_diversos.php?cod=HJ" target="_blank"  class="dropdown-item">Foro</a></li>
+<li id="200" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/lancamentos_diversos.php?cod=LF" target="_blank"  class="dropdown-item">IPTU 2021</a></li>
+<li id="137" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/pagina/18_Concursos-Publicos.html" class="dropdown-item">Concursos</a></li>
+<li id="202" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/protocolo_consulta.php" target="_blank"  class="dropdown-item">Consulta Protocolo</a></li>
+<li id="153" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/pagina/9_Convenio-Sesc-Rio.html" class="dropdown-item">Convênio Sesc Rio</a></li>
+<li id="30" class="nav-item"> <a href="https://sistema.ouvidorias.gov.br/publico/RJ/NovaFriburgo/Manifestacao/RegistrarManifestacao" class="dropdown-item">Ouvidoria</a></li>
+<li id="22" class="nav-item"> <a href="https://novafriburgo.cespro.com.br/visualizarIndicePorAssunto.php?cdMunicipio=6811&cdTipoDiploma=3385" class="dropdown-item">Legislação</a></li>
+<li id="174" class="nav-item"> <a href="http://www.novafriburgo.rj.gov.br/licitacao/" class="dropdown-item">Licitação</a></li>
+<li id="203" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/" target="_blank"  class="dropdown-item">Portal de Serviços</a></li>
+<li id="171" class="nav-item"> <a href="http://transparencia.novafriburgo.rj.gov.br/portalTransparencia/" target="_blank"  class="dropdown-item">Portal da Transparência</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="134">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Empresas
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="192" class="nav-item"> <a href="https://docs.google.com/forms/d/e/1FAIpQLScArCWybT45ehp053Mg9w9Pvp4PLzP-iq6moqgjv4AwOFSgBA/viewform" target="_blank"  class="dropdown-item">Produção industrial anti-Coronavírus</a></li>
+<li id="204" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/lancamentos_diversos.php?cod=MF" target="_blank"  class="dropdown-item">Alvará</a></li>
+<li id="172" class="nav-item"> <a href="http://iss00.el.com.br:8080/bancario/paginas/sistema/login.xhtml" target="_blank"  class="dropdown-item">ISS Bancário</a></li>
+<li id="205" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/lancamentos_diversos.php?cod=NF" target="_blank"  class="dropdown-item">ISS Fixo</a></li>
+<li id="135" class="nav-item"> <a href="https://rj-novafriburgo-pm-nfs.cloud.el.com.br/" target="_blank"  class="dropdown-item">Nota Fiscal Eletrônica</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="206">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Serviços Online
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="209" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/index.php" target="_blank"  class="dropdown-item">Alvará</a></li>
+<li id="212" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/protocolo_consulta.php" target="_blank"  class="dropdown-item">Consulta Protocolo</a></li>
+<li id="217" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/emissao_divida_ativa.php" target="_blank"  class="dropdown-item">Dívida Ativa</a></li>
+<li id="218" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/parcelamento_divida.php" target="_blank"  class="dropdown-item">Dívida Ativa (Parcelamento)</a></li>
+<li id="210" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/lancamentos_diversos.php?cod=HJ" target="_blank"  class="dropdown-item">Foro</a></li>
+<li id="211" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/lancamentos_diversos.php?cod=LF" class="dropdown-item">IPTU 2021</a></li>
+<li id="214" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/index.php" target="_blank"  class="dropdown-item">ISS Fixo</a></li>
+<li id="215" class="nav-item"> <a href="http://iss00.el.com.br:8080/bancario/paginas/sistema/login.xhtml" target="_blank"  class="dropdown-item">ISS Bancário</a></li>
+<li id="213" class="nav-item"> <a href="https://rj-novafriburgo-pm-nfs.cloud.el.com.br//paginas/sistema/login.jsf" target="_blank"  class="dropdown-item">NF-e</a></li>
+<li id="216" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/" target="_blank"  class="dropdown-item">Portal de Serviços</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="13">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Contato
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="133" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/contato/" class="dropdown-item">Fale Conosco</a></li>
+<li id="131" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/localizacao/" class="dropdown-item">Localizacao</a></li>
+<li id="132" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/faq" class="dropdown-item">Perguntas Frequentes</a></li>
+
+</ul>
+</li>
+
+</ul>
+                <!-- Links -->
+            </div>
+            <!-- Collapsible content -->
+
+        </div>
+    </div>
+</nav>
+
+<div class="barra barra-topo-logo">
+    <div class="container">
+        <div class="topo-logo-box">
+            <div class="row">
+                <div class="col-lg-3 d-none d-xl-block d-lg-block d-md-none d-xl-none logo-topo">
+                    <a href="https://www.pmnf.rj.gov.br/" title="Prefeitura Municipal de Nova Friburgo">
+                        <img src="https://www.pmnf.rj.gov.br/uploads/siteDescricao/logosite_(881).jpg" class="img-fluid" width="70%" />
+                    </a>
+                    
+                     <a href="https://www.pmnf.rj.gov.br/paginas-centralizadas/9_57_Programa-Nacional-de-Prevencao-a-Corrupcao-PNPC.html" title="PNPC">
+                        <img src="https://www.pmnf.rj.gov.br/uploads/siteDescricao/selo.jpg" class="img-fluid" width="28%" />
+                    </a>
+                    
+                </div>
+                <div class="col-9 d-none d-xl-block d-lg-block d-md-none d-xl-none">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <!--<div class="telefone-topo">
+                                (22) 2525-9100 
+                                <div class="icon">
+                                    <i class="fa fa-phone"></i> 
+                                    <div class="marcador"></div>
+                                </div>
+                            </div>
+                            <div class="atendimento-topo">
+                                Segunda a Sexta, das 09h às 18h  
+                                <div class="icon">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    <div class="marcador"></div>
+                                </div>
+                            </div>-->
+                            <div class="menu-margin-top"></div>
+                            <nav id="menu-topo" class="navbar navbar-expand-lg navbar-dark scrolling-navbar nopadding">
+                                <div class="container">
+                                    <div class="row nopadding" style="width: 100%;">
+
+                                        <!-- Navbar brand -->
+                                        <div id="logoPequena"><a href="/"><img src="https://www.pmnf.rj.gov.br/imagens/logoPequena.png" class="img-fluid"/></a></div>
+                                        <a class="navbar-brand d-lg-none" href="#"><img src="https://www.pmnf.rj.gov.br/imagens/logoPequena.png" class="img-fluid"/></a>
+
+                                        <!-- Collapse button -->
+                                        <button class="navbar-toggler ml-auto hidden-sm-up float-xs-right" type="button" data-toggle="collapse"
+                                                data-target="#basicExampleNav" aria-controls="basicExampleNav"
+                                                aria-expanded="false" aria-label="Toggle navigation">
+                                            <span class="navbar-toggler-icon"></span>
+                                        </button>
+
+                                        <!-- Collapsible content -->
+                                        <div class="collapse navbar-collapse" id="basicExampleNav">
+                                            <!-- Links -->
+                                            
+<ul class="navbar-nav mr-auto">
+<li class="nav-item dropdown" id="164">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Prefeitura
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="165" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/pagina/1_A-Cidade.html" class="dropdown-item">A Cidade</a></li>
+<li id="166" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/secretarias" class="dropdown-item">Secretarias</a></li>
+<li id="179" class="nav-item"> <a href="http://novafriburgo.rj.gov.br/gabinete/" class="dropdown-item">Gabinete do Prefeito</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="63">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Páginas
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="152" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/paginas-centralizadas/4_Ciencia-e-Tecnologia.html" class="dropdown-item">Ciência e Tecnologia</a></li>
+<li id="169" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/paginas-centralizadas/9_Controladoria-Geral.html" class="dropdown-item">Controladoria Geral</a></li>
+<li id="189" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/paginas-centralizadas/11_Cultura.html" target="_blank"  class="dropdown-item">Cultura</a></li>
+<li id="168" class="nav-item"> <a href="https://defesacivilnf.wixsite.com/home" target="_blank"  class="dropdown-item">Defesa Civil</a></li>
+<li id="194" class="nav-item"> <a href="https://smenf.wordpress.com/" target="_blank"  class="dropdown-item">Educação</a></li>
+<li id="159" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/paginas-centralizadas/10_Meio-Ambiente.html" target="_blank"  class="dropdown-item">Meio Ambiente</a></li>
+<li id="195" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/paginas-centralizadas/13_Ordem-e-Mobilidade-Urbana.html" class="dropdown-item">Ordem e Mobilidade Urbana</a></li>
+<li id="156" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/pagina/88_Planos.html" target="_blank"  class="dropdown-item">Planos</a></li>
+<li id="219" class="nav-item"> <a href="http://pmnf.rj.gov.br/paginas-centralizadas/14_Transporte-Publico.html" target="_blank"  class="dropdown-item">Transporte Público</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="8">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Imprensa
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="191" class="nav-item"> <a href="https://plenussistemas.dioenet.com.br/list/nova-friburgo" target="_blank"  class="dropdown-item">Diário Oficial Eletrônico</a></li>
+<li id="26" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/noticias/" class="dropdown-item">Notícias</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="10">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Servidor
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="222" class="nav-item"> <a href="https://efggblog.wixsite.com/site" target="_blank"  class="dropdown-item">EFGG - Escola Friburguense de Governança e Gestão</a></li>
+<li id="163" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/portal/" target="_blank"  class="dropdown-item">Portal do Servidor</a></li>
+<li id="221" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/almoxarifado/login" target="_blank"  class="dropdown-item">Solicitações de Materiais do Almoxarifado</a></li>
+<li id="78" class="nav-item"> <a href="https://webmail.pmnf.rj.gov.br/" class="dropdown-item">Webmail</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="136">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Cidadão
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="193" class="nav-item"> <a href="http://novafriburgo-rj.portaltp.com.br/consultas/documentos.aspx?id=132" target="_blank"  class="dropdown-item">Coronavírus (informações)</a></li>
+<li id="167" class="nav-item"> <a href="http://ecidade.pmnf.rj.gov.br:8060/matricula-online/" target="_blank"  class="dropdown-item">Cadastro Único de Espera da Rede Municipal de Ensino</a></li>
+<li id="220" class="nav-item"> <a href="https://docs.google.com/forms/d/e/1FAIpQLScNcwWym_5x5-PO5-GlKWuy8uc13uOBIHgLhR2PvbsECs4mqA/viewform" target="_blank"  class="dropdown-item">Cadastro de Cidadãos c/ Comorbidade p/ Vacinação contra a Covid 19</a></li>
+<li id="183" class="nav-item"> <a href="http://pmnf.rj.gov.br/pagina/82_Carta-de-Servicos-ao-Cidadao.html" target="_blank"  class="dropdown-item">Carta de Serviços ao Cidadão</a></li>
+<li id="198" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/certidao_retirada.php" target="_blank"  class="dropdown-item">Certidões</a></li>
+<li id="155" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/casadotrabalhador" target="_blank"  class="dropdown-item">Casa do Trabalhador</a></li>
+<li id="180" class="nav-item"> <a href="https://plenussistemas.dioenet.com.br/list/nova-friburgo" target="_blank"  class="dropdown-item">Diário Oficial Eletrônico</a></li>
+<li id="199" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/lancamentos_diversos.php?cod=HJ" target="_blank"  class="dropdown-item">Foro</a></li>
+<li id="200" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/lancamentos_diversos.php?cod=LF" target="_blank"  class="dropdown-item">IPTU 2021</a></li>
+<li id="137" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/pagina/18_Concursos-Publicos.html" class="dropdown-item">Concursos</a></li>
+<li id="202" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/protocolo_consulta.php" target="_blank"  class="dropdown-item">Consulta Protocolo</a></li>
+<li id="153" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/pagina/9_Convenio-Sesc-Rio.html" class="dropdown-item">Convênio Sesc Rio</a></li>
+<li id="30" class="nav-item"> <a href="https://sistema.ouvidorias.gov.br/publico/RJ/NovaFriburgo/Manifestacao/RegistrarManifestacao" class="dropdown-item">Ouvidoria</a></li>
+<li id="22" class="nav-item"> <a href="https://novafriburgo.cespro.com.br/visualizarIndicePorAssunto.php?cdMunicipio=6811&cdTipoDiploma=3385" class="dropdown-item">Legislação</a></li>
+<li id="174" class="nav-item"> <a href="http://www.novafriburgo.rj.gov.br/licitacao/" class="dropdown-item">Licitação</a></li>
+<li id="203" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/" target="_blank"  class="dropdown-item">Portal de Serviços</a></li>
+<li id="171" class="nav-item"> <a href="http://transparencia.novafriburgo.rj.gov.br/portalTransparencia/" target="_blank"  class="dropdown-item">Portal da Transparência</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="134">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Empresas
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="192" class="nav-item"> <a href="https://docs.google.com/forms/d/e/1FAIpQLScArCWybT45ehp053Mg9w9Pvp4PLzP-iq6moqgjv4AwOFSgBA/viewform" target="_blank"  class="dropdown-item">Produção industrial anti-Coronavírus</a></li>
+<li id="204" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/lancamentos_diversos.php?cod=MF" target="_blank"  class="dropdown-item">Alvará</a></li>
+<li id="172" class="nav-item"> <a href="http://iss00.el.com.br:8080/bancario/paginas/sistema/login.xhtml" target="_blank"  class="dropdown-item">ISS Bancário</a></li>
+<li id="205" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/lancamentos_diversos.php?cod=NF" target="_blank"  class="dropdown-item">ISS Fixo</a></li>
+<li id="135" class="nav-item"> <a href="https://rj-novafriburgo-pm-nfs.cloud.el.com.br/" target="_blank"  class="dropdown-item">Nota Fiscal Eletrônica</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="206">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Serviços Online
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="209" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/index.php" target="_blank"  class="dropdown-item">Alvará</a></li>
+<li id="212" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/protocolo_consulta.php" target="_blank"  class="dropdown-item">Consulta Protocolo</a></li>
+<li id="217" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/emissao_divida_ativa.php" target="_blank"  class="dropdown-item">Dívida Ativa</a></li>
+<li id="218" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/parcelamento_divida.php" target="_blank"  class="dropdown-item">Dívida Ativa (Parcelamento)</a></li>
+<li id="210" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/lancamentos_diversos.php?cod=HJ" target="_blank"  class="dropdown-item">Foro</a></li>
+<li id="211" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/lancamentos_diversos.php?cod=LF" class="dropdown-item">IPTU 2021</a></li>
+<li id="214" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/index.php" target="_blank"  class="dropdown-item">ISS Fixo</a></li>
+<li id="215" class="nav-item"> <a href="http://iss00.el.com.br:8080/bancario/paginas/sistema/login.xhtml" target="_blank"  class="dropdown-item">ISS Bancário</a></li>
+<li id="213" class="nav-item"> <a href="https://rj-novafriburgo-pm-nfs.cloud.el.com.br//paginas/sistema/login.jsf" target="_blank"  class="dropdown-item">NF-e</a></li>
+<li id="216" class="nav-item"> <a href="https://servicoonline.novafriburgo.rj.gov.br/services/" target="_blank"  class="dropdown-item">Portal de Serviços</a></li>
+
+</ul>
+</li>
+<li class="nav-item dropdown" id="13">
+<a class="nav-link dropdown-toggle" style="font-size:13px; padding: 18px 10px;" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Contato
+<span class="caret"></span>
+</a>
+
+<ul class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+<li id="133" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/contato/" class="dropdown-item">Fale Conosco</a></li>
+<li id="131" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/localizacao/" class="dropdown-item">Localizacao</a></li>
+<li id="132" class="nav-item"> <a href="https://www.pmnf.rj.gov.br/faq" class="dropdown-item">Perguntas Frequentes</a></li>
+
+</ul>
+</li>
+
+</ul>
+                                            <!-- Links -->
+                                            <ul class="navbar-nav" style="float: right;">
+                                                <li class="nav-item">
+                                                    <a href="#" class="nav-link open-search">
+                                                        <i class="fa fa-search"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- Collapsible content -->
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12 atendimento">
+                                            <form class="formulario-busca" method="GET" id="form_pesquisar_home" action="/busca/">
+                                                <input type="search" placeholder="Pesquisar" name="q"/>
+                                                <button type="submit">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                                <div class="overlay"></div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </nav>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+        <div class="form-group" id="page-container"><div class="barra barra-internas-noticia">
+    <div class="container" >
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <h1 class="titulo-internas">PROCESSO SELETIVO PARA CURSO DE TÉCNICO EM ENFERMAGEM<span></span></h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+<div class="barra-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 nopadding">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="https://www.pmnf.rj.gov.br/noticias/">Notícias</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="barra barra-base">
+    <div class="container" >
+        <div class="row">
+            <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12">
+                <h6 style="margin-top: 1px;">&nbsp;</h6>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <h6>
+
+<ul>
+    <li>
+    <a href="https://drive.google.com/file/d/1uj3A4avK9slMS0MYwqdDfWcbB9Fe-q39/view?usp=sharing" target="_blank">
+        Baixe o EDITAL PARA CONVOCAÇÃO DO PROCESSO SELETIVO PARA CURSO DE TÉCNICO EM ENFERMAGEM na íntegra
+    </a>
+    </li>
+    <li>
+
+    <a href="https://drive.google.com/file/d/1lQOBzJMFSEnjERF38m5s9QOXTvJmycJm/view?usp=sharing" target="_blank">
+        Baixe a CORRIGENDA do EDITAL, corrigindo o período de inscrição para 11/10/2021 a 15/10/2021
+    </a>
+    </li>
+</ul>
+                        <hr>
+
+
+{% block cab %}{% endblock %}
+
+
+<!--
+
+
+                        <  ! -- Botões Facebook e Twitter --  >
+                        <div>
+                            <div id="fb-root"></div>
+                            <script>(function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (d.getElementById(id))
+                                        return;
+                                    js = d.createElement(s);
+                                    js.id = id;
+                                    js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.8&appId=1684557354891601";
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));</script>
+                            <div class="fb-like" data-share="false" data-href="http://www.pmnf.rj.gov.br/noticiasView/?id=1504" data-layout="button" data-action="like" data-size="small" data-show-faces="true" data-share="true" style="position: relative; top: -5px;"></div>
+
+                            <button id="facebookShareLink">Compartilhar</button>
+
+                            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.pmnf.rj.gov.br/noticiasView/?id=1504">Tweet</a>
+                            <script>!function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                                    if (!d.getElementById(id)) {
+                                        js = d.createElement(s);
+                                        js.id = id;
+                                        js.src = p + '://platform.twitter.com/widgets.js';
+                                        fjs.parentNode.insertBefore(js, fjs);
+                                    }
+                                }(document, 'script', 'twitter-wjs');</script>
+
+                                                            <link itemprop="thumbnailUrl" href="https://www.pmnf.rj.gov.br/uploads/noticia/thumbs/thumb_300x300_whatsapp-image-2021-10-01-at-122249.jpeg"> 
+                                <span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject"> 
+                                    <link itemprop="url" href="https://www.pmnf.rj.gov.br/uploads/noticia/thumbs/thumb_300x300_whatsapp-image-2021-10-01-at-122249.jpeg"> 
+                                </span>
+                                                        <a href="whatsapp://send?text=http://www.pmnf.rj.gov.br/noticiasView/?id=1504" data-action="share/whatsapp/share" class="btn btn-sm btn-whatsapp hide"><i class="fa fa-whatsapp"></i> Whatsapp</a>
+
+                            <p style="height: 0px;">&nbsp;</p>
+                        </div>
+                        <  ! -- Botões Facebook e Twitter --  >
+
+                                                    <div style="width: 100%; margin-right: 30px; margin-bottom: 10px">
+                                <a href="https://www.pmnf.rj.gov.br/uploads/noticia/whatsapp-image-2021-10-01-at-122249.jpeg" data-lightbox="lightbox[imagens]"> 
+                                    <img data-holder-rendered="true" src="https://www.pmnf.rj.gov.br/uploads/noticia/thumbs/thumb_800x500_whatsapp-image-2021-10-01-at-122249.jpeg" alt="PREFEITURA DE NOVA FRIBURGO ABRE PROCESSO SELETIVO PARA CURSO DE TÉCNICO EM ENFERMAGEM " title="PREFEITURA DE NOVA FRIBURGO ABRE PROCESSO SELETIVO PARA CURSO DE TÉCNICO EM ENFERMAGEM " style="width: 100%; overflow: hidden;" />
+                                </a>
+                                <p style="color:#6b6b6b; font-size: 11px;"></p>
+                            </div>
+                        
+                        <div class="leitura">
+                            <p style="text-align:center"><strong>PREFEITURA DE NOVA FRIBURGO ABRE PROCESSO SELETIVO PARA CURSO DE TÉCNICO EM ENFERMAGEM</strong></p>
+
+<p style="text-align:justify">A Prefeitura de Nova Friburgo, por meio da Secretaria Municipal de Educação, realizará processo seletivo ofertando 20 vagas para o curso técnico em enfermagem da Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima, no Centro. As inscrições poderão ser feitas a partir do dia 11 de outubro, segunda-feira, e se estenderão até o dia 15, sexta-feira, do mesmo mês. O site para se inscrever é o https://enfermagem.pmnf.rj.gov.br/. O cartão de confirmação de inscrição estará disponível para impressão neste mesmo link. É necessário que o candidato tenha o ensino médio completo até a data da matrícula, que será em fevereiro de 2022.</p>
+
+<p style="text-align:justify">A seleção será feita por meio de uma prova discursiva aplicada presencialmente, de caráter eliminatório e classificatório, constituída de uma redação (dissertativo-argumentativa) sobre algum tema ligado à área da saúde. A avaliação será no dia 31 de outubro com hora e local a serem divulgados no dia 19 deste mês, no Diário Oficial do Município, pelo site da Prefeitura de Nova Friburgo.</p>
+
+<p style="text-align:justify">Vale destacar que orientações de segurança sanitária deverão ser seguidas devido a pandemia da covid-19. Na entrada dos locais de prova será disponibilizado álcool em gel 70% para higienização das mãos. Além disso, o uso de máscaras enquanto perdurar a permanência do candidato para realização da prova é obrigatório. Outra medida é o distanciamento físico de, no mínimo, um metro entre os demais candidatos e entre os aplicadores da prova. Caso a pessoa esteja com sintomas do coronavírus, ela não deverá comparecer.</p>
+
+<p style="text-align:justify">O resultado do processo seletivo para o curso técnico em enfermagem será publicado no dia 8 de dezembro deste ano, no Diário Oficial do Município. O início das aulas está previsto para fevereiro de 2022, de acordo com o calendário escolar disponibilizado pela Secretaria Municipal de Educação.</p>
+
+<p style="text-align:justify">O edital completo para convocação do processo seletivo está disponível no Diário Oficial Eletrônico do Município, na edição de 01 de outubro. <a href="https://plenussistemas.dioenet.com.br/public/uploads/diarios/2021/09/db517562732c891effa397fb99c95dbb.pdf">CLIQUE AQUI. </a></p>
+                        </div>
+                                        
+                    </div>
+                    <div class="col-12">
+                                            </div>
+                    <div class="col-12">
+                                            </div>
+                    <div class="col-12">
+                        <a class="btn btn-info sobre-botao" href="javascript: history.go(-1)" role="button"><i class="fa fa-reply" aria-hidden="true"></i>  Voltar</a>
+                    </div>
+                </div>
+
+                
+            </div>
+            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
+                <h2 class="titulo"> Leia Mais <span class="noticia"></span></h2>
+                
+                <div class="leiatambem">
+                                            <div class="bloco">
+                            
+                                                        <a href="https://www.pmnf.rj.gov.br/noticiasView/?id=1503">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="categoria-data">
+                                            <span><i class="fa fa-clock-o" aria-hidden="true"></i> 01/10/2021 18:09</span><br />
+                                                                                    </div>
+                                        <div class="titulo">MAIS DUAS UNIDADES ESCOLARES ESTÃO APTAS AO RETORNO PRESENCIAL </div>
+                                    </div>
+                                </div>
+                            </a>
+                            
+                        </div>
+                                            <div class="bloco">
+                            
+                                                        <a href="https://www.pmnf.rj.gov.br/noticiasView/?id=1502">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="categoria-data">
+                                            <span><i class="fa fa-clock-o" aria-hidden="true"></i> 01/10/2021 17:57</span><br />
+                                                                                    </div>
+                                        <div class="titulo">SETEMBRO AMARELO TEVE UMA SÉRIE DE AÇÕES E ATIVIDADES DE CONSCIENTIZAÇÃO E PREVENÇÃO AO SUICÍDIO EM NOVA FRIBURGO</div>
+                                    </div>
+                                </div>
+                            </a>
+                            
+                        </div>
+                                            <div class="bloco">
+                            
+                                                        <a href="https://www.pmnf.rj.gov.br/noticiasView/?id=1501">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="categoria-data">
+                                            <span><i class="fa fa-clock-o" aria-hidden="true"></i> 01/10/2021 17:50</span><br />
+                                                                                    </div>
+                                        <div class="titulo">SSUBEA PROMOVE 2ª CAMPANHA DE ADOÇÃO RESPONSÁVEL </div>
+                                    </div>
+                                </div>
+                            </a>
+                            
+                        </div>
+                                            <div class="bloco">
+                            
+                                                        <a href="https://www.pmnf.rj.gov.br/noticiasView/?id=1499">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="categoria-data">
+                                            <span><i class="fa fa-clock-o" aria-hidden="true"></i> 01/10/2021 14:41</span><br />
+                                                                                    </div>
+                                        <div class="titulo">PREFEITO JOHNNY MAYCON É O ENTREVISTADO NA EDIÇÃO DE ESTREIA DO PODCAST “FALA, FRIBURGO”</div>
+                                    </div>
+                                </div>
+                            </a>
+                            
+                        </div>
+                                            <div class="bloco">
+                            
+                                                        <a href="https://www.pmnf.rj.gov.br/noticiasView/?id=1498">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="categoria-data">
+                                            <span><i class="fa fa-clock-o" aria-hidden="true"></i> 01/10/2021 14:20</span><br />
+                                                                                    </div>
+                                        <div class="titulo">PREFEITURA ANUNCIA O ADVOGADO RODRIGO DE LIMA COMO NOVO SUBSECRETÁRIO DE SERVIÇOS CONCEDIDOS</div>
+                                    </div>
+                                </div>
+                            </a>
+                            
+                        </div>
+                                    </div>
+
+-->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+        <div>
+
+<footer>
+    <div class="overlay"></div>
+    <div class="footer-barra01">
+        <div class="container" >
+            <div class="row">
+                
+                <div class="col-lg-3 col-md-12 col-sm-12">
+    <div class="menu">
+        <h4>A Prefeitura</h4>
+        <ul>
+                <li><a href="https://www.pmnf.rj.gov.br/pagina/1_A-Cidade.html">A Cidade</a></li>
+                <li><a href="https://www.pmnf.rj.gov.br/gabinete">Gabinete do Prefeito</a></li>
+                <li><a href="https://novafriburgo.cespro.com.br/visualizarIndicePorAssunto.php?cdMunicipio=6811&amp;cdTipoDiploma=3385">Legislação</a></li>
+                <li><a href="https://www.pmnf.rj.gov.br/secretarias">Secretarias</a></li>
+        </ul>
+    </div>
+</div>
+<div class="col-lg-3 col-md-12 col-sm-12">
+    <div class="menu">
+        <h4>Cidadão</h4>
+        <ul>
+                <li><a href="https://www.pmnf.rj.gov.br/paginas-centralizadas/7_Atendimento-ao-Cidadao.html">Atendimento ao Cidadão</a></li>
+                <li><a href="https://plenussistemas.dioenet.com.br/list/nova-friburgo">Diário Oficial Eletrônico</a></li>
+                <li><a href="https://www.pmnf.rj.gov.br/pagina/18_Concursos-Publicos.html">Concursos</a></li>
+                <li><a href="https://sistema.ouvidorias.gov.br/publico/RJ/NovaFriburgo/Manifestacao/RegistrarManifestacao">Ouvidoria</a></li>
+                <li><a href="http://transparencia.novafriburgo.rj.gov.br/portalTransparencia/">Portal da Transparência</a></li>
+        </ul>
+    </div>
+</div>
+<div class="col-lg-3 col-md-12 col-sm-12">
+    <div class="menu">
+        <h4>Imprensa</h4>
+        <ul>
+                <li><a href="https://www.pmnf.rj.gov.br/noticias">Notícias</a></li>
+                <li><a href="https://www.pmnf.rj.gov.br/galeria-fotos">Galeria de Imagens</a></li>
+                <li><a href="https://www.pmnf.rj.gov.br/videos">Vídeos</a></li>
+                <li><a href="https://defesacivilnf.wixsite.com/home/">Defesa Civil</a></li>
+        </ul>
+    </div>
+</div>
+<div class="col-lg-3 col-md-12 col-sm-12">
+    <div class="menu">
+        <h4>Contatos</h4>
+        <ul>
+                <li><a href="https://www.pmnf.rj.gov.br/contato">Fale Conosco</a></li>
+                <li><a href="https://www.pmnf.rj.gov.br/localizacao">Localização</a></li>
+                <li><a href="https://www.pmnf.rj.gov.br/faq">Perguntas Frequentes</a></li>
+        </ul>
+    </div>
+</div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="footer-barra02">
+        <div class="container" >
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <a href="#"><img src="https://www.pmnf.rj.gov.br/imagens/logo-rodape.png" /></a>
+
+                    <ul>
+                                                <li>
+                            <a href="https://www.facebook.com/curtapmnf/" title="Facebbok"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        </li> 
+                                                                                                <li>
+                            <a href="https://www.instagram.com/prefeituranovafriburgo/" title="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </li> 
+                                                                        <li>
+                            <a href="https://www.youtube.com/c/PrefeituradeNovaFriburgooficial" title="Youtube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                        </li> 
+                                                                        <li>
+                            <a href="https://webmail.pmnf.rj.gov.br" title="WebMail"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                        </li> 
+                                            </ul>
+
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-12">
+                    <div class="menu">
+                        <a href="https://www.pmnf.rj.gov.br/contato/" class="btn bt-rodape" title="Contato">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp;Contato
+                        </a>
+                        <a href="https://www.pmnf.rj.gov.br/localizacao/" class="btn bt-rodape" title="Localização">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp;Localização
+                        </a>
+                        <a href="https://www.pmnf.rj.gov.br/faq/" class="btn bt-rodape" title="Perguntas Frequentes">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i> &nbsp;Perguntas Frequentes
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="menu">
+                        <h4>Localização</h4>
+                        <div class="texto">
+                            Av. Alberto Braune, 225 - Centro <br />
+                            Nova Friburgo-RJ <br/>
+                            Cep: 28613-001 <br/>
+                        </div>
+                        <div class="texto contato-rodape">
+                                                            <i class="fa fa-phone" aria-hidden="true"></i> &nbsp;(22) 2525-9100 <br />
+                                                                                        <i class="fa fa-envelope" aria-hidden="true"></i> &nbsp;ouvidoria.novafriburgo@gmail.com <br/>
+                                                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-barra03">
+        <div class="container" >
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 copyright">
+                    2021 © Prefeitura Municipal de Nova Friburgo | Desenvolvido por: 
+                    <a href="https://plenussistemas.com.br" title="Plenus Sistemas"><img src="https://www.pmnf.rj.gov.br/imagens/plenus.png" class="img-fluid" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<div vw class="enabled">
+    <div vw-access-button class="active"></div>
+   <div vw-plugin-wrapper>
+       <div class="vw-plugin-top-wrapper"></div>
+   </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+ new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
+<!-- Banner LGPD -->
+<div class="banner-lgpd-consent-container">
+    <div class="banner-lgpd-consent">
+        <div class="banner-lgpd-consent__column">
+            Utilizamos cookies essenciais e tecnologias semelhantes de acordo com a nossa &nbsp;<a href="https://www.pmnf.rj.gov.br/pagina/122_LGPD-Politica-de-Privacidade.html">Política de Privacidade</a>&nbsp; e, ao continuar navegando, você concorda com estas condições.
+        </div>
+        <div class="banner-lgpd-consent__column">
+            <button class="btn btn-warning" id="bt-lgpd">Concordo</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setCookie(name, value, duration) {
+        var cookie = name + "=" + escape(value) +
+        ((duration) ? "; expires=" + duration.toGMTString() : "");
+
+        document.cookie = cookie;
+    }
+    function getCookie(name) {
+        var cookies = document.cookie;
+        var prefix = name + "=";
+        var begin = cookies.indexOf("; " + prefix);
+
+        if (begin == -1) {
+
+            begin = cookies.indexOf(prefix);
+
+            if (begin != 0) {
+                return null;
+            }
+
+        } else {
+            begin += 2;
+        }
+
+        var end = cookies.indexOf(";", begin);
+
+        if (end == -1) {
+            end = cookies.length;                        
+        }
+
+        return unescape(cookies.substring(begin + prefix.length, end));
+    }
+        
+    $( "#bt-lgpd" ).click(function() {
+        var data = new Date(2090,0,01);
+        setCookie('banner_lgpd', '1', data);
+        
+        if(getCookie('banner_lgpd') == '1'){
+            $('.banner-lgpd-consent-container').hide();
+        }
+    });
+    
+    if(getCookie('banner_lgpd') == '1'){
+        $('.banner-lgpd-consent-container').hide();
+    }
+    
+    
+</script>
+<!-- Banner LGPD --></div>
+        <script src="https://www.pmnf.rj.gov.br/js/owlCarousel/owl.carousel.js"></script>
+        <script src="https://www.pmnf.rj.gov.br/js/lightbox/lightbox.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                        $('.btn-whatsapp').show();
+                }
+
+                $("#facebookShareLink").on("click",function(){
+                    var complemento = 'www.pmnf.rj.gov.br/noticiasView/?id=1504';
+                    var fbpopup = window.open("https://www.facebook.com/sharer/sharer.php?u=http://"+complemento, "pop", "width=600, height=400, scrollbars=no");
+                    return false;
+                });
+                
+                $("#crc-noticias").owlCarousel({
+                    autoPlay: 7000, //Set AutoPlay to 3 seconds
+                    items: 4,
+                    nav: false,
+                    dots: true,
+                    itemsDesktop: [1199, 3],
+                    itemsDesktopSmall: [979, 3]
+                });
+                
+                lightbox.option({
+                    'resizeDuration': 200,
+                    'wrapAround': true
+                })
+
+            });
+        </script>
+    </body>
+</html>

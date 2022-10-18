@@ -1,0 +1,29 @@
+{% extends "adm/header.html" %}
+
+{% load static %}
+
+{% block header %}
+
+    <div class="row">
+        <div class="col-10">
+            <h3>Escola Técnica de Auxiliar de Enfermagem</h3>
+            <h3 class="display-6 text-bold text-md-left mb-1">Prefeitura Municipal de Nova Friburgo</h3>
+            <h5 class="display-8 text-bold text-md-left mb-1">Secretaria de Ciência, Tecnologia, Inovação e Educação Profissionalizante e Superior</h5>
+        </div>
+        <div class="col">
+            {% if user.is_authenticated %}Usuário: {{ user.username }}{% else %}{% endif %}
+        </div>
+    </div>
+
+    <a href="{% url 'adm:inicio' %}" class="btn btn-primary" role="button">
+        Início
+    </a>
+
+    <a href="{% url 'adm:sair' %}" class="btn btn-danger" role="button">
+        Sair
+    </a>
+    <br>
+
+    {% block cab %}{% endblock %}
+
+{% endblock %}

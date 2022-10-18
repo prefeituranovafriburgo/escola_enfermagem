@@ -1,0 +1,43 @@
+{% load template_filters %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Confirmação de Inscrição do Processo Seletivo para Curso de Técnico em Enfermagem</title>
+        <style type="text/css">
+            .titulo {
+                float: left;
+                font-weight: bold;
+            }
+            .numero {
+                float: right;
+            }
+        </style>
+    </head>
+
+    <body>
+        <img src="{% static "logo_prefeitura_transparente.png" %}" alt="Logo PMNF" title="Logo Cáritas"  style="margin:20px 0 0 15px;position: relative;left: 5px;" width="300px" />
+
+        <div class="titulo">FICHA DE INSCRIÇÃO</div> <div class="numero">N° {{ id }}</div><br>
+        <br>
+        Nome: {{ nome }}<br>
+        Data Nascimento: {{ dt_nascimento | date:"SHORT_DATE_FORMAT" }}<br>
+        CPF: {{ cpf | formata_cpf }}<br>
+        Celular: {{ celular | formata_tel }}<br>
+        Telefone: {{ tel | formata_tel }}<br>
+        E-Mail: {{ email }}<br>
+        Possui deficiência? {% if deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
+        Indique qual deficiência? {{ qual_deficiencia }}<br>
+        Informe se necessita de alguma condição especial para a realização da prova: {{ necessidade }}<br>
+        Data Cadastro: {{ dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
+        IP: {{ ip }}<br>
+	<br>
+	Inscrição para o Processo Seletivo efetivado com SUCESSO.<br>
+	<br>
+	O local e o horário do processo seletivo será divulgado no dia 19 de outubro de 2021, no Diário Oficial do Município, através do site da Prefeitura Municipal de Nova Friburgo.<br>
+    </body>
+</html>

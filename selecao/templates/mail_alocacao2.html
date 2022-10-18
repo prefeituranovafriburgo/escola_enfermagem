@@ -1,0 +1,53 @@
+{% load template_filters %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Local e sala de realização da prova</title>
+        <style type="text/css">
+            .titulo {
+                float: left;
+                font-weight: bold;
+            }
+            .numero {
+                float: right;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="titulo">Local e sala de realização da prova:</div><br>
+        <br>
+Boa noite {{ nome }}!<br>
+<br>
+No dia 19 de outubro enviamos e-mail aos candidatos com informações importantes sobre o processo seletivo para o curso de Técnico em Enfermagem da Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima, incluindo o link de acesso ao comprovante de inscrição.<br>
+<br>
+Como alguns candidatos ainda não acessaram o comprovante de inscrição, estamos encaminhando mais uma vez. O candidato que já acessou o referido comprovante, não precisa acessar novamente.<br>
+<br>
+A prova será realizada no dia 31  de outubro de 2021, no Colégio Estadual Professor Jamil El Jaick, localizado na Rua Dr. Euclides Solon de Pontes, número 33, Centro, Nova Friburgo.<br>
+<br>
+A prova será aplicada nos seguintes horários: para os candidatos cujo nome se inicia com com a letra “A” até a letra “K” a prova será aplicada às 9h; para os candidatos cujo nome se inicia  com a letra “L” até a letra “Z” a prova será aplicada às 11h.<br>
+<br>
+<b>A sua prova será aplicada no seguinte horário: {{ horario }}h - sala {{ sala }}.</b><br>
+<br>
+<a href="https://enfermagem.pmnf.rj.gov.br/confirmacao/{{ chave }}">Clique aqui para imprimir o comprovante de inscrição que você deverá levar no dia da prova</a><br>
+<br>
+A prova terá a duração de 1h e 30min.<br>
+<br>
+Você deverá comparecer ao local designado para o processo seletivo, com antecedência de 30 minutos, munido do comprovante de inscrição, caneta de tinta azul ou preta, apresentando um documento de identificação que possua foto, conforme previsto no edital.<br>
+<br>
+Deverá, ainda, respeitar  os protocolos sanitários previstos no edital, sob pena de exclusão no processo seletivo.<br>
+<br>
+Indicamos a leitura da íntegra do edital.<br>
+<br>
+<a href="https://drive.google.com/file/d/1uj3A4avK9slMS0MYwqdDfWcbB9Fe-q39/view?usp=sharing">Clique aqui para acessar o edital.</a><br>
+<a href="https://drive.google.com/file/d/1lQOBzJMFSEnjERF38m5s9QOXTvJmycJm/view?usp=sharing">Clique aqui para acessar a corrigenda.</a><br>
+<br>
+Desejamos uma ótima prova e boa sorte!<br>
+<br>
+Atenciosamente,<br>
+A Direção<br>
+    </body>
+</html>

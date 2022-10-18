@@ -1,0 +1,38 @@
+{% extends "adm/cab.html" %}
+
+{% load static %}
+
+{% block cab %}
+<br>
+<div class="container">
+
+    <div class="row">
+        <div class="col-10">
+            <h3>Envia E-Mail:</h3>
+        </div>
+    </div>
+
+    <table  class="table table-striped table-bordered">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CPF</th>
+            </tr>
+        </thead>
+
+        {% for candidato in candidatos %}
+
+            <tr>
+            <td><a href="{% url 'adm:envia' candidato.id %}">{{ candidato.id }}</a></td>
+            <td>{{ candidato.nome }}</td>
+            <td>{{ candidato.cpf }}</td>
+            </tr>
+
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock %}

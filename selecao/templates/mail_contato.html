@@ -1,0 +1,29 @@
+{% load template_filters %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dúvida de Candidato</title>
+        <style type="text/css">
+            .titulo {
+                float: left;
+                font-weight: bold;
+            }
+            .numero {
+                float: right;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="titulo">Dúvida de Candidato:</div><br>
+        <br>
+        Nome: {{ nome }}<br>
+        CPF: {{ cpf | formata_cpf }}<br>
+        Celular: {{ celular | formata_tel }}<br>
+        E-Mail: {{ email }}<br>
+        Dúvida: {{ duvida }}<br>
+    </body>
+</html>
