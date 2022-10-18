@@ -14,7 +14,7 @@ main{
     color: rgb(255, 255, 255);
 }
 .bg{
-    background-color: #104a74;
+    background-color: #3fb4a7;
 }
 .filtro{
     align-items: center
@@ -42,9 +42,6 @@ ul, li{
 }
 li{    
     margin-bottom: 2px;
-}
-p{
-    margin: 0;
 }
 
 #id_curso {
