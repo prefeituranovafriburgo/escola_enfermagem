@@ -17,18 +17,18 @@ class CandidatoForm(ModelForm):
         ('N', 'Não'),
     )
 
-    cpf = forms.CharField(label='CPF', max_length=14, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,icpf)"}))
-    celular = forms.CharField(label= "Celular", max_length=15, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,icelular)", 'onload' : 'mascara(this,icelular)'}))
-    tel = forms.CharField(label = "Telefone",required=False, max_length=14, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,itelefone)", 'onload' : 'mascara(this,itelefone)'}))
-    dt_nascimento = forms.DateField(label='Dt. Nascimento:', widget=forms.SelectDateWidget(years=range(1900, 2010)))
-
-#    deficiencia = forms.CharField(widget=forms.RadioSelect(choices=DEFICIENCIA))
-    deficiencia = forms.ChoiceField(label='Possui deficiência?',widget=forms.RadioSelect, choices=DEFICIENCIA)
-    qual_deficiencia = forms.CharField(label='Indique qual a deficiência:',required=False,max_length=200,widget=forms.Textarea(attrs={'size': '40'}))
-    necessidade = forms.CharField(label='Informe se necessita de alguma condição especial para a realização da prova:',required=False,max_length=200,widget=forms.Textarea(attrs={'size': '40'}))
+    
+    cpf = forms.CharField(label = "CPF", max_length=14, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,icpf)", 'onload' : 'mascara(this,icpf)'}))
+    celular = forms.CharField(label = "Celular", max_length=15, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,icelular)", 'onload' : 'mascara(this,icelular)'}))
+    tel = forms.CharField(label = "Telefone", max_length=14, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,itelefone)", 'onload' : 'mascara(this,itelefone)'}))
 
     class Meta:
         model = Candidato
+        widgets = {
+            'edital': forms.HiddenInput(),
+            'cpf': forms.TextInput(attrs={'onkeydown':"mascara(this,icpf)"}),
+            'dt_nascimento': forms.SelectDateWidget(years=range(1940, 2022)),            
+        }
         exclude = ['chave', 'ip', 'dt_inclusao']
 
     def clean_cpf(self):

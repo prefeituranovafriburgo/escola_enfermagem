@@ -1,16 +1,33 @@
-{% extends "cab.html" %}
-
-{% load static %}
-
-{% block cab %}
+{% extends 'template.html' %}
+{% load bootstrap5 %}
+{% load static%}
+{% block title %}INSCRIÇÃO - {{nome}}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cursos.css' %}">
+<script src="{% static 'js/cursos.js' %}"></script>
+{% endblock %}
+{% block editais %}fw-bold{% endblock %}
+{% block main %}
 <br>
-<div class="container">
-
-    <div class="row">
-        <div class="col">
-            <h3>Cadastro realizado com sucesso. Disponibilizaremos em breve, aqui no site e por e-mail, o local de realização da prova.</h3>
-            <br>
-            <h5>Enviamos o protocolo de inscrição via e-mail para o endereço cadastrado. Caso queira imprimir, clique <a href="{% url 'selecao:imprime' chave %}" target="_blank"><span style="cursor:pointer;text-decoration:underline;color:#0000ff;">AQUI.</span></a></h5>
+<div class="row" id="edital">
+    <div class="col d-flex py-5"> 
+        <div class="row w-100">
+            <div class="col-10 pb-4 m-auto bg-white">
+                <div class="row py-3 px-4">
+                    <div class="col bg p-5">
+                        <h1 class="display-4 text-center">INSCREVER-SE</h1>
+                    </div>
+                </div>   
+                <div class="row">
+                    <div class="col text-dark px-4">
+                        <p class="bg-sucess">
+                            <h5 class="alert">Cadastro realizado com sucesso. Disponibilizaremos em breve, aqui no site e por e-mail, o local de realização da prova.</h5>
+                        </p>
+                        <br>
+                        <h5 class="text-center">Enviamos o protocolo de inscrição via e-mail para o endereço cadastrado. Caso queira imprimir, clique <a href="{% url 'selecao:imprime' chave %}" target="_blank"><span style="cursor:pointer;text-decoration:underline;color:#0000ff;">AQUI.</span></a></h5>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

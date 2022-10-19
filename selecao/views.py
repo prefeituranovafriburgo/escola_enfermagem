@@ -14,7 +14,7 @@ def inicio(request):
     from datetime import date, datetime
 
     hoje = date.today()
-    data_inicio = datetime.strptime('24/10/2022', '%d/%m/%Y').date()
+    data_inicio = datetime.strptime('18/10/2022', '%d/%m/%Y').date()
     data_fim = datetime.strptime('31/10/2022', '%d/%m/%Y').date()
 
     data_resultado = datetime.strptime('08/12/2022', '%d/%m/%Y').date()
@@ -28,89 +28,96 @@ def inicio(request):
     return render(request, 'inicio_aguardar.html')
 
 
-def cadastro(request):
+def cadastro(request, id):
     from django.template import Context
     from django.template.loader import render_to_string, get_template
     from django.core.mail import EmailMessage
     import uuid
     from ipware import get_client_ip
+    
+    try:
+        edital=Edital.objects.get(id=id, ativo=True)
+    except:
+        edital=False
+    
+    if edital:
+        if request.method == 'POST':
+            form = CandidatoForm(request.POST)
 
-    if request.method == 'POST':
-        form = CandidatoForm(request.POST)
+            if form.is_valid():
+                cadastro = form.save(commit=False)
 
-        if form.is_valid():
-            cadastro = form.save(commit=False)
+                chave = str(uuid.uuid4())
+                cadastro.chave = chave
 
-            chave = str(uuid.uuid4())
-            cadastro.chave = chave
+                # Busca IP
 
-            # Busca IP
-
-            client_ip, is_routable = get_client_ip(request)
-            if client_ip is None:
-                # Unable to get the client's IP address
-                print(client_ip)
-                client_ip = '0.0.0.0'
-            else:
-                # We got the client's IP address
-                if is_routable:
-                    print('sim:', is_routable)
-                    # The client's IP address is publicly routable on the Internet
+                client_ip, is_routable = get_client_ip(request)
+                if client_ip is None:
+                    # Unable to get the client's IP address
+                    print(client_ip)
+                    client_ip = '0.0.0.0'
                 else:
-                    print('não:', is_routable)
-                    # The client's IP address is privat
+                    # We got the client's IP address
+                    if is_routable:
+                        print('sim:', is_routable)
+                        # The client's IP address is publicly routable on the Internet
+                    else:
+                        print('não:', is_routable)
+                        # The client's IP address is privat
 
-            cadastro.ip = client_ip
+                cadastro.ip = client_ip
 
-            cadastro.save()
+                cadastro.save()
 
-            # Envia e-mail
+                # Envia e-mail
 
-            dados = {
-                'id': cadastro.id,
-                'nome': cadastro.nome,
-                'dt_nascimento': cadastro.dt_nascimento,
-                'cpf': cadastro.cpf,
-                'celular': cadastro.celular,
-                'tel': cadastro.tel,
-                'email': cadastro.email,
-                'deficiencia': cadastro.deficiencia,
-                'qual_deficiencia': cadastro.qual_deficiencia,
-                'necessidade': cadastro.necessidade,
-                'dt_inclusao': cadastro.dt_inclusao,
-                'ip': cadastro.ip,
-            }
+                dados = {
+                    'id': cadastro.id,
+                    'nome': cadastro.nome,
+                    'dt_nascimento': cadastro.dt_nascimento,
+                    'cpf': cadastro.cpf,
+                    'celular': cadastro.celular,
+                    'tel': cadastro.tel,
+                    'email': cadastro.email,
+                    'deficiencia': cadastro.deficiencia,
+                    'qual_deficiencia': cadastro.qual_deficiencia,
+                    'necessidade': cadastro.necessidade,
+                    'dt_inclusao': cadastro.dt_inclusao,
+                    'ip': cadastro.ip,
+                }
 
-            mensagem = get_template('mail.html').render(dados)
+                mensagem = get_template('mail.html').render(dados)
 
-            msg = EmailMessage(
-                'Confirmação de Inscrição do Processo Seletivo para Curso de Técnico em Enfermagem',
-                mensagem,
-                'Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima - Inscrição <inscricao@sme.novafriburgo.rj.gov.br>',
-                [cadastro.email],
-            )
-            msg.content_subtype = "html"  # Main content is now text/html
-            msg.send()
+                msg = EmailMessage(
+                    'Confirmação de Inscrição do '+str(edital.nome),
+                    mensagem,
+                    'Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima - Inscrição <inscricao@sme.novafriburgo.rj.gov.br>',
+                    [cadastro.email],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                # msg.send()
 
-            return render(request, 'cadastrook.html', { 'chave': chave })
+                return render(request, 'cadastrook.html', { 'chave': chave })
+
+            else:
+                # Se teve erro:
+                print('Erro: ', form.errors)
+                erro_tmp = str(form.errors)
+                erro_tmp = erro_tmp.replace('<ul class="errorlist">', '')
+                erro_tmp = erro_tmp.replace('</li>', '')
+                erro_tmp = erro_tmp.replace('<ul>', '')
+                erro_tmp = erro_tmp.replace('</ul>', '')
+                erro_tmp = erro_tmp.split('<li>')
+
+                messages.error(request, erro_tmp[2])
 
         else:
-            # Se teve erro:
-            print('Erro: ', form.errors)
-            erro_tmp = str(form.errors)
-            erro_tmp = erro_tmp.replace('<ul class="errorlist">', '')
-            erro_tmp = erro_tmp.replace('</li>', '')
-            erro_tmp = erro_tmp.replace('<ul>', '')
-            erro_tmp = erro_tmp.replace('</ul>', '')
-            erro_tmp = erro_tmp.split('<li>')
+            form = CandidatoForm(initial={'edital': edital.id})
 
-            messages.error(request, erro_tmp[2])
-
+        return render(request, 'cadastro.html', { 'form': form, 'id': id, 'nome': edital.nome })
     else:
-        form = CandidatoForm()
-
-    return render(request, 'cadastro.html', { 'form': form })
-
+        return redirect ('/')
 
 def imprime(request, chave):
     candidato = Candidato.objects.get(chave=chave)
@@ -158,7 +165,7 @@ def consulta(request):
                 [candidato.email],
             )
             msg.content_subtype = "html"  # Main content is now text/html
-            msg.send()
+            # msg.send()
 
 
             messages.error(request, 'Enviamos um e-mail para o endereço informado, que dará acesso ao cadastro.')

@@ -14,7 +14,7 @@ admin.site.register(Downloads)
 
 class CandidatoAdmin(admin.ModelAdmin):
     list_display = ['id', 'nome', 'cpf', 'dt_nascimento', 'celular', 'deficiencia', 'dt_inclusao']
-    list_filter = ['deficiencia']
+    list_filter = ['edital','deficiencia']
     search_fields = ['nome', 'id']
 
 admin.site.register(Candidato, CandidatoAdmin)

@@ -67,7 +67,7 @@
                 <div class="row">
                     <div class="col px-4 text-dark mx-auto d-flex flex-column" style="font-size: 16pt; max-width: 900px;">
                         <h3 class="mb-5">INSCRIÇÃO</h3>
-                        <button class="btn btn-info mb-5 mx-auto px-5 py-3" style="background-color: #77D5CA;">INSCREVER-SE</button>                        
+                        <a href="{% url 'selecao:cadastro' edital.id %}" class="btn btn-info mb-5 mx-auto px-5 py-3" style="background-color: #77D5CA;">INSCREVER-SE</a>
                     </div>
                 </div>
                 {% elif encerrar_inscricao %}

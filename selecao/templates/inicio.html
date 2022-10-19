@@ -1,34 +1,52 @@
-{% extends "cab.html" %}
-
-{% load static %}
-
-{% block cab %}
+{% extends 'template.html' %}
+{% load bootstrap5 %}
+{% load static%}
+{% block title %}EDITAL - {{edital.nome}}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cursos.css' %}">
+<script src="{% static 'js/cursos.js' %}"></script>
+{% endblock %}
+{% block editais %}fw-bold{% endblock %}
+{% block main %}
 <br>
-<div class="container">
-
-    <div class="row">
-        <div class="col">
-            <h3>Informações:</h3>
+<div class="row" id="edital">
+    <div class="col d-flex py-5"> 
+        <div class="row w-100">
+            <div class="col-10 pb-4 m-auto bg-white text-dark">
+                <div class="row py-3 px-4">
+                    <div class="col bg p-5">
+                        <h1 class="display-4 text-center">INSCREVER-SE</h1>
+                    </div>
+                </div>   
+                <div class="row">
+                    <div class="col">
+                        <h3>Informações:</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <ul>
+                            <li>O Período de inscrições para o Processo Seletivo para o Curso de Técnico em Enfermagem é de 11/10/2021 a 15/10/2021;</li>
+                            <li>Um e-mail de Confirmação de Inscrição será enviado imediatamente para o endereço informado assim que a inscrição for concluída;</li>
+                            <li>O Processo Seletivo será realizado no dia 31 de outubro de 2021;</li>
+                            <li>O candidato deverá acompanhar este site, bem como o e-mail cadastrado, pois poderemos divulgar informações por estes canais;</li>
+                            <li>O local e o horário do Processo Seletivo será divulgado no dia 19 de outubro de 2021, no Diário Oficial do Município, através do site da Prefeitura Municipal de Nova Friburgo;</li>
+                            <li>Para maiores informações, leia o Edital e a Corrigenda disponíveis acima.</li>
+                            <li>Em caso de dúvidas, entre em contato conosco clicando <a href="{% url 'selecao:contato' %}"><span style="cursor:pointer;text-decoration:underline;color:#0000ff;">AQUI.</span></a>.</li>
+                            </ul>
+                            <br>
+                            <a href="{% url 'selecao:cadastro' 2 %}" class="btn btn-primary" role="button">
+                                Inscrição
+                            </a>
+            
+                            <a href="{% url 'selecao:consulta' %}" class="btn btn-primary" role="button">
+                                Consultar Inscrição
+                            </a>            
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <ul>
-    <li>O Período de inscrições para o Processo Seletivo para o Curso de Técnico em Enfermagem é de 11/10/2021 a 15/10/2021;</li>
-    <li>Um e-mail de Confirmação de Inscrição será enviado imediatamente para o endereço informado assim que a inscrição for concluída;</li>
-    <li>O Processo Seletivo será realizado no dia 31 de outubro de 2021;</li>
-    <li>O candidato deverá acompanhar este site, bem como o e-mail cadastrado, pois poderemos divulgar informações por estes canais;</li>
-    <li>O local e o horário do Processo Seletivo será divulgado no dia 19 de outubro de 2021, no Diário Oficial do Município, através do site da Prefeitura Municipal de Nova Friburgo;</li>
-    <li>Para maiores informações, leia o Edital e a Corrigenda disponíveis acima.</li>
-    <li>Em caso de dúvidas, entre em contato conosco clicando <a href="{% url 'selecao:contato' %}"><span style="cursor:pointer;text-decoration:underline;color:#0000ff;">AQUI.</span></a>.</li>
-    </ul>
-    <br>
-    <a href="{% url 'selecao:cadastro' %}" class="btn btn-primary" role="button">
-        Inscrição
-    </a>
-
-    <a href="{% url 'selecao:consulta' %}" class="btn btn-primary" role="button">
-        Consultar Inscrição
-    </a>
-
 </div>
 
 {% endblock %}

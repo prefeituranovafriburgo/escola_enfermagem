@@ -1,7 +1,12 @@
 {% extends "template.html" %}
-
-{% load static %}
-
+{% load bootstrap5 %}
+{% load static%}
+{% block title %}EDITAL - {{edital.nome}}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cursos.css' %}">
+<script src="{% static 'js/cursos.js' %}"></script>
+{% endblock %}
+{% block editais %}fw-bold{% endblock %}
 {% block main %}
 <br>
 <div class="row">
@@ -10,11 +15,17 @@
             <div class="col-10 pb-4 m-auto bg-white">
                 <div class="row py-3 px-4">
                     <div class="col bg p-5">
-                        <h1 class="display-4 text-center">EDITAIS</h1>
+                        <h1 class="display-4 text-center">ADMINISTRATIVO</h1>
                     </div>
                 </div>
                 
-                
+                <div class="row">
+                    <div class="col px-4">
+                        <button class="btn btn-dark">
+                            teste
+                        </button>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col px-4">
                         <ul>
