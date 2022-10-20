@@ -21,7 +21,6 @@ class CandidatoForm(ModelForm):
     cpf = forms.CharField(label = "CPF", max_length=14, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,icpf)", 'onload' : 'mascara(this,icpf)'}))
     celular = forms.CharField(label = "Celular", max_length=15, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,icelular)", 'onload' : 'mascara(this,icelular)'}))
     tel = forms.CharField(label = "Telefone", max_length=14, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,itelefone)", 'onload' : 'mascara(this,itelefone)'}))
-
     class Meta:
         model = Candidato
         widgets = {
