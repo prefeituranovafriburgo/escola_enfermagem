@@ -69,6 +69,12 @@ class CandidatoForm(ModelForm):
 
     def clean_deficiencia(self):
         if self.cleaned_data["deficiencia"] == 'S':
+            if not self.data["qual_deficiencia"]:
+                raise ValidationError({"qual_deficiencia":"Esse campo é obrigatório caso possua deficiência"})
+
+            if not self.data["file_termo_para_vagas_reservadas"]:
+                raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso possua deficiência"})
+
             self.fields['qual_deficiencia'].widget.attrs['readonly'] = False
             self.fields['necessidade'].widget.attrs['readonly'] = False
         else:
@@ -77,6 +83,59 @@ class CandidatoForm(ModelForm):
 
         return self.cleaned_data["deficiencia"]
 
+    def clean_autodeclaracao(self):
+        if self.cleaned_data["autodeclaracao"] == 'S':
+            if not self.data["file_termo_para_vagas_reservadas"]:
+                raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso o candidato se autodeclara preto, pardo ou indígena"})
+        else:
+            pass
+    
+        return self.cleaned_data["autodeclaracao"]
+
+    def clean_necessidade(self):
+        if self.cleaned_data["necessidade"] == 'S':
+            if not self.data["file_necessidade"]:
+                raise ValidationError({"file_necessidade":"Esse campo é obrigatório caso o candidato necessite de alguma condição especial para a realização da prova"})
+        else:
+            pass
+    
+        return self.cleaned_data["necessidade"]
+
+    def clean_tempo_excedente(self):
+        if self.cleaned_data["tempo_excedente"] == 'S':
+            if not self.data["file_tempo_excedente"]:
+                raise ValidationError({"file_tempo_excedente":"Esse campo é obrigatório caso o candidato necessite de tempo excedente"})
+        else:
+            pass
+    
+        return self.cleaned_data["tempo_excedente"]
+
+    def clean_ensino_fundamental_publico(self):
+        if self.cleaned_data["ensino_fundamental_publico"] == 'S':
+            if not self.data["file_termo_para_vagas_reservadas"]:
+                raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso o candidato tenha cursado o ensino fundamental integralmente em escola pública"})
+        else:
+            pass
+    
+        return self.cleaned_data["ensino_fundamental_publico"]
+
+    def clean_ensino_medio_publico(self):
+        if self.cleaned_data["ensino_medio_publico"] == 'S':
+            if not self.data["file_termo_para_vagas_reservadas"]:
+                raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso o candidato tenha cursado o ensino médio integralmente em escola pública?"})
+        else:
+            pass
+    
+        return self.cleaned_data["ensino_medio_publico"]
+
+    def clean_renda_bruta(self):
+        if self.cleaned_data["renda_bruta"] == 'S':
+            if not self.data["file_termo_para_vagas_reservadas"]:
+                raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso o candidato possua renda menor que 1,5 salários mínimos per capita"})
+        else:
+            pass
+    
+        return self.cleaned_data["renda_bruta"]
 
 class ContatoForm(forms.Form):
     nome = forms.CharField(label='Nome', max_length=60)
