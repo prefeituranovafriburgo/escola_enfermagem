@@ -178,6 +178,23 @@
             e.querySelector('input').removeAttribute('required');
         })
     }
+
+    function yes_or_no_check(e){
+        if(e.target.value == "S"){
+            file_guardian++
+            show(file_termo_para_vagas_reservadas)
+            setRequired(file_termo_para_vagas_reservadas)
+
+        } else if(e.target.value == "N"){
+            file_guardian--
+            if(!file_guardian){
+                hide(file_termo_para_vagas_reservadas)
+                removeRequired(file_termo_para_vagas_reservadas)
+            }
+
+        }
+        file_guardian < 0 ? file_guardian = 0 : file_guardian
+    }
     
 
     hide(qual_deficiencia, necessidade, tempo_excedente, file_termo_para_vagas_reservadas, file_necessidade, file_tempo_excedente)
@@ -187,85 +204,30 @@
     document.querySelector('#id_deficiencia').addEventListener('change', (e)=>{
         if(e.target.value == "S"){
             show(qual_deficiencia, necessidade, tempo_excedente, file_termo_para_vagas_reservadas)
-            setRequired(file_termo_para_vagas_reservadas)
+            setRequired(qual_deficiencia, file_termo_para_vagas_reservadas)
             file_guardian++
 
         } else if(e.target.value == "N"){
             file_guardian--
             hide(qual_deficiencia, necessidade, tempo_excedente, file_necessidade, file_tempo_excedente)
-            removeRequired(file_termo_para_vagas_reservadas, file_necessidade, file_tempo_excedente)
+            removeRequired(qual_deficiencia, file_termo_para_vagas_reservadas, file_necessidade, file_tempo_excedente)
 
             if(!file_guardian){
                 hide(file_termo_para_vagas_reservadas)
                 removeRequired(file_termo_para_vagas_reservadas)
             }
-
         }
+        file_guardian < 0 ? file_guardian = 0 : file_guardian
+
     })
 
-    document.querySelector('#id_autodeclaracao').addEventListener('change', (e)=>{
-        if(e.target.value == "S"){
-            file_guardian++
-            show(file_termo_para_vagas_reservadas)
-            setRequired(file_termo_para_vagas_reservadas)
+    document.querySelector('#id_autodeclaracao').addEventListener('change', yes_or_no_check)
 
-        } else if(e.target.value == "N"){
-            file_guardian--
-            if(!file_guardian){
-                hide(file_termo_para_vagas_reservadas)
-                removeRequired(file_termo_para_vagas_reservadas)
-            }
+    document.querySelector('#id_ensino_fundamental_publico').addEventListener('change', yes_or_no_check)
 
-        }
-    })
+    document.querySelector('#id_ensino_medio_publico').addEventListener('change', yes_or_no_check)
 
-    document.querySelector('#id_ensino_fundamental_publico').addEventListener('change', (e)=>{
-        if(e.target.value == "S"){
-            file_guardian++
-            show(file_termo_para_vagas_reservadas)
-            setRequired(file_termo_para_vagas_reservadas)
-
-        } else if(e.target.value == "N"){
-            file_guardian--
-            if(!file_guardian){
-                hide(file_termo_para_vagas_reservadas)
-                removeRequired(file_termo_para_vagas_reservadas)
-            }
-
-        }
-    })
-
-    document.querySelector('#id_ensino_medio_publico').addEventListener('change', (e)=>{
-        if(e.target.value == "S"){
-            file_guardian++
-            show(file_termo_para_vagas_reservadas)
-            setRequired(file_termo_para_vagas_reservadas)
-
-        } else if(e.target.value == "N"){
-            file_guardian--
-            if(!file_guardian){
-                hide(file_termo_para_vagas_reservadas)
-                removeRequired(file_termo_para_vagas_reservadas)
-            }
-
-        }
-    })
-
-    document.querySelector('#id_renda_bruta').addEventListener('change', (e)=>{
-        if(e.target.value == "S"){
-            file_guardian++
-            show(file_termo_para_vagas_reservadas)
-            setRequired(file_termo_para_vagas_reservadas)
-
-        } else if(e.target.value == "N"){
-            file_guardian--
-            if(!file_guardian){
-                hide(file_termo_para_vagas_reservadas)
-                removeRequired(file_termo_para_vagas_reservadas)
-            }
-
-        }
-    })
+    document.querySelector('#id_renda_bruta').addEventListener('change', yes_or_no_check)
 
     document.querySelector('#id_necessidade').addEventListener('keyup', (e)=>{
         
@@ -291,8 +253,15 @@
         }
     })
 
-    
+    let all = [...document.querySelectorAll('select')]
+    all.sort((a, b)=>a.value > b.value).forEach(e=>{
+        
+        e.dispatchEvent(new Event('change'))
+    })
 
+    document.querySelectorAll('input').forEach(e=>{
+        e.dispatchEvent(new Event('keyup'))
+    })
 
 </script>
 <style>
