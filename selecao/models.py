@@ -80,16 +80,16 @@ class Candidato(models.Model):
     tel = models.CharField(verbose_name='Telefone', max_length=10, blank=True, null=True)
     email = models.CharField(verbose_name='Email', max_length=120)
     
-    autodeclaracao=models.CharField(verbose_name='O candidato é autodeclarado preto, pardo ou indígena', choices=ESCOLHAS, max_length=1)
+    autodeclaracao=models.CharField(verbose_name='O candidato é autodeclarado preto, pardo ou indígena', choices=ESCOLHAS, max_length=1, default='N')
     
-    deficiencia = models.CharField(verbose_name='Possui deficiência?', max_length=1, choices=ESCOLHAS)
+    deficiencia = models.CharField(verbose_name='Possui deficiência?', max_length=1, choices=ESCOLHAS, default='N')
     qual_deficiencia = models.CharField(verbose_name='Indique qual a deficiência', max_length=600, blank=True, null=True)        
     necessidade = models.CharField(verbose_name='Informe se necessita de alguma condição especial para a realização da prova', max_length=200, blank=True)    
     tempo_excedente= models.CharField(verbose_name='Informe se necessita de tempo excedente para a realização da prova', max_length=200, blank=True)        
     
-    ensino_fundamental_publico=models.CharField(verbose_name='O candidato cursou o ensino fundamental integralmente em escola pública?', choices=ESCOLHAS, max_length=1)
-    ensino_medio_publico=models.CharField(verbose_name='O candidato cursou o ensino médio integralmente em escola pública?', choices=ESCOLHAS, max_length=1)
-    renda_bruta=models.CharField(verbose_name='O candidato possui renda bruta mensal igual ou inferior a 1,5 salários mínimos per capita?', choices=ESCOLHAS, max_length=1)
+    ensino_fundamental_publico=models.CharField(verbose_name='O candidato cursou o ensino fundamental integralmente em escola pública?', default='N', choices=ESCOLHAS, max_length=1)
+    ensino_medio_publico=models.CharField(verbose_name='O candidato cursou o ensino médio integralmente em escola pública?', default='N', choices=ESCOLHAS, max_length=1)
+    renda_bruta=models.CharField(verbose_name='O candidato possui renda bruta mensal igual ou inferior a 1,5 salários mínimos per capita?', default='N', choices=ESCOLHAS, max_length=1)
     
     
     file_termo_para_vagas_reservadas=models.FileField(upload_to='file_adesao_sis_vagas_reservadas', verbose_name='Anexo em PDF do Termo de Adesão ao Sistema de Vagas Reservadas', blank=True, null=True)
