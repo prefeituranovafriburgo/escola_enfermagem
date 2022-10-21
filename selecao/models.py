@@ -80,7 +80,7 @@ class Candidato(models.Model):
     tel = models.CharField(verbose_name='Telefone', max_length=10, blank=True, null=True)
     email = models.CharField(verbose_name='Email', max_length=120)
     
-    autodeclaracao=models.CharField(verbose_name='O candidato autodeclarado preto, pardo ou indígena', choices=ESCOLHAS, max_length=1)
+    autodeclaracao=models.CharField(verbose_name='O candidato é autodeclarado preto, pardo ou indígena', choices=ESCOLHAS, max_length=1)
     
     deficiencia = models.CharField(verbose_name='Possui deficiência?', max_length=1, choices=ESCOLHAS)
     qual_deficiencia = models.CharField(verbose_name='Indique qual a deficiência', max_length=600, blank=True, null=True)        
