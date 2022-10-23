@@ -86,11 +86,9 @@ class Candidato(models.Model):
     tempo_excedente= models.CharField(verbose_name='Informe se necessita de tempo excedente para a realização da prova', max_length=200, blank=True)        
 
     autodeclaracao=models.CharField(verbose_name='O candidato é autodeclarado preto, pardo ou indígena', choices=ESCOLHAS, max_length=1)
-    
     renda_bruta=models.CharField(verbose_name='O candidato possui renda bruta mensal igual ou inferior a 1,5 salários mínimos per capita?', choices=ESCOLHAS, max_length=1)
     ensino_fundamental_publico=models.CharField(verbose_name='O candidato cursou o ensino fundamental integralmente em escola pública?', choices=ESCOLHAS, max_length=1)
-    ensino_medio_publico=models.CharField(verbose_name='O candidato cursou o ensino médio integralmente em escola pública?', choices=ESCOLHAS, max_length=1)    
-    
+    ensino_medio_publico=models.CharField(verbose_name='O candidato cursou o ensino médio integralmente em escola pública?', choices=ESCOLHAS, max_length=1)
     
     file_termo_para_vagas_reservadas=models.FileField(upload_to='file_adesao_sis_vagas_reservadas', verbose_name='Anexo em PDF do Termo de Adesão ao Sistema de Vagas Reservadas', blank=True, null=True)
     file_necessidade=models.FileField(upload_to='file_necessidade', verbose_name='Anexo em PDF de justificativa da necessidade por médico especializado', blank=True, null=True)

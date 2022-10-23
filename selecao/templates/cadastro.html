@@ -18,7 +18,6 @@
                         <h1 class="display-4 text-center">INSCREVER-SE</h1>
                     </div>
                 </div>       
-
                 
                 <div class="row">      
                     <div class="col text-right px-4 d-flex">
@@ -30,6 +29,16 @@
                         </a>
                     </div>
                 </div>
+
+                {% if form.errors %}
+
+                <div class="row d-flex ">
+                    <div class="col-8 pt-4 m-auto text-dark">
+                        <h2 class="invalid-feedback text-uppercase" style="display: block; font-size: 1rem">Corrija os erros apresentados no formulário</h2>
+                    </div>
+                </div>
+                {% endif %}
+
                 <div class="row d-flex">
                     <div id="informativo" class="col-8 pt-4 m-auto text-dark">
                         <h2 class="text-dark text-uppercase">Informativo</h2>
@@ -169,83 +178,58 @@
             e.querySelector('input').removeAttribute('required');
         })
     }
+
+    function yes_or_no_check(e){
+        if(e.target.value == "S"){
+            file_guardian++
+            show(file_termo_para_vagas_reservadas)
+            setRequired(file_termo_para_vagas_reservadas)
+
+        } else if(e.target.value == "N"){
+            file_guardian--
+            if(!file_guardian){
+                hide(file_termo_para_vagas_reservadas)
+                removeRequired(file_termo_para_vagas_reservadas)
+            }
+
+        }
+        file_guardian < 0 ? file_guardian = 0 : file_guardian
+    }
     
 
     hide(qual_deficiencia, necessidade, tempo_excedente, file_termo_para_vagas_reservadas, file_necessidade, file_tempo_excedente)
 
-    document.querySelector('#id_deficiencia').addEventListener('click', (e)=>{
+    let file_guardian = 0
+
+    document.querySelector('#id_deficiencia').addEventListener('change', (e)=>{
         if(e.target.value == "S"){
             show(qual_deficiencia, necessidade, tempo_excedente, file_termo_para_vagas_reservadas)
-            setRequired(file_termo_para_vagas_reservadas)
+            setRequired(qual_deficiencia, file_termo_para_vagas_reservadas)
+            file_guardian++
 
         } else if(e.target.value == "N"){
-            hide(qual_deficiencia, necessidade, tempo_excedente, file_termo_para_vagas_reservadas)
-            removeRequired(file_termo_para_vagas_reservadas)
+            file_guardian--
+            hide(qual_deficiencia, necessidade, tempo_excedente, file_necessidade, file_tempo_excedente)
+            removeRequired(qual_deficiencia, file_termo_para_vagas_reservadas, file_necessidade, file_tempo_excedente)
 
+            if(!file_guardian){
+                hide(file_termo_para_vagas_reservadas)
+                removeRequired(file_termo_para_vagas_reservadas)
+            }
         }
+        file_guardian < 0 ? file_guardian = 0 : file_guardian
+
     })
 
-    document.querySelector('#id_autodeclaracao').addEventListener('click', (e)=>{
-        if(e.target.value == "S"){
-            show(file_termo_para_vagas_reservadas)
-            setRequired(file_termo_para_vagas_reservadas)
+    document.querySelector('#id_autodeclaracao').addEventListener('change', yes_or_no_check)
 
-        } else if(e.target.value == "N"){
-            hide(file_termo_para_vagas_reservadas)
-            removeRequired(file_termo_para_vagas_reservadas)
+    document.querySelector('#id_ensino_fundamental_publico').addEventListener('change', yes_or_no_check)
 
-        }
-    })
+    document.querySelector('#id_ensino_medio_publico').addEventListener('change', yes_or_no_check)
 
-    document.querySelector('#id_ensino_fundamental_publico').addEventListener('click', (e)=>{
-        if(e.target.value == "S"){
-            show(file_termo_para_vagas_reservadas)
-            setRequired(file_termo_para_vagas_reservadas)
+    document.querySelector('#id_renda_bruta').addEventListener('change', yes_or_no_check)
 
-        } else if(e.target.value == "N"){
-            hide(file_termo_para_vagas_reservadas)
-            removeRequired(file_termo_para_vagas_reservadas)
-
-        }
-    })
-
-    document.querySelector('#id_ensino_medio_publico').addEventListener('click', (e)=>{
-        if(e.target.value == "S"){
-            show(file_termo_para_vagas_reservadas)
-            setRequired(file_termo_para_vagas_reservadas)
-
-        } else if(e.target.value == "N"){
-            hide(file_termo_para_vagas_reservadas)
-            removeRequired(file_termo_para_vagas_reservadas)
-
-        }
-    })
-
-    document.querySelector('#id_renda_bruta').addEventListener('click', (e)=>{
-        if(e.target.value == "S"){
-            show(file_termo_para_vagas_reservadas)
-            setRequired(file_termo_para_vagas_reservadas)
-
-        } else if(e.target.value == "N"){
-            hide(file_termo_para_vagas_reservadas)
-            removeRequired(file_termo_para_vagas_reservadas)
-
-        }
-    })
-
-    document.querySelector('#id_renda_bruta').addEventListener('click', (e)=>{
-        if(e.target.value == "S"){
-            show(file_termo_para_vagas_reservadas)
-            setRequired(file_termo_para_vagas_reservadas)
-
-        } else if(e.target.value == "N"){
-            hide(file_termo_para_vagas_reservadas)
-            removeRequired(file_termo_para_vagas_reservadas)
-
-        }
-    })
-
-    document.querySelector('#id_necessidade').addEventListener('change', (e)=>{
+    document.querySelector('#id_necessidade').addEventListener('keyup', (e)=>{
         
         if(e.target.value == "" || e.target.value == "Não" || e.target.value == "N"){
             hide(file_necessidade)
@@ -257,7 +241,7 @@
         }
     })
 
-    document.querySelector('#id_tempo_excedente').addEventListener('change', (e)=>{
+    document.querySelector('#id_tempo_excedente').addEventListener('keyup', (e)=>{
 
         if(e.target.value == "" || e.target.value == "Não" || e.target.value == "N"){
             hide(file_tempo_excedente)
@@ -269,8 +253,15 @@
         }
     })
 
-    
+    let all = [...document.querySelectorAll('select')]
+    all.sort((a, b)=>a.value > b.value).forEach(e=>{
+        
+        e.dispatchEvent(new Event('change'))
+    })
 
+    document.querySelectorAll('input').forEach(e=>{
+        e.dispatchEvent(new Event('keyup'))
+    })
 
 </script>
 <style>
