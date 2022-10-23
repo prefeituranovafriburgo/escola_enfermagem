@@ -76,20 +76,20 @@ class Candidato(models.Model):
     nome = models.CharField(verbose_name='Nome completo', max_length=60)
     dt_nascimento = models.DateField('Data de nascimento')
     cpf = models.CharField(verbose_name='CPF', unique=True, max_length=11, validators=[validate_CPF])
-    celular = models.CharField(verbose_name='Celular', max_length=11)
     tel = models.CharField(verbose_name='Telefone', max_length=10, blank=True, null=True)
+    celular = models.CharField(verbose_name='Celular', max_length=11)    
     email = models.CharField(verbose_name='Email', max_length=120)
-    
-    autodeclaracao=models.CharField(verbose_name='O candidato é autodeclarado preto, pardo ou indígena', choices=ESCOLHAS, max_length=1)
     
     deficiencia = models.CharField(verbose_name='Possui deficiência?', max_length=1, choices=ESCOLHAS)
     qual_deficiencia = models.CharField(verbose_name='Indique qual a deficiência', max_length=600, blank=True, null=True)        
     necessidade = models.CharField(verbose_name='Informe se necessita de alguma condição especial para a realização da prova', max_length=200, blank=True)    
     tempo_excedente= models.CharField(verbose_name='Informe se necessita de tempo excedente para a realização da prova', max_length=200, blank=True)        
+
+    autodeclaracao=models.CharField(verbose_name='O candidato é autodeclarado preto, pardo ou indígena', choices=ESCOLHAS, max_length=1)
     
-    ensino_fundamental_publico=models.CharField(verbose_name='O candidato cursou o ensino fundamental integralmente em escola pública?', choices=ESCOLHAS, max_length=1)
-    ensino_medio_publico=models.CharField(verbose_name='O candidato cursou o ensino médio integralmente em escola pública?', choices=ESCOLHAS, max_length=1)
     renda_bruta=models.CharField(verbose_name='O candidato possui renda bruta mensal igual ou inferior a 1,5 salários mínimos per capita?', choices=ESCOLHAS, max_length=1)
+    ensino_fundamental_publico=models.CharField(verbose_name='O candidato cursou o ensino fundamental integralmente em escola pública?', choices=ESCOLHAS, max_length=1)
+    ensino_medio_publico=models.CharField(verbose_name='O candidato cursou o ensino médio integralmente em escola pública?', choices=ESCOLHAS, max_length=1)    
     
     
     file_termo_para_vagas_reservadas=models.FileField(upload_to='file_adesao_sis_vagas_reservadas', verbose_name='Anexo em PDF do Termo de Adesão ao Sistema de Vagas Reservadas', blank=True, null=True)
@@ -147,6 +147,7 @@ class Sala(models.Model):
     class Meta:
         ordering = ['horario', 'sala']
 
+    local=models.ForeignKey(Local, on_delete=models.CASCADE, null=True)
     horario = models.ForeignKey(Horario, on_delete=models.PROTECT)
     sala = models.CharField(max_length=5)
     qnt_alocação=models.IntegerField(verbose_name='Quantas alocações é permitida?')
@@ -165,6 +166,7 @@ class Alocacao(models.Model):
         verbose_name_plural = "Alocações"
         verbose_name = "Alocação"
 
+    edital=models.ForeignKey(Edital, on_delete=models.CASCADE, null=True)
     sala = models.ForeignKey(Sala, on_delete=models.PROTECT)
     candidato = models.ForeignKey(Candidato, on_delete=models.PROTECT)
     dt_inclusao = models.DateTimeField(auto_now_add=True)

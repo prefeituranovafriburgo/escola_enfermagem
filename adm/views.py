@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from .forms import *
 
-from selecao.models import Alocacao, Candidato
+from selecao.models import Alocacao, Candidato, Edital
 
 # Create your views here.
 
@@ -103,24 +103,50 @@ def envia(request, id):
 
 
 @login_required
-def relacao_candidatos(request):
-
-    alocacoes = Alocacao.objects.all().order_by('candidato__nome')
+def relacao_candidatos(request, id):
+    try:
+        edital=Edital.objects.get(id=id)
+        alocacoes = Alocacao.objects.filter(edital=edital).order_by('candidato__nome')
+    except:
+        return redirect('adm:adm_relacao_candidatos')
 
     return render(request, "adm/relacao_candidatos.html",{"alocacoes" : alocacoes})
 
+@login_required
+def adm_relacao_candidatos(request):
+
+    if request.method=='POST':
+        context={
+            "edital" : Edital.objects.get(id=request.POST['edital'])
+            }
+        return render(request, "adm/adm_relacao_candidatos_opcoes.html", context)    
+    
+    editais=Edital.objects.all()
+    context={"editais" : editais}
+    
+    return render(request, "adm/adm_relacao_candidatos.html", context)
+
+
 
 @login_required
-def relacao_candidatos_assinatura(request):
+def relacao_candidatos_assinatura(request, id):
 
-    alocacoes = Alocacao.objects.all().order_by('candidato__nome')
+    try:
+        edital=Edital.objects.get(id=id)
+        alocacoes = Alocacao.objects.filter(edital=edital).order_by('candidato__nome')
+    except:
+        return redirect('adm:adm_relacao_candidatos')
 
     return render(request, "adm/relacao_candidatos_assinatura.html",{"alocacoes" : alocacoes})
 
 
 @login_required
-def relacao_candidatos_porta(request):
+def relacao_candidatos_porta(request, id):
 
-    alocacoes = Alocacao.objects.all().order_by('candidato__nome')
+    try:
+        edital=Edital.objects.get(id=id)
+        alocacoes = Alocacao.objects.filter(edital=edital).order_by('candidato__nome')
+    except:
+        return redirect('adm:adm_relacao_candidatos')
 
     return render(request, "adm/relacao_candidatos_porta.html",{"alocacoes" : alocacoes})

@@ -1,0 +1,49 @@
+{% extends "template.html" %}
+{% load bootstrap5 %}
+{% load static%}
+{% block title %}EDITAL - {{edital.nome}}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cursos.css' %}">
+<script src="{% static 'js/cursos.js' %}"></script>
+{% endblock %}
+{% block editais %}fw-bold{% endblock %}
+{% block main %}
+<br>
+<div class="row">
+    <div class="col d-flex py-5"> 
+        <div class="row w-100">
+            <div class="col-10 pb-4 m-auto bg-white">
+                <div class="row py-3 px-4">
+                    <div class="col bg p-5">
+                        <h1 class="display-4 text-center">ADMINISTRATIVO</h1>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col px-4 d-flex">
+                        <h3 class="text-dark" style="display: inline;">{{edital.nome}}</h3>
+                        <a href="{% url 'adm:adm_relacao_candidatos' %}" class="btn btn-dark ms-auto">
+                            Voltar
+                        </a>
+                    </div>
+                </div>                
+                
+                <div class="row">
+                    <div class="col px-4 pt-5">
+                        <ul>
+                        <!-- <li><a href="{% url 'adm:envia_email' %}">Envia e-mail</a></li> -->
+                        <li><a href="{% url 'adm:relacao_candidatos' edital.id %}" target="_blank">Imprime relação de candidatos (Dados completos)</a></li>
+                        <li><a href="{% url 'adm:relacao_candidatos_assinatura' edital.id %}" target="_blank">Imprime relação de candidatos (para assinatura)</a></li>
+                        <li><a href="{% url 'adm:relacao_candidatos_porta' edital.id %}" target="_blank">Imprime relação de candidatos (para afixar nas salas)</a></li>
+                        </ul>
+                        <br>
+                    </div>                    
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+
+
+{% endblock %}

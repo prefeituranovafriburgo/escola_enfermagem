@@ -1,0 +1,55 @@
+{% extends "template.html" %}
+{% load bootstrap5 %}
+{% load static%}
+{% block title %}EDITAL - {{edital.nome}}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cursos.css' %}">
+<script src="{% static 'js/cursos.js' %}"></script>
+{% endblock %}
+{% block editais %}fw-bold{% endblock %}
+{% block main %}
+<br>
+<div class="row">
+    <div class="col d-flex py-5"> 
+        <div class="row w-100">
+            <div class="col-10 pb-4 m-auto bg-white">
+                <div class="row py-3 px-4">
+                    <div class="col bg p-5">
+                        <h1 class="display-4 text-center">ADMINISTRATIVO</h1>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col px-4 d-flex">
+                        <a href="{% url 'adm:inicio' %}" class="btn btn-dark ms-auto">
+                            Voltar
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col pt-4 pb-5 d-flex flex-column">
+                        <form method="POST" class="m-auto">
+                            <h5 class="text-dark">Escolha o edital ativo</h5>
+                            {% csrf_token %}
+                            <select name="edital"id="edital" class="form-select">
+                                {% for edital in editais %}
+                                <option value="{{edital.id}}">
+                                    {{edital}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <br>
+                            <button class="w-100">
+                                Ver opções
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+
+
+{% endblock %}
