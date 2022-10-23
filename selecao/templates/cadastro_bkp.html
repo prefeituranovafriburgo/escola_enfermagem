@@ -132,16 +132,17 @@
         v_obj.value=v_fun(v_obj.value)
     }
 
-
     function some_com_tudo(){
         var color = 'rgb(229, 255, 236)'
         document.getElementById('id_qual_deficiencia').style.backgroundColor=color
         document.getElementById('id_necessidade').style.backgroundColor=color
         document.getElementById('id_tempo_excedente').style.backgroundColor=color
+        
         document.getElementById('id_file_termo_para_vagas_reservadas').style.backgroundColor=color
         document.getElementById('id_file_necessidade').style.backgroundColor=color
-        document.getElementById('id_file_tempo_excedente').style.backgroundColor=color        
+        document.getElementById('id_file_tempo_excedente').style.backgroundColor=color
     }
+
     some_com_tudo()
 
     const qual_deficiencia = document.querySelector("#id_qual_deficiencia").parentNode
@@ -261,6 +262,7 @@
     document.querySelectorAll('input').forEach(e=>{
         e.dispatchEvent(new Event('keyup'))
     })
+
 </script>
 <style>
     #informativo p{
