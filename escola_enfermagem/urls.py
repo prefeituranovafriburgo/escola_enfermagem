@@ -10,6 +10,7 @@ urlpatterns = [
     path('administrativo/', include('adm.urls')),
     path('selecao/', include('selecao.urls')),
 ]
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 admin.site.site_header = "SECRETARIA MUNICIPAL DE CULTURA"
 admin.site.site_title = "PREFEITURA MUNICIPAL DE NOVA FRIBURGO"

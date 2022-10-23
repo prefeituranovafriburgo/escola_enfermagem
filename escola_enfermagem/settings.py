@@ -133,7 +133,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'cultura/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'escola_enfermagem/media')
 
 LOGIN_URL='/login'
 LOGIN_REDIRECT_URL = '/'
@@ -141,13 +141,18 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-DEFAULT_FROM_EMAIL = 'Secretaria Municipal de Turismo e Marketing <turismo@sme.novafriburgo.rj.gov.br>'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'Processo Seletivo para a Escola de Enfermagem <enfermagem@sme.novafriburgo.rj.gov.br>'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = email_user
 EMAIL_HOST_PASSWORD = email_pass
+
+LOGIN_REDIRECT_URL = '/administrativo'
+LOGOUT_REDIRECT_URL = '/login'
+
 X_FRAME_OPTIONS = 'SAMEORIGIN'

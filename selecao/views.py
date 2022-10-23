@@ -42,8 +42,8 @@ def cadastro(request, id):
     
     if edital:
         if request.method == 'POST':
-            form = CandidatoForm(request.POST)
-
+            form = CandidatoForm(request.POST, request.FILES)
+            print(request.POST)
             if form.is_valid():
                 cadastro = form.save(commit=False)
 
@@ -85,18 +85,19 @@ def cadastro(request, id):
                     'necessidade': cadastro.necessidade,
                     'dt_inclusao': cadastro.dt_inclusao,
                     'ip': cadastro.ip,
+                    'edital': edital
                 }
 
                 mensagem = get_template('mail.html').render(dados)
-
+                print(dados)
                 msg = EmailMessage(
-                    'Confirmação de Inscrição do '+str(edital.nome),
+                    'Confirmação de Inscrição - Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima',
                     mensagem,
                     'Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima - Inscrição <inscricao@sme.novafriburgo.rj.gov.br>',
                     [cadastro.email],
                 )
                 msg.content_subtype = "html"  # Main content is now text/html
-                # msg.send()
+                msg.send()
 
                 return render(request, 'cadastrook.html', { 'chave': chave })
 

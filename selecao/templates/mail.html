@@ -20,9 +20,9 @@
     </head>
 
     <body>
-        <img src="{% static "logo_prefeitura_transparente.png" %}" alt="Logo PMNF" title="Logo Cáritas"  style="margin:20px 0 0 15px;position: relative;left: 5px;" width="300px" />
+        <!-- <img src="{% static 'logo_pmnf.png' %}" alt="Logo PMNF" title="Logo Prefeitura de Nova Friburgo"  style="margin:20px 0 0 15px;position: relative;left: 5px;" width="300px" /> -->
 
-        <div class="titulo">FICHA DE INSCRIÇÃO</div> <div class="numero">N° {{ id }}</div><br>
+        <div class="titulo">FICHA DE INSCRIÇÃO PARA: {{edital}}</div> <div class="numero">N° {{ id }}</div><br>
         <br>
         Nome: {{ nome }}<br>
         Data Nascimento: {{ dt_nascimento | date:"SHORT_DATE_FORMAT" }}<br>
@@ -31,13 +31,16 @@
         Telefone: {{ tel | formata_tel }}<br>
         E-Mail: {{ email }}<br>
         Possui deficiência? {% if deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
-        Indique qual deficiência? {{ qual_deficiencia }}<br>
-        Informe se necessita de alguma condição especial para a realização da prova: {{ necessidade }}<br>
+        {% if deficiencia == 'S' %}
+        Deficiência: {{ qual_deficiencia }}<br>
+        Informe se necessita de alguma condição especial para a realização da prova: {% if necessidade %}{{ necessidade }}{% endif %}<br>
+        {% endif %}
         Data Cadastro: {{ dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
         IP: {{ ip }}<br>
 	<br>
 	Inscrição para o Processo Seletivo efetivado com SUCESSO.<br>
 	<br>
-	O local e o horário do processo seletivo será divulgado no dia 19 de outubro de 2021, no Diário Oficial do Município, através do site da Prefeitura Municipal de Nova Friburgo.<br>
+	O local e o horário do processo seletivo será divulgado no dia {{edital.dt_divulgacao}}, no Diário Oficial do Município, através do site da Prefeitura Municipal de Nova Friburgo. Você também pode se manter informado pela nossa plataforma <a target="_blank" href="https://enfermagem.pmnf.rj.gov.br/edital/1">clicando aqui</a>.<br>
+    
     </body>
 </html>
