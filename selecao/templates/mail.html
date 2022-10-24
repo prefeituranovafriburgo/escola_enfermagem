@@ -27,19 +27,19 @@
          <br>
         <br>
         <div style="text-align: justify; margin-left: 30px; margin-top: 20px;">        
-            Nome: {{ candidato.nome }}<br>
-            Data Nascimento: {{ candidato.dt_nascimento | date:"SHORT_DATE_FORMAT" }}<br>
-            CPF: {{ candidato.cpf | formata_cpf }}<br>
-            Celular: {{ candidato.celular | formata_tel }}<br>
-            Telefone: {{ candidato.tel | formata_tel }}<br>
+            Nome: {{ nome }}<br>
+            Data Nascimento: {{ dt_nascimento | date:"SHORT_DATE_FORMAT" }}<br>
+            CPF: {{ cpf | formata_cpf }}<br>
+            Celular: {{ celular | formata_tel }}<br>
+            Telefone: {{ tel | formata_tel }}<br>
             E-mail: {{ candidato.email }}<br>
-            Possui deficiência: {% if candidato.deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
-            {% if candidato.qual_deficiencia %}Deficiência: {{ candidato.qual_deficiencia }}<br>{% endif %}
-            {% if candidato.necessidade %}Informe se necessita de alguma condição especial para a realização da prova: {{ candidato.necessidade }}<br>{% endif %}
-            Data Cadastro: {{ candidato.dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
-            IP: {{ candidato.ip }}
+            Possui deficiência: {% if deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
+            {% if qual_deficiencia %}Deficiência: {{ qual_deficiencia }}<br>{% endif %}
+            {% if necessidade %}Informe se necessita de alguma condição especial para a realização da prova: {{ candidato.necessidade }}<br>{% endif %}
+            Data Cadastro: {{ dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
+            IP: {{ ip }}
             <div style="margin-top: 20px;">
-                Protocolo de inscrição: <br>{{candidato.chave}}<br>
+                Protocolo de inscrição: <br>{{chave}}<br>
             </div>
             </div>
 	<br>
