@@ -69,24 +69,27 @@ class CandidatoForm(ModelForm):
 
     def clean_deficiencia(self):
         if self.cleaned_data["deficiencia"] == 'S':
+            print(self.data)
             if not self.data["qual_deficiencia"]:
                 raise ValidationError({"qual_deficiencia":"Esse campo é obrigatório caso possua deficiência"})
 
-            if not self.data["file_termo_para_vagas_reservadas"]:
-                raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso possua deficiência"})
+            # if not self.data["file_termo_para_vagas_reservadas"]:
+                # raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso possua deficiência"})
 
-            self.fields['qual_deficiencia'].widget.attrs['readonly'] = False
-            self.fields['necessidade'].widget.attrs['readonly'] = False
+            # self.fields['qual_deficiencia'].widget.attrs['readonly'] = False
+            # self.fields['necessidade'].widget.attrs['readonly'] = False
         else:
-            self.fields['qual_deficiencia'].widget.attrs['readonly'] = True
-            self.fields['necessidade'].widget.attrs['readonly'] = True
+            # self.fields['qual_deficiencia'].widget.attrs['readonly'] = True
+            # self.fields['necessidade'].widget.attrs['readonly'] = True
+            pass
 
         return self.cleaned_data["deficiencia"]
 
     def clean_autodeclaracao(self):
-        if self.cleaned_data["autodeclaracao"] == 'S':
-            if not self.data["file_termo_para_vagas_reservadas"]:
-                raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso o candidato se autodeclara preto, pardo ou indígena"})
+        if self.cleaned_data["autodeclaracao"] == 'S':            
+            pass
+            # if not self.data["file_termo_para_vagas_reservadas"]:
+            #     raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso o candidato se autodeclara preto, pardo ou indígena"})
         else:
             pass
     
@@ -112,8 +115,9 @@ class CandidatoForm(ModelForm):
 
     def clean_ensino_fundamental_publico(self):
         if self.cleaned_data["ensino_fundamental_publico"] == 'S':
-            if not self.data["file_termo_para_vagas_reservadas"]:
-                raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso o candidato tenha cursado o ensino fundamental integralmente em escola pública"})
+            pass
+            # if not self.data["file_termo_para_vagas_reservadas"]:
+                # raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso o candidato tenha cursado o ensino fundamental integralmente em escola pública"})
         else:
             pass
     
@@ -121,8 +125,9 @@ class CandidatoForm(ModelForm):
 
     def clean_ensino_medio_publico(self):
         if self.cleaned_data["ensino_medio_publico"] == 'S':
-            if not self.data["file_termo_para_vagas_reservadas"]:
-                raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso o candidato tenha cursado o ensino médio integralmente em escola pública?"})
+            pass
+            # if not self.data["file_termo_para_vagas_reservadas"]:
+                # raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso o candidato tenha cursado o ensino médio integralmente em escola pública?"})
         else:
             pass
     
@@ -130,8 +135,9 @@ class CandidatoForm(ModelForm):
 
     def clean_renda_bruta(self):
         if self.cleaned_data["renda_bruta"] == 'S':
-            if not self.data["file_termo_para_vagas_reservadas"]:
-                raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso o candidato possua renda menor que 1,5 salários mínimos per capita"})
+            pass
+            # if not self.data["file_termo_para_vagas_reservadas"]:
+                # raise ValidationError({"file_termo_para_vagas_reservadas":"Esse campo é obrigatório caso o candidato possua renda menor que 1,5 salários mínimos per capita"})
         else:
             pass
     

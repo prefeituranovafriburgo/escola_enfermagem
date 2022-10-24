@@ -42,9 +42,11 @@ def cadastro(request, id):
     
     if edital:
         if request.method == 'POST':
-            form = CandidatoForm(request.POST, request.FILES)
+            form = CandidatoForm(request.POST, request.FILES)            
             print(request.POST)
-            if form.is_valid():
+            print(request.FILES)
+            # print(request.POST)
+            if form.is_valid():                
                 cadastro = form.save(commit=False)
 
                 chave = str(uuid.uuid4())
@@ -89,7 +91,7 @@ def cadastro(request, id):
                 }
 
                 mensagem = get_template('mail.html').render(dados)
-                print(dados)
+                # print(dados)
                 msg = EmailMessage(
                     'Confirmação de Inscrição - Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima',
                     mensagem,
@@ -166,10 +168,10 @@ def consulta(request):
                 [candidato.email],
             )
             msg.content_subtype = "html"  # Main content is now text/html
-            # msg.send()
+            msg.send()
 
 
-            messages.error(request, 'Enviamos um e-mail para o endereço informado, que dará acesso ao cadastro.')
+            messages.success(request, 'Enviamos um e-mail para o endereço informado na hora da sua inscrição com o link de acesso aos dados de seu cadastro.')
 
             return redirect ('/')
 
@@ -291,7 +293,7 @@ def cadastro_corrige(request, chave):
     else:
         form = CandidatoForm(instance=candidato)
 
-    return render(request, 'cadastro.html', { 'form': form })
+    return render(request, 'cadastro.html', { 'form': form, 'id': 2})
 
 
 def contato(request):

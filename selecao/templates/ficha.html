@@ -20,21 +20,27 @@
     </head>
 
     <body>
-        <img src="{% static "logo_prefeitura_transparente.png" %}" alt="Logo PMNF" title="Logo Cáritas"  style="margin:20px 0 0 15px;position: relative;left: 5px;" width="300px" />
+        <img src="{% static 'logo_prefeitura_transparente.png' %}" alt="Logo PMNF" title="Logo Cáritas"  style="margin:20px 0 0 15px;position: relative;left: 5px;" width="300px" />
 <br>
-        <div class="titulo">FICHA DE INSCRIÇÃO</div> <div class="numero">N° {{ candidato.id }}</div><br>
+        <div class="titulo" style="margin-top: 20px; margin-left: 30px;">FICHA DE INSCRIÇÃO</div> <div class="numero">N° de inscrição {{ candidato.id }}</div><br>
         <br>
+        <div style="text-align: justify; margin-left: 30px; margin-top: 20px;">        
         Nome: {{ candidato.nome }}<br>
         Data Nascimento: {{ candidato.dt_nascimento | date:"SHORT_DATE_FORMAT" }}<br>
         CPF: {{ candidato.cpf | formata_cpf }}<br>
         Celular: {{ candidato.celular | formata_tel }}<br>
         Telefone: {{ candidato.tel | formata_tel }}<br>
-        E-Mail: {{ candidato.email }}<br>
-        Possui deficiência? {% if candidato.deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
-        Indique qual deficiência? {{ candidato.qual_deficiencia }}<br>
-        Informe se necessita de alguma condição especial para a realização da prova: {{ candidato.necessidade }}<br>
+        E-mail: {{ candidato.email }}<br>
+        Possui deficiência: {% if candidato.deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
+        {% if candidato.qual_deficiencia %}Deficiência: {{ candidato.qual_deficiencia }}<br>{% endif %}
+        {% if candidato.necessidade %}Informe se necessita de alguma condição especial para a realização da prova: {{ candidato.necessidade }}<br>{% endif %}
         Data Cadastro: {{ candidato.dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
-        IP: {{ candidato.ip }}<br>
+        IP: {{ candidato.ip }}
+        <div style="margin-top: 20px;">
+            Protocolo de inscrição: <br>{{candidato.chave}}<br>
+        </div>
+        </div>
+        <br>
     </body>
 
     <SCRIPT LANGUAGE="JavaScript">

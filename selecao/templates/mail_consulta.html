@@ -18,13 +18,13 @@
     </head>
 
     <body>
-        <div class="titulo">FICHA DE INSCRIÇÃO</div> <div class="numero">N° {{ id }}</div><br>
+        <div class="titulo">FICHA DE INSCRIÇÃO</div><br>
         <br>
         Nome: {{ nome }}<br>
         CPF: {{ cpf | formata_cpf }}<br>
-        E-Mail: {{ email }}<br>
+        E-mail: {{ email }}<br>
         Data Cadastro: {{ dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
         IP: {{ ip }}<br>
-        <a href="https://enfermagem.pmnf.rj.gov.br/consulta_chave/{{ chave }}">Clique aqui para acessar o cadastro</a>
+        <a href="https://enfermagem.pmnf.rj.gov.br/selecao/consulta_chave/{{ chave }}">Clique aqui para acessar o cadastro</a>
     </body>
 </html>

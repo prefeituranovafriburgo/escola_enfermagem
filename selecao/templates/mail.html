@@ -22,25 +22,32 @@
     <body>
         <!-- <img src="{% static 'logo_pmnf.png' %}" alt="Logo PMNF" title="Logo Prefeitura de Nova Friburgo"  style="margin:20px 0 0 15px;position: relative;left: 5px;" width="300px" /> -->
 
-        <div class="titulo">FICHA DE INSCRIÇÃO PARA: {{edital}}</div> <div class="numero">N° {{ id }}</div><br>
+        <div class="titulo">FICHA DE INSCRIÇÃO PARA: {{edital}}</div>
+         <!-- <div class="numero">N° {{ id }}</div> -->
+         <br>
         <br>
-        Nome: {{ nome }}<br>
-        Data Nascimento: {{ dt_nascimento | date:"SHORT_DATE_FORMAT" }}<br>
-        CPF: {{ cpf | formata_cpf }}<br>
-        Celular: {{ celular | formata_tel }}<br>
-        Telefone: {{ tel | formata_tel }}<br>
-        E-Mail: {{ email }}<br>
-        Possui deficiência? {% if deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
-        {% if deficiencia == 'S' %}
-        Deficiência: {{ qual_deficiencia }}<br>
-        Informe se necessita de alguma condição especial para a realização da prova: {% if necessidade %}{{ necessidade }}{% endif %}<br>
-        {% endif %}
-        Data Cadastro: {{ dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
-        IP: {{ ip }}<br>
+        <div style="text-align: justify; margin-left: 30px; margin-top: 20px;">        
+            Nome: {{ candidato.nome }}<br>
+            Data Nascimento: {{ candidato.dt_nascimento | date:"SHORT_DATE_FORMAT" }}<br>
+            CPF: {{ candidato.cpf | formata_cpf }}<br>
+            Celular: {{ candidato.celular | formata_tel }}<br>
+            Telefone: {{ candidato.tel | formata_tel }}<br>
+            E-mail: {{ candidato.email }}<br>
+            Possui deficiência: {% if candidato.deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
+            {% if candidato.qual_deficiencia %}Deficiência: {{ candidato.qual_deficiencia }}<br>{% endif %}
+            {% if candidato.necessidade %}Informe se necessita de alguma condição especial para a realização da prova: {{ candidato.necessidade }}<br>{% endif %}
+            Data Cadastro: {{ candidato.dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
+            IP: {{ candidato.ip }}
+            <div style="margin-top: 20px;">
+                Protocolo de inscrição: <br>{{candidato.chave}}<br>
+            </div>
+            </div>
 	<br>
 	Inscrição para o Processo Seletivo efetivado com SUCESSO.<br>
 	<br>
 	O local e o horário do processo seletivo será divulgado no dia {{edital.dt_divulgacao}}, no Diário Oficial do Município, através do site da Prefeitura Municipal de Nova Friburgo. Você também pode se manter informado pela nossa plataforma <a target="_blank" href="https://enfermagem.pmnf.rj.gov.br/edital/1">clicando aqui</a>.<br>
+    <br>    
+    <span style="color: red;">Caso você precisse corrigir algo no seu cadastro, estaremos disponibilizando a partir do dia 25/10 a possibilidade de corrigir seu cadastro em nossa plataforma.</span>
     
     </body>
 </html>
