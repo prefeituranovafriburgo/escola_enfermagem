@@ -224,6 +224,12 @@
         document.getElementById('body').style.overflow='auto'
         document.getElementById('preloading').style.display='none'          
       }
+      let btnModal = document.querySelector(".btn-close")
+      btnModal.addEventListener('click', ()=>{
+        setTimeout(()=>{
+          document.querySelector('body').style.overflowY='auto';
+        },500)
+      })
     </script>
 </body>
 </html>
