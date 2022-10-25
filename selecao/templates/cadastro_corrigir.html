@@ -1,0 +1,278 @@
+{% extends 'template.html' %}
+{% load bootstrap5 %}
+{% load static%}
+{% block title %}INSCRIÇÃO - {{nome}}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cursos.css' %}">
+<script src="{% static 'js/cursos.js' %}"></script>
+{% endblock %}
+{% block editais %}fw-bold{% endblock %}
+{% block main %}
+<br>
+<div class="row" id="edital">
+    <div class="col d-flex py-5"> 
+        <div class="row w-100">
+            <div class="col-10 pb-4 m-auto bg-white">
+                <div class="row py-3 px-4">
+                    <div class="col bg p-5">
+                        <h1 class="display-4 text-center">INSCREVER-SE</h1>
+                    </div>
+                </div>       
+                
+                <div class="row">      
+                    <div class="col text-right px-4 d-flex">
+                        <a href="{% url 'edital' id %}" class="btn btn-dark ms-auto" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                            </svg>
+                            Voltar
+                        </a>
+                    </div>
+                </div>
+
+                {% if form.errors %}
+
+                <div class="row d-flex ">
+                    <div class="col-8 pt-4 m-auto text-dark">
+                        <h2 class="invalid-feedback text-uppercase" style="display: block; font-size: 1rem">Corrija os erros apresentados no formulário</h2>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="row d-flex">
+                    <div id="informativo" class="col-8 pt-4 m-auto text-dark">
+                        <h2 class="text-dark text-uppercase">Informativo</h2>
+                            <p>Além das informações do cadastro abaixo, coletaremos também o endereço IP do dispositivo utilizado para a inscrição apenas com o intuito de oferecer maior segurança;</p>
+                            <p>Os dados armazenados serão utilizados única e exclusivamente no processo Seletivo do ano do mesmo para fim de execução do edital;</p>                            
+                            <p>Os dados informados serão compartilhados apenas com a equipe responsável por este Processo Seletivo, e com a equipe da Secretaria Municipal de Ciência, Tecnologia, Inovação e Educação Profissionalizante e Superior, desenvolvedora desta plataforma;</p>
+                            <p>Tão logo o processo se encerre, todos os dados serão excluídos de nossa base de dados, atendendo a Lei Nº 13.709/2018;</p>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col pt-5">                        
+                        <div class="row d-flex">
+                            <div class="col-8 m-auto">
+                                <h2 class="text-dark text-uppercase">Formulário de inscrição</h2>
+                                <form method="POST" class="text-dark" id="formulario" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <table  class="table text-dark table-striped table-bordered">
+                                        {% bootstrap_form form %}
+                                    </table>
+                                    <small class="text-danger text-center">
+                                        Lembre-se de anexar os arquivos nos casos necessários, conforme dito no edital.
+                                    </small>
+                                    <div class="row">
+                                        <div class="col d-flex pt-3">
+                                            <input class="btn btn-primary mb-5 mx-auto" type="submit" value="Confirmar inscrição">
+                                        </div>
+                                    </div>
+                                </form>    
+                            </div>
+                        </div>
+                    </div>                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+    function leech(v){
+        v=v.replace(/o/gi,"0")
+        v=v.replace(/i/gi,"1")
+        v=v.replace(/z/gi,"2")
+        v=v.replace(/e/gi,"3")
+        v=v.replace(/a/gi,"4")
+        v=v.replace(/s/gi,"5")
+        v=v.replace(/t/gi,"7")
+        return v
+    }
+
+    function open_popup(url){
+        newwindow = window.open(url,'{{title}}', 'height = 400,width = 600');
+        if(window.focus) {newwindow.focus()}
+        return false;
+    }
+
+    function data(v){
+        v=v.replace(/\D/g,"")                //Remove tudo o que nao e digito
+        v=v.replace(/(\d{2})(\d)/,"$1/$2")   //Coloca um ponto entre o terceiro e o quarto digitos
+        v=v.replace(/(\d{2})(\d)/,"$1/$2")   //Coloca um ponto entre o terceiro e o quarto digitos
+                                                //de novo (para o segundo bloco de numeros)
+        return v
+    }
+    function icpf(v){
+        v=v.replace(/\D/g,"")                    //Remove tudo o que nao e digito
+        v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto digitos
+        v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto digitos
+                                                //de novo (para o segundo bloco de numeros)
+        v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hifen entre o terceiro e o quarto digitos
+        return v
+    }
+    function itelefone(v){
+        v=v.replace(/\D/g,"")                 //Remove tudo o que nao e digito
+        v=v.replace(/^(\d\d)(\d)/g,"($1) $2") //Coloca parenteses em volta dos dois primeiros digitos
+        v=v.replace(/(\d{4})(\d)/,"$1-$2")    //Coloca hifen entre o quarto e o quinto digitos
+        return v
+    }
+    function icep(v){
+        v=v.replace(/\D/g,"")                 //Remove tudo o que nao e digito
+        v=v.replace(/(\d{2})(\d)/,"$1.$2")    //Coloca hifen entre o quarto e o quinto digitos
+        v=v.replace(/(\d{3})(\d)/,"$1-$2")    //Coloca hifen entre o quarto e o quinto digitos
+        return v
+    }
+    function icelular(v){
+        v=v.replace(/\D/g,"")                 //Remove tudo o que nao e digito
+        v=v.replace(/^(\d\d)(\d)/g,"($1) $2") //Coloca parenteses em volta dos dois primeiros digitos
+        v=v.replace(/(\d{5})(\d)/,"$1-$2")    //Coloca hifen entre o quarto e o quinto digitos
+        return v
+    }
+    function mascara(o,f){
+        v_obj=o
+        v_fun=f
+        setTimeout("execmascara()",1)
+    }
+
+    function execmascara(){
+        v_obj.value=v_fun(v_obj.value)
+    }
+
+
+    function some_com_tudo(){
+        var color = 'rgb(229, 255, 236)'
+        document.getElementById('id_qual_deficiencia').style.backgroundColor=color
+        document.getElementById('id_necessidade').style.backgroundColor=color
+        document.getElementById('id_tempo_excedente').style.backgroundColor=color
+        document.getElementById('id_file_termo_para_vagas_reservadas').style.backgroundColor=color
+        document.getElementById('id_file_necessidade').style.backgroundColor=color
+        document.getElementById('id_file_tempo_excedente').style.backgroundColor=color        
+    }
+    some_com_tudo()
+
+    const qual_deficiencia = document.querySelector("#id_qual_deficiencia").parentNode
+    const necessidade = document.querySelector("#id_necessidade").parentNode
+    const tempo_excedente = document.querySelector("#id_tempo_excedente").parentNode
+    const file_termo_para_vagas_reservadas = document.querySelector('#id_file_termo_para_vagas_reservadas').parentNode
+    const file_necessidade = document.querySelector('#id_file_necessidade').parentNode
+    const file_tempo_excedente = document.querySelector('#id_file_tempo_excedente').parentNode
+
+    function hide(...elements){
+        elements.forEach(e => {
+            e.style.display = 'none'
+            e.querySelector('input').value = '';
+
+        })
+    }
+
+    function show(...elements){
+        elements.forEach(e => {
+            e.style.display = 'block'
+        })
+    }
+
+
+    function setRequired(...elements){
+        elements.forEach(e => {
+            e.querySelector('input').setAttribute('required', '');
+        })
+    }
+
+    function removeRequired(...elements){
+        elements.forEach(e => {
+            e.querySelector('input').removeAttribute('required');
+        })
+    }
+
+    function yes_or_no_check(e){
+        if(e.target.value == "S"){
+            file_guardian++
+            show(file_termo_para_vagas_reservadas)
+            setRequired(file_termo_para_vagas_reservadas)
+
+        } else if(e.target.value == "N"){
+            file_guardian--
+            if(!file_guardian){
+                hide(file_termo_para_vagas_reservadas)
+                removeRequired(file_termo_para_vagas_reservadas)
+            }
+
+        }
+        file_guardian < 0 ? file_guardian = 0 : file_guardian
+    }
+    
+
+    hide(qual_deficiencia, necessidade, tempo_excedente, file_termo_para_vagas_reservadas, file_necessidade, file_tempo_excedente)
+
+    let file_guardian = 0
+
+    document.querySelector('#id_deficiencia').addEventListener('change', (e)=>{
+        if(e.target.value == "S"){
+            show(qual_deficiencia, necessidade, tempo_excedente, file_termo_para_vagas_reservadas)
+            setRequired(qual_deficiencia, file_termo_para_vagas_reservadas)
+            file_guardian++
+
+        } else if(e.target.value == "N"){
+            file_guardian--
+            hide(qual_deficiencia, necessidade, tempo_excedente, file_necessidade, file_tempo_excedente)
+            removeRequired(qual_deficiencia, file_termo_para_vagas_reservadas, file_necessidade, file_tempo_excedente)
+
+            if(!file_guardian){
+                hide(file_termo_para_vagas_reservadas)
+                removeRequired(file_termo_para_vagas_reservadas)
+            }
+        }
+        file_guardian < 0 ? file_guardian = 0 : file_guardian
+
+    })
+
+    document.querySelector('#id_autodeclaracao').addEventListener('change', yes_or_no_check)
+
+    document.querySelector('#id_ensino_fundamental_publico').addEventListener('change', yes_or_no_check)
+
+    document.querySelector('#id_ensino_medio_publico').addEventListener('change', yes_or_no_check)
+
+    document.querySelector('#id_renda_bruta').addEventListener('change', yes_or_no_check)
+
+    document.querySelector('#id_necessidade').addEventListener('keyup', (e)=>{
+        
+        if(e.target.value == "" || e.target.value == "Não" || e.target.value == "N"){
+            hide(file_necessidade)
+            removeRequired(file_necessidade)
+
+        } else {
+            show(file_necessidade)
+            setRequired(file_necessidade)
+        }
+    })
+
+    document.querySelector('#id_tempo_excedente').addEventListener('keyup', (e)=>{
+
+        if(e.target.value == "" || e.target.value == "Não" || e.target.value == "N"){
+            hide(file_tempo_excedente)
+            removeRequired(file_tempo_excedente)
+
+        } else {
+            show(file_tempo_excedente)
+            setRequired(file_tempo_excedente)
+        }
+    })
+
+    let all = [...document.querySelectorAll('select')]
+    all.sort((a, b)=>a.value > b.value).forEach(e=>{
+        
+        e.dispatchEvent(new Event('change'))
+    })
+
+    document.querySelectorAll('input').forEach(e=>{
+        e.dispatchEvent(new Event('keyup'))
+    })
+</script>
+<style>
+    #informativo p{
+        text-indent: 40px;
+        text-align: justify;
+    }    
+</style>
+{% endblock %}

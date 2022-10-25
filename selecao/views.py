@@ -216,7 +216,7 @@ def cadastro_corrige(request, chave):
         candidato = Candidato.objects.get(chave=chave)
     except ObjectDoesNotExist:
         messages.error(request, 'Chave não cadastrada.')
-        return redirect ('/consulta')
+        return redirect ('/selecao/consulta')
 
 
     if request.method == 'POST':
@@ -293,7 +293,7 @@ def cadastro_corrige(request, chave):
     else:
         form = CandidatoForm(instance=candidato)
 
-    return render(request, 'cadastro.html', { 'form': form, 'id': 2})
+    return render(request, 'cadastro_corrigir.html', { 'form': form, 'id': candidato.edital.id})
 
 
 def contato(request):
