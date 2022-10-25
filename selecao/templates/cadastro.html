@@ -193,6 +193,8 @@
 
         } else if(e.target.value == "N"){
             file_guardian--
+            file_guardian < 0 ? file_guardian = 0 : file_guardian
+
             if(!file_guardian){
                 hide(file_termo_para_vagas_reservadas)
                 removeRequired(file_termo_para_vagas_reservadas)
@@ -203,7 +205,7 @@
     }
     
 
-    hide(qual_deficiencia, necessidade, tempo_excedente, file_termo_para_vagas_reservadas, file_necessidade, file_tempo_excedente)
+    //hide(qual_deficiencia, necessidade, tempo_excedente, file_termo_para_vagas_reservadas, file_necessidade, file_tempo_excedente)
 
     let file_guardian = 0
 
@@ -223,7 +225,6 @@
                 removeRequired(file_termo_para_vagas_reservadas)
             }
         }
-        file_guardian < 0 ? file_guardian = 0 : file_guardian
 
     })
 
@@ -261,7 +262,6 @@
 
     let all = [...document.querySelectorAll('select')]
     all.sort((a, b)=>a.value > b.value).forEach(e=>{
-        
         e.dispatchEvent(new Event('change'))
     })
 

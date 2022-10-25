@@ -43,9 +43,6 @@ def cadastro(request, id):
     if edital:
         if request.method == 'POST':
             form = CandidatoForm(request.POST, request.FILES)            
-            print(request.POST)
-            print(request.FILES)
-            # print(request.POST)
             if form.is_valid():                
                 cadastro = form.save(commit=False)
 
@@ -105,7 +102,7 @@ def cadastro(request, id):
 
             else:
                 # Se teve erro:
-                print('Erro: ', form.errors)
+                # print('Erro: ', form.errors)
                 erro_tmp = str(form.errors)
                 erro_tmp = erro_tmp.replace('<ul class="errorlist">', '')
                 erro_tmp = erro_tmp.replace('</li>', '')
@@ -114,6 +111,9 @@ def cadastro(request, id):
                 erro_tmp = erro_tmp.split('<li>')
 
                 messages.error(request, erro_tmp[2])
+                print(form)
+                #return render(request, 'cadastro.html', { 'form': form, 'id': id, 'nome': edital.nome })
+
 
         else:
             form = CandidatoForm(initial={'edital': edital.id})
