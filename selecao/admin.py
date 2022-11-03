@@ -53,3 +53,10 @@ class AcessoAdmin(admin.ModelAdmin):
     search_fields = ['candidato__nome']
 
 admin.site.register(Acesso, AcessoAdmin)
+
+class NotaAdmin(admin.ModelAdmin):
+    list_display = ['nota', 'candidato', 'dt_inclusao']
+#    list_filter = ['sala']
+    search_fields = ['candidato__nome']
+
+admin.site.register(Nota, NotaAdmin)

@@ -182,3 +182,15 @@ class Acesso(models.Model):
     candidato = models.ForeignKey(Candidato, on_delete=models.PROTECT)
     ip = models.GenericIPAddressField(protocol='IPv4')
     dt_inclusao = models.DateTimeField(auto_now_add=True)
+
+# Tabela para registrar a nota de notas
+class Nota(models.Model):
+
+    class Meta:
+        ordering = ['nota']
+        verbose_name_plural = "Notas"
+
+    nota = models.FloatField()
+    candidato = models.ForeignKey(Candidato, on_delete=models.PROTECT, null=True, blank=True)
+    dt_inclusao = models.DateTimeField(auto_now_add=True)
+

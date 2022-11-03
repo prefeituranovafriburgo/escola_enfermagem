@@ -167,3 +167,18 @@ class ContatoForm(forms.Form):
             if len(telefone) != 11:
                 raise ValidationError('Insira um número válido ')
         return telefone
+
+class NotasForm(ModelForm):
+    
+    cpf = forms.CharField(label='CPF do candidato', max_length=14, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,icpf)"}))
+
+    class Meta:
+        model = Nota
+        exclude = ['dt_inclusao']
+        widgets = {
+            'candidato': forms.HiddenInput()
+        }
+
+    def clean_cpf(self):
+        cpf = validate_CPF(self.cleaned_data["cpf"])
+        return cpf
