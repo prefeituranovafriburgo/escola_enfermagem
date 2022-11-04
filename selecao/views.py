@@ -490,13 +490,18 @@ def cadastro_notas(request):
             except ObjectDoesNotExist:
                 messages.error(request, 'CPF não cadastrado.')
                 return render(request, 'consulta.html', { 'form': form })
-            
-            form=NotasForm(request.POST, instance= candidato)
-            form.save()
-            # nota = form.save()
-            # nota.candidato = candidato
-            # nota.save()
-            messages.success(request, "Nota cadastrada com sucesso!")
+
+            try:
+                nota = Nota.objects.get(candidato=candidato)
+                form=NotasForm(request.POST, instance=nota)
+                messages.success(request, "Nota atualizada com sucesso!")
+
+            except:
+                messages.success(request, "Nota cadastrada com sucesso!")
+                
+            nota = form.save()
+            nota.candidato = candidato
+            nota.save()
         else: 
             print('Erro: ', form.errors)
             erro_tmp = str(form.errors)

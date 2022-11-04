@@ -9,8 +9,36 @@
 {% block editais %}fw-bold{% endblock %}
 
 {% block main %}
-<br>
 <div class="row" id="edital">
+    <div class="col d-flex py-5"> 
+        <div class="row w-100">
+            <div class="col-10 pb-4 m-auto bg-white text-dark">
+                <div class="row py-3 px-4">
+                    <div class="col bg p-5 text-white">
+                        <h1 class="display-4 text-center">Cadastro de notas</h1>
+                    </div>
+                </div>   
+                <!-- <div class="row">
+                    <div class="col d-flex text-right px-4">
+                        <a href="#" class="btn btn-dark ms-auto" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                            </svg>
+                            Volta
+                        </a>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col px-4">
+                        <b>Entre com o CPF do candidato e sua nota para cadastra-la</b>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col px-4">
+                    <b>Se for necessário alterar a nota de um candidato: insira uma nova nota que o registro será atualizado automaticamente</b>
+                </div>
+            </div>
+                <br>
 
                 {% if form.errors %}
 
@@ -21,26 +49,61 @@
                 </div>
                 {% endif %}
 
-                <div class="row">
-                    <div class="col pt-5">                        
-                        <div class="row d-flex">
-                            <div class="col-8 m-auto">
-                                <h2 class="text-dark text-uppercase">Cadastro de notas</h2>
-                                <form method="POST" class="text-dark" id="formulario" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    <table  class="table text-dark table-striped table-bordered">
-                                        {% bootstrap_form form %}
-                                    </table>
-                                    <div class="row">
-                                        <div class="col d-flex pt-3">
-                                            <input class="btn btn-primary mb-5 mx-auto" type="submit" value="Confirmar inscrição">
-                                        </div>
-                                    </div>
-                                </form>    
-                            </div>
-                        </div>
-                    </div>                
+               <div class="row d-flex">
+                <div class="col-6 m-auto px-4">
+                    <form method="POST" id="formulario">                        
+                        {% csrf_token %}
+                        <table  class="table table-striped table-bordered">
+                            {% bootstrap_form form %}
+                        </table>                        
+                        <input class="btn btn-primary mb-5" type="submit" value="Cadastrar nota">
+                    </form>
                 </div>
+               </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+
+    function leech(v){
+        v=v.replace(/o/gi,"0")
+        v=v.replace(/i/gi,"1")
+        v=v.replace(/z/gi,"2")
+        v=v.replace(/e/gi,"3")
+        v=v.replace(/a/gi,"4")
+        v=v.replace(/s/gi,"5")
+        v=v.replace(/t/gi,"7")
+        return v
+    }
+
+    function open_popup(url){
+        newwindow = window.open(url,'{{title}}', 'height = 400,width = 600');
+        if(window.focus) {newwindow.focus()}
+        return false;
+    }
+
+    function icpf(v){
+        v=v.replace(/\D/g,"")                    //Remove tudo o que nao e digito
+        v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto digitos
+        v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto digitos
+                                                //de novo (para o segundo bloco de numeros)
+        v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hifen entre o terceiro e o quarto digitos
+        return v
+    }
+    function mascara(o,f){
+        v_obj=o
+        v_fun=f
+        setTimeout("execmascara()",1)
+    }
+
+    function execmascara(){
+        v_obj.value=v_fun(v_obj.value)
+    }
+
+</script>
 
 {% endblock %}
