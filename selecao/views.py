@@ -111,7 +111,8 @@ def cadastro(request, id):
                 erro_tmp = erro_tmp.split('<li>')
 
                 messages.error(request, erro_tmp[2])
-                print(form)
+                print('entrou aqui')
+                # print(form)
                 #return render(request, 'cadastro.html', { 'form': form, 'id': id, 'nome': edital.nome })
 
 
@@ -354,41 +355,116 @@ def alocacao(request):
 
 
     candidatos = Candidato.objects.all().order_by('nome')
+    qnt_candidatos=len(candidatos)
+    print(qnt_candidatos, qnt_candidatos/len(Sala.objects.all()))
 
-    horario1 = Horario.objects.get(id=1)
-    horario2 = Horario.objects.get(id=2)
-
-    horario = horario1
-
-    num_sala = 1
-
-    x = 16
 
     for candidato in candidatos:
+        par=True
+        for i in range(4):
+            if par:            
+                print('i:', i+1)
+            for u in range(1):
+                if par:                    
+                    # print('u:', u)
+                    sala=Sala.objects.get(id=i+1)
+                    print(candidato, sala)
+                    aloca(candidato, sala)
+            if par:
+                par=False
+            else:
+                par=True
 
-        x += 1
+        # par=True
+        # for i in range(11):
+        #     if not par:            
+        #         print('i:', i+1)
+        #     for u in range(27):
+        #         if par:                    
+        #             # print('u:', u)
+        #             sala=Sala.objects.get(id=i+1)
+        #             print(candidato, sala)
+        #             aloca(candidato, sala)
+        #     if not par:
+        #         par=False
+        #     else:
+        #         par=True
 
-        if candidato.nome[0].upper() == 'L' and horario == horario1:
-            print (x, candidato)
-            horario = horario2
-            x = 17
-            num_sala = 1
+    # for candidato in candidatos:
+    #     for i in range(6):
+    #         print('i:', i)
+    #         for u in range(27):
+    #             print('u:', u)
+    #             sala=Sala.objects.get(id=1)
+        
+        
+    sala1_8=Sala.objects.get(id=1),
+    sala2_8=Sala.objects.get(id=3),
+    # sala3_8=Sala.objects.get(id=5),
+    # sala4_8=Sala.objects.get(id=7),
+    # sala5_8=Sala.objects.get(id=9),
+    # sala6_8=Sala.objects.get(id=11),
+    # sala7_8=Sala.objects.get(id=13),
+    # sala8_8=Sala.objects.get(id=15),
+    # sala9_8=Sala.objects.get(id=17),
+    
 
-        if x > 15:
-            sala = Sala(horario=horario, sala=str(num_sala))
-            sala.save()
-            num_sala += 1
-            x = 0
+    sala1_10=Sala.objects.get(id=2)
+    sala2_10=Sala.objects.get(id=4)
+    # sala3_10=Sala.objects.get(id=6)
+    # sala4_10=Sala.objects.get(id=8)
+    # sala5_10=Sala.objects.get(id=10)
+    # sala6_10=Sala.objects.get(id=12)
+    # sala7_10=Sala.objects.get(id=14)
+    # sala8_10=Sala.objects.get(id=16)
+    # sala9_10=Sala.objects.get(id=18)
+    
+    
+    salas=[
+        sala1_8,
+        sala2_8,
+        # sala3_8,
+        # sala4_8,
+        # sala5_8,
+        # sala6_8,
+        # sala7_8,
+        # sala8_8,
+        # sala9_8,
 
-
-        aloca(candidato, sala)
+        sala1_10,
+        sala2_10,
+        # sala3_10,
+        # sala4_10,
+        # sala5_10,
+        # sala6_10,
+        # sala7_10,
+        # sala8_10,
+        # sala9_10,
+    ]
+    
+    for candidato in candidatos:        
+        pass
+        # sala=salas[i]
+        # i+=1           
+        # try:
+        #     alocados=Alocacao.objects.filter(edital=2, sala=sala[0])
+        # except:
+        #     alocados=[]
+        #     pass
+        # if int(len(alocados))>=int(sala.qnt_alocação):
+        #     aux[aux[0], aux[1]+1]
+        #     if aux[1]>2:
+        #         aux=[1, 0]
+            
+        # print(candidato, sala[0])
+        # aloca(candidato, sala[0])
 
     return HttpResponse("Alocação concluída.")
 
 
 def aloca(candidato, sala):
 
-    alocacao = Alocacao(sala=sala, candidato=candidato)
+    alocacao = Alocacao(edital=Edital.objects.get(id=3), sala=sala, candidato=candidato)
     alocacao.save()
 
 

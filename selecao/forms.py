@@ -20,7 +20,7 @@ class CandidatoForm(ModelForm):
     
     cpf = forms.CharField(label = "CPF", max_length=14, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,icpf)", 'onload' : 'mascara(this,icpf)'}))
     celular = forms.CharField(label = "Celular", max_length=15, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,icelular)", 'onload' : 'mascara(this,icelular)'}))
-    tel = forms.CharField(label = "Telefone", max_length=14, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,itelefone)", 'onload' : 'mascara(this,itelefone)'}))
+    tel = forms.CharField(label = "Telefone", max_length=14, widget = forms.TextInput(attrs={'onkeydown':"mascara(this,itelefone)", 'onload' : 'mascara(this,itelefone)', 'required':False}))
     class Meta:
         model = Candidato
         widgets = {
@@ -68,8 +68,7 @@ class CandidatoForm(ModelForm):
 
 
     def clean_deficiencia(self):
-        if self.cleaned_data["deficiencia"] == 'S':
-            print(self.data)
+        if self.cleaned_data["deficiencia"] == 'S':            
             if not self.data["qual_deficiencia"]:
                 raise ValidationError({"qual_deficiencia":"Esse campo é obrigatório caso possua deficiência"})
 
