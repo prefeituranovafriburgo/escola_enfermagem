@@ -111,7 +111,7 @@ def cadastro(request, id):
                 erro_tmp = erro_tmp.split('<li>')
 
                 messages.error(request, erro_tmp[2])
-                print(form)
+                #print(form)
                 #return render(request, 'cadastro.html', { 'form': form, 'id': id, 'nome': edital.nome })
 
 
@@ -476,7 +476,45 @@ def confirmacao(request, chave):
 
     return render(request, 'confirmacao.html', { 'alocacao': alocacao })
 
+def cadastro_notas(request):
 
+    form = NotasForm()
+
+    if request.method == 'POST':
+        form = NotasForm(request.POST)
+
+        if form.is_valid():
+            cpf = form.cleaned_data['cpf']
+            try:
+                candidato = Candidato.objects.get(cpf=cpf)
+            except ObjectDoesNotExist:
+                messages.error(request, 'CPF não cadastrado.')
+                return render(request, 'consulta.html', { 'form': form })
+
+            try:
+                nota = Nota.objects.get(candidato=candidato)
+                form=NotasForm(request.POST, instance=nota)
+                messages.success(request, "Nota atualizada com sucesso!")
+
+            except:
+                messages.success(request, "Nota cadastrada com sucesso!")
+                
+            nota = form.save()
+            nota.candidato = candidato
+            nota.save()
+        else: 
+            print('Erro: ', form.errors)
+            erro_tmp = str(form.errors)
+            erro_tmp = erro_tmp.replace('<ul class="errorlist">', '')
+            erro_tmp = erro_tmp.replace('</li>', '')
+            erro_tmp = erro_tmp.replace('<ul>', '')
+            erro_tmp = erro_tmp.replace('</ul>', '')
+            erro_tmp = erro_tmp.split('<li>')
+
+            messages.error(request, erro_tmp[2])
+
+
+    return render(request, 'cadastro_notas.html', {'form': form})
 """
 def corrige_nome(request):
 

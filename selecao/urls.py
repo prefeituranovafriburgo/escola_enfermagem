@@ -16,6 +16,7 @@ urlpatterns = [
     # path('alocacao', views.alocacao, name='alocacao'),
     # path('divulga', views.divulga, name='divulga'),
     path('confirmacao/<str:chave>', views.confirmacao, name='confirmacao'),
+    path('cadastro/notas', views.cadastro_notas, name="cadastro_notas")
     #
 #    path('corrige_nome', views.corrige_nome, name='corrige_nome'),
 ]
