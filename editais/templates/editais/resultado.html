@@ -1,43 +1,91 @@
-{% extends 'template.html' %}
-{% load bootstrap5 %}
-{% load static%}
-{% block title %}ENFERMAGEM - RESULTADO{% endblock %}
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/cursos.css' %}">
+{% extends 'template.html' %} {% load bootstrap5 %} {% load static%} 
+{% block title %}ENFERMAGEM - RESULTADO{% endblock %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/cursos.css' %}" />
 <script src="{% static 'js/cursos.js' %}"></script>
-{% endblock %}
-{% block resultado %}fw-bold{% endblock %}
-{% block main %}
+{% endblock %} {% block resultado %}fw-bold{% endblock %} {% block main %}
 <div class="row">
-    <div class="col d-flex py-5"> 
-        <div class="row w-100">
-            <div class="col-10 pb-4 m-auto bg-white">
-                <div class="row py-3 px-4">
-                    <div class="col bg p-5">
-                        <h1 class="display-4 text-center">RESULTADOS</h1>
-                    </div>
-                </div>
-                
-                
-                <div class="row d-flex">
-                    <div class="col px-4 py-5 text-dark text-justify mx-auto" style="font-size: 16pt; max-width: 900px;">
-                        <h6 class="text-secondary text-center">Não há resultados a serem exibidos no momento.</h6>
-                      
-                    
-                    </div>
-                    
-                </div>
-                <div class="row">
-                    <div class="col px-4 text-dark">
-                                    
-                        </div>                         
-                    </div>
-                </div>
-            </div>
+  <div class="col d-flex py-5">
+    <div class="row w-100">
+      <div class="col-10 pb-4 m-auto bg-white">
+        <div class="row py-3 px-4">
+          <div class="col bg p-5">
+            <h1 class="display-4 text-center">RESULTADOS - {{edital.nome}} - {{edital.mes}}/{{edital.ano}}</h1>
+          </div>
         </div>
+
+        <div class="row d-flex">
+          <div
+            class="col px-4 py-5 text-dark text-justify mx-auto"
+            style="font-size: 16pt; max-width: 900px"
+          >
+
+          <h1>Vagas não reservadas</h1>
+          <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Nota</th>
+                    <th scope="col" class="text-center">Classificado</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for nota in notas_classificados %}
+                    <tr>
+                        <th>{{nota.candidato}}</th>
+                        <th>{{nota.nota}}</th>
+                        <th class="table-success text-center">SIM</th>
+                    </tr>
+                {% endfor %}
+
+                {% for nota in notas_nao_classificados %}
+                    <tr>
+                        <th>{{nota.candidato}}</th>
+                        <th>{{nota.nota}}</th>
+                        <th class="table-danger text-center">NÃO</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+
+          <h1 class="mt-5">Vagas reservadas</h1>
+          <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Nota</th>
+                    <th scope="col" class="text-center">Classificado</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for nota in notas_reservadas_classificados %}
+                    <tr>
+                        <th>{{nota.candidato}}</th>
+                        <th>{{nota.nota}}</th>
+                        <th class="table-success text-center">SIM</th>
+                    </tr>
+                {% endfor %}
+
+                {% for nota in notas_reservadas_nao_classificados %}
+                    <tr>
+                        <th>{{nota.candidato}}</th>
+                        <th>{{nota.nota}}</th>
+                        <th class="table-danger text-center">NÃO</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+
+            <div class="row">
+              <div class="col px-4 text-dark"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-<style>
+  </div>
+  <style>
     .text-justify p{
         text-indent: 30px;
     }
@@ -45,9 +93,11 @@
         margin-bottom: 20px;
     }
     .text-justify ul{
-        margin-bottom: 20px;    
+        margin-bottom: 20px;
     }
     .text-justify ul li{
         list-style: circle !important;
-</style>
-{% endblock %}
+    }
+  </style>
+  {% endblock %}
+</div>
