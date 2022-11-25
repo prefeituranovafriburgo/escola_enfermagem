@@ -150,13 +150,13 @@ class CandidatoForm(ModelForm):
         return self.cleaned_data["renda_bruta"]
 
     def clean_file_termo_para_vagas_reservadas(self):
-        return self.cleaned_data['file_termo_para_vagas_reservadas'].name.translate({ord(c): " " for c in "!@#$%^&*()[]{};:,./<>?\|`~-=_+"}.replace(' ', ''))
+        return self.cleaned_data['file_termo_para_vagas_reservadas'].name.translate({ord(c): " " for c in "!@#$%^&*()[]{};:,./<>?\|`~-=_+"}).replace(' ', '')
 
     def clean_file_necessidade(self):
-        return self.cleaned_data['file_necessidade'].name.translate({ord(c): " " for c in "!@#$%^&*()[]{};:,./<>?\|`~-=_+"}.replace(' ', ''))
+        return self.cleaned_data['file_necessidade'].name.translate({ord(c): " " for c in "!@#$%^&*()[]{};:,./<>?\|`~-=_+"}).replace(' ', '')
 
     def clean_file_tempo_excedente(self):
-        return self.cleaned_data['file_tempo_excedente'].name.translate({ord(c): " " for c in "!@#$%^&*()[]{};:,./<>?\|`~-=_+"}.replace(' ', ''))
+        return self.cleaned_data['file_tempo_excedente'].name.translate({ord(c): " " for c in "!@#$%^&*()[]{};:,./<>?\|`~-=_+"}).replace(' ', '')
 
 
 class ContatoForm(forms.Form):
