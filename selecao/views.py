@@ -558,9 +558,9 @@ def cadastro_notas(request):
         form = NotasForm(request.POST)
 
         if form.is_valid():
-            cpf = form.cleaned_data['cpf']
+            id_candidato = form.cleaned_data['id_candidato']
             try:
-                candidato = Candidato.objects.get(cpf=cpf)
+                candidato = Candidato.objects.get(id=id_candidato)
             except ObjectDoesNotExist:
                 messages.error(request, 'CPF não cadastrado.')
                 return render(request, 'consulta.html', { 'form': form })

@@ -190,8 +190,8 @@ class ContatoForm(forms.Form):
 
 class NotasForm(ModelForm):
 
-    cpf = forms.CharField(label='CPF do candidato', max_length=14, widget=forms.TextInput(
-        attrs={'onkeydown': "mascara(this,icpf)"}))
+    id_candidato = forms.CharField(label='Id do candidato',  widget=forms.TextInput(
+        attrs={}))
 
     class Meta:
         model = Nota
