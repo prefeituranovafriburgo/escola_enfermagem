@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{% static 'css/cursos.css' %}" />
 <script src="{% static 'js/cursos.js' %}"></script>
 {% endblock %} {% block resultado %}fw-bold{% endblock %} {% block main %}
+
 <div class="row">
   <div class="col d-flex py-5">
     <div class="row w-100">
@@ -23,6 +24,7 @@
           <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">Classificação</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Nota</th>
                     <th scope="col" class="text-center">Classificado</th>
@@ -32,7 +34,8 @@
             <tbody>
                 {% for nota in notas_classificados %}
                     <tr>
-                        <th>{{nota.candidato}}</th>
+                        <th>{{forloop.counter}}º</th>
+                        <th>{{nota.nome}}</th>
                         <th>{{nota.nota}}</th>
                         <th class="table-success text-center">SIM</th>
                     </tr>
@@ -40,7 +43,8 @@
 
                 {% for nota in notas_nao_classificados %}
                     <tr>
-                        <th>{{nota.candidato}}</th>
+                        <th>{{forloop.counter|add:n_vagas_normais}}º</th>
+                        <th>{{nota.nome}}</th>
                         <th>{{nota.nota}}</th>
                         <th class="table-danger text-center">NÃO</th>
                     </tr>
@@ -52,16 +56,17 @@
           <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">Classificação</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Nota</th>
                     <th scope="col" class="text-center">Classificado</th>
-
                 </tr>
             </thead>
             <tbody>
                 {% for nota in notas_reservadas_classificados %}
                     <tr>
-                        <th>{{nota.candidato}}</th>
+                        <th>{{forloop.counter}}º</th>
+                        <th>{{nota.nome}}</th>
                         <th>{{nota.nota}}</th>
                         <th class="table-success text-center">SIM</th>
                     </tr>
@@ -69,7 +74,8 @@
 
                 {% for nota in notas_reservadas_nao_classificados %}
                     <tr>
-                        <th>{{nota.candidato}}</th>
+                        <th>{{forloop.counter|add:edital.vagas_reservadas}}º</th>
+                        <th>{{nota.nome}}</th>
                         <th>{{nota.nota}}</th>
                         <th class="table-danger text-center">NÃO</th>
                     </tr>

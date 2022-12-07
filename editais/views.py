@@ -68,34 +68,65 @@ def resultado(request, id):
 
     edital = Edital.objects.get(id=id)
 
-    if(edital.dt_resultado >= date.today()):
+    if(edital.dt_resultado > date.today()):
         return redirect('/')
-    notas = Nota.objects.order_by('nota').filter(candidato__edital=edital)
+        
+    # notas = Nota.objects.order_by('nota').filter(candidato__edital=edital)
 
-    notas_normais = notas.filter(candidato__deficiencia='N', candidato__autodeclaracao='N', candidato__renda_bruta='N',
-                                 candidato__ensino_fundamental_publico='N', candidato__ensino_medio_publico='N')
+    notas_normais = Nota.objects.raw('''
+    select selecao_candidato.id, nome, nota,
+    -- concat(deficiencia, ensino_fundamental_publico, ensino_medio_publico, renda_bruta, autodeclaracao) as codigo_vaga_reservada,
+    floor((LENGTH(concat(deficiencia, ensino_fundamental_publico, ensino_medio_publico, renda_bruta, autodeclaracao)) 
+    - LENGTH(REPLACE(concat(deficiencia, ensino_fundamental_publico, ensino_medio_publico, renda_bruta, autodeclaracao), 'S', '')))/LENGTH('S'))
+    as pontuação,
+    TIMESTAMPDIFF(YEAR, dt_nascimento, CURDATE()) as idade,
+    dt_nascimento
+    from selecao_candidato
+     join selecao_nota on (selecao_candidato.id = selecao_nota.candidato_id)
+    where floor((LENGTH(concat(deficiencia, ensino_fundamental_publico, ensino_medio_publico, renda_bruta, autodeclaracao)) 
+    - LENGTH(REPLACE(concat(deficiencia, ensino_fundamental_publico, ensino_medio_publico, renda_bruta, autodeclaracao), 'S', '')))/LENGTH('S')) = 0
+    group by selecao_candidato.id
+    order by nota desc, pontuação desc, idade;
+''')
+    for i in notas_normais:
+        print(i.nome)
     notas_classificados = notas_normais[:edital.vagas -
                                         edital.vagas_reservadas]
     notas_nao_classificados = notas_normais[edital.vagas -
                                             edital.vagas_reservadas:]
 
-    notas_reservadas = notas.filter(Q(candidato__deficiencia='S') | Q(candidato__autodeclaracao='S') | Q(
-        candidato__renda_bruta='S') | Q(candidato__ensino_fundamental_publico='S') | Q(candidato__ensino_medio_publico='S'))
+    notas_reservadas = Nota.objects.raw('''
+    select selecao_candidato.id, nome, nota,
+    -- concat(deficiencia, ensino_fundamental_publico, ensino_medio_publico, renda_bruta, autodeclaracao) as codigo_vaga_reservada,
+    floor((LENGTH(concat(deficiencia, ensino_fundamental_publico, ensino_medio_publico, renda_bruta, autodeclaracao)) 
+    - LENGTH(REPLACE(concat(deficiencia, ensino_fundamental_publico, ensino_medio_publico, renda_bruta, autodeclaracao), 'S', '')))/LENGTH('S'))
+    as pontuação,
+    TIMESTAMPDIFF(YEAR, dt_nascimento, CURDATE()) as idade,
+    dt_nascimento
+    from selecao_candidato
+     join selecao_nota on (selecao_candidato.id = selecao_nota.candidato_id)
+    where floor((LENGTH(concat(deficiencia, ensino_fundamental_publico, ensino_medio_publico, renda_bruta, autodeclaracao)) 
+    - LENGTH(REPLACE(concat(deficiencia, ensino_fundamental_publico, ensino_medio_publico, renda_bruta, autodeclaracao), 'S', '')))/LENGTH('S')) > 0
+    group by selecao_candidato.id
+    order by nota desc, pontuação desc, idade;
+''')
     notas_reservadas_classificados = notas_reservadas[:edital.vagas_reservadas]
     notas_reservadas_nao_classificados = notas_reservadas[edital.vagas_reservadas:]
 
     context = {
         'edital': edital,
+        'notas_normais': notas_normais,
+        'notas_reservadas': notas_reservadas,
         'notas_classificados': notas_classificados,
         'notas_nao_classificados': notas_nao_classificados,
         'notas_reservadas_classificados': notas_reservadas_classificados,
-        'notas_reservadas_nao_classificados': notas_reservadas_nao_classificados
+        'notas_reservadas_nao_classificados': notas_reservadas_nao_classificados,
+        'n_vagas_normais': edital.vagas - edital.vagas_reservadas
     }
     return render(request, 'editais/resultado.html', context)
 
 
 def resultados(request):
-    print(Edital.objects.filter(dt_resultado=date.today()))
     context = {
         'editais': Edital.objects.filter(dt_resultado__lte=date.today()),
     }
