@@ -14,16 +14,19 @@
             <div class="col-10 pb-4 m-auto bg-white">
                 <div class="row py-3 px-4">
                     <div class="col bg p-5">
-                        <h1 class="display-4 text-center">RESULTADOS</h1>
+                        <h1 class="display-4 text-center">RESULTADO</h1>
                     </div>
                 </div>
                 
                 
                 <div class="row d-flex">
-                    <div class="col px-4 py-5 text-dark text-justify mx-auto" style="font-size: 16pt; max-width: 900px;">
-                        <h6 class="text-secondary text-center">Não há resultados a serem exibidos no momento.</h6>
-                      
-                    
+                    <div class="col px-4 py-5 text-dark text-center text-justify mx-auto" style="font-size: 16pt; max-width: 900px;">
+                        {% comment %} <h6 class="text-secondary text-center">Não há resultados a serem exibidos no momento.</h6> {% endcomment %}
+                        <object data="/static/resultado.pdf" type="application/pdf">
+                            <a target="_blank" href="https://drive.google.com/file/d/1I65D5y0GtGsUljLV9CzIsbkic-ZdNabe/view?usp=sharing">
+                                <i class="fa-solid fa-download me-3"></i>
+                                Baixar PDF com resultado</a>
+                        </object>
                     </div>
                     
                 </div>
