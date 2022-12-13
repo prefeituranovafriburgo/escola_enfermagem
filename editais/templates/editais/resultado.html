@@ -1,13 +1,9 @@
-{% extends 'template.html' %}
-{% load bootstrap5 %}
-{% load static%}
-{% block title %}ENFERMAGEM - RESULTADO{% endblock %}
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/cursos.css' %}">
+{% extends 'template.html' %} {% load bootstrap5 %} {% load static%} 
+{% block title %}ENFERMAGEM - RESULTADO{% endblock %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/cursos.css' %}" />
 <script src="{% static 'js/cursos.js' %}"></script>
-{% endblock %}
-{% block resultado %}fw-bold{% endblock %}
-{% block main %}
+{% endblock %} {% block resultado %}fw-bold{% endblock %} {% block main %}
+
 <div class="row">
     <div class="col d-flex py-5"> 
         <div class="row w-100">
@@ -38,9 +34,11 @@
                 </div>
             </div>
         </div>
+        
+      </div>
     </div>
-</div>
-<style>
+  </div>
+  <style>
     .text-justify p{
         text-indent: 30px;
     }
@@ -48,9 +46,11 @@
         margin-bottom: 20px;
     }
     .text-justify ul{
-        margin-bottom: 20px;    
+        margin-bottom: 20px;
     }
     .text-justify ul li{
         list-style: circle !important;
-</style>
-{% endblock %}
+    }
+  </style>
+  {% endblock %}
+</div>
