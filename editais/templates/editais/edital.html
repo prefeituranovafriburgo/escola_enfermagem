@@ -57,6 +57,10 @@
                                     <i class="fa-solid fa-download me-3"></i>{{download.nome}}
                                 </a>
                             </li>
+                            {% empty %}
+                            <li>
+                                <p class="text-center">Nenhum link disponível até o momento.</p>
+                            </li>
                             {% endfor %}
                                                        
                         </ul>

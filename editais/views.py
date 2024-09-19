@@ -30,7 +30,7 @@ def edital(request, id):
     encerrar_inscricao = False
     exibir_resultado = False
 
-    edital = Edital.objects.get(id=id)
+    edital = Edital.objects.all().first()
     try:
         downloads = Downloads.objects.filter(edital=edital)
     except:
