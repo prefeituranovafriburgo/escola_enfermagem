@@ -32,7 +32,7 @@ def edital(request, id):
 
     edital = Edital.objects.all().first()
     try:
-        downloads = Downloads.objects.filter(edital=edital)
+        downloads = Downloads.objects.filter(edital=edital).order_by('id')
     except:
         downloads = []
     if len(downloads) == 0:

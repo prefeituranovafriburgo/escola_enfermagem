@@ -22,6 +22,9 @@ def inicio(request):
     if hoje >= data_resultado:
         return render(request, 'inicio_resultado.html')
 
+    if hoje > data_fim:
+        return render(request, 'inscricao_encerrada.html')
+
     if hoje >= data_inicio and hoje <= data_fim:
         return render(request, 'inicio.html')
 
@@ -35,12 +38,17 @@ def cadastro(request, id):
     import uuid
     from ipware import get_client_ip
     
+
+
     try:
         edital=Edital.objects.get(id=id, ativo=True)
     except:
         edital=False
     
     if edital:
+        # if date.today() > edital.dt_final_inscricao:
+        #     messages.error(request, 'O período de inscrição para este edital já foi encerrado.')
+        #     return redirect('/')
         if request.method == 'POST':
             form = CandidatoForm(request.POST, request.FILES)            
             if form.is_valid():                

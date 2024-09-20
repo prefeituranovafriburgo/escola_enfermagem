@@ -90,9 +90,9 @@ class Candidato(models.Model):
     ensino_fundamental_publico=models.CharField(verbose_name='O candidato cursou o ensino fundamental integralmente em escola pública?', choices=ESCOLHAS, max_length=1, default='N')
     ensino_medio_publico=models.CharField(verbose_name='O candidato cursou o ensino médio integralmente em escola pública?', choices=ESCOLHAS, max_length=1, default='N')
     
-    file_termo_para_vagas_reservadas=models.FileField(upload_to='file_adesao_sis_vagas_reservadas', verbose_name='Anexo em PDF do Termo de Adesão ao Sistema de Vagas Reservadas', blank=True, null=True)
-    file_necessidade=models.FileField(upload_to='file_necessidade', verbose_name='Anexo em PDF de justificativa da necessidade por médico especializado', blank=True, null=True)
-    file_tempo_excedente=models.FileField(upload_to='file_tempo_excedente', verbose_name='Anexo em PDF de justificativa para tempo excedente de médico especializado', blank=True, null=True)
+    file_termo_para_vagas_reservadas=models.FileField(upload_to='file_adesao_sis_vagas_reservadas', verbose_name='Anexar em PDF o Termo de Adesão ao Sistema de Vagas Reservadas, devidamente preenchido e assinado (Anexo 1 do Edital).', blank=True, null=True)
+    file_necessidade=models.FileField(upload_to='file_necessidade', verbose_name='Anexar em PDF a justificativa da necessidade por médico especializado.', blank=True, null=True)
+    file_tempo_excedente=models.FileField(upload_to='file_tempo_excedente', verbose_name='Anexar em PDF a justificativa para tempo excedente de médico especializado.', blank=True, null=True)
     
     ip = models.GenericIPAddressField(protocol='IPv4')
     chave = models.CharField(unique=True, max_length=36)
