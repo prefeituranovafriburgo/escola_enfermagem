@@ -187,19 +187,33 @@ class ContatoForm(forms.Form):
                 raise ValidationError('Insira um número válido ')
         return telefone
 
-
 class NotasForm(ModelForm):
-
-    id_candidato = forms.CharField(label='Id do candidato',  widget=forms.TextInput(
-        attrs={}))
+    id_candidato = forms.CharField(
+        label='Id do candidato',
+        widget=forms.TextInput(attrs={})
+    )
 
     class Meta:
         model = Nota
         exclude = ['dt_inclusao']
         widgets = {
-            'candidato': forms.HiddenInput()
+            'candidato': forms.HiddenInput(),
+            'nota': forms.NumberInput(attrs={
+                'min': 0,   # mínimo
+                'max': 100   # máximo
+            })
         }
 
     def clean_cpf(self):
         cpf = validate_CPF(self.cleaned_data["cpf"])
         return cpf
+
+    def clean_nota(self):
+        nota = self.cleaned_data.get("nota")
+        if nota is not None:
+            if nota < 0:
+                raise forms.ValidationError("A nota não pode ser negativa.")
+            if nota > 100:
+                raise forms.ValidationError("A nota não pode ser maior que 100.")
+        return nota
+

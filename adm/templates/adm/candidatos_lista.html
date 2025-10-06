@@ -1,0 +1,211 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Candidatos</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 20px;
+}
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+}
+th {
+    background-color: #eee;
+    text-align: left;
+    font-weight: bold;
+}
+td.id-col {
+    width: 60px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+td.nome-col {
+    cursor: pointer;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+/* span que contém apenas o nome visível */
+span.nome-text {
+    display: inline-block;
+}
+.detalhes {
+    display: none;
+    margin-top: 0;
+}
+.detalhes table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.detalhes th, .detalhes td {
+    border: 1px solid #ccc;
+    padding: 5px 8px;
+    word-break: break-word;
+}
+.detalhes th {
+    width: 30%;
+    background-color: #f0f8ff;
+    font-weight: bold;
+}
+.detalhes td {
+    font-weight: normal;
+    cursor: text;
+}
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Lista de Candidatos</h1>
+
+<!-- campo de busca -->
+<input type="text" id="filtroNome" placeholder="Digite um nome para filtrar...">
+
+<table id="tabelaCandidatos">
+<thead>
+<tr>
+<th class="id-col">ID</th>
+<th>Nome</th>
+</tr>
+</thead>
+<tbody>
+{% for c in candidatos %}
+<tr>
+    <td class="id-col" onclick="toggleDetalhes(event, {{ c.id }})">{{ c.id }}</td>
+    <!-- envolvemos apenas o nome visível em .nome-text -->
+    <td class="nome-col" onclick="toggleDetalhes(event, {{ c.id }})">
+        <span class="nome-text">{{ c.nome }}</span>
+        <div class="detalhes" id="detalhes-{{ c.id }}">
+            <table onclick="event.stopPropagation()">
+                {% if c.dt_nascimento %}<tr><th>Data de Nascimento</th><td>{{ c.dt_nascimento }}</td></tr>{% endif %}
+                {% if c.cpf %}<tr><th>CPF</th><td>{{ c.cpf|slice:":3" }}.{{ c.cpf|slice:"3:6" }}.{{ c.cpf|slice:"6:9" }}-{{ c.cpf|slice:"9:" }}</td></tr>{% endif %}
+                {% if c.celular %}<tr><th>Celular</th><td>({{ c.celular|slice:":2" }}) {{ c.celular|slice:"2:7" }}-{{ c.celular|slice:"7:" }}</td></tr>{% endif %}
+                {% if c.tel %}<tr><th>Telefone</th><td>({{ c.tel|slice:":2" }}) {{ c.tel|slice:"2:6" }}-{{ c.tel|slice:"6:" }}</td></tr>{% endif %}
+                {% if c.email %}<tr><th>Email</th><td>{{ c.email }}</td></tr>{% endif %}
+                {% if c.deficiencia and c.deficiencia != 'N' %}
+                <tr><th>Possui deficiência? Qual?</th><td>{% if c.deficiencia == 'S' %}Sim{% else %}Não{% endif %}{% if c.qual_deficiencia %} - {{ c.qual_deficiencia }}{% endif %}</td></tr>
+                {% endif %}
+                {% if c.necessidade %}<tr><th>Necessita de alguma condição especial?</th><td>{{ c.necessidade }}</td></tr>{% endif %}
+                {% if c.tempo_excedente %}<tr><th>Necessita de tempo excedente?</th><td>{{ c.tempo_excedente }}</td></tr>{% endif %}
+                {% if c.autodeclaracao and c.autodeclaracao != 'N' %}
+                <tr><th>O candidato é autodeclarado preto, pardo ou indígena?</th><td>{% if c.autodeclaracao == 'S' %}Sim{% else %}Não{% endif %}</td></tr>
+                {% endif %}
+                {% if c.renda_bruta and c.renda_bruta != 'N' %}
+                <tr><th>O candidato possui renda bruta mensal igual ou inferior a 1,5 salários mínimos per capita?</th><td>{% if c.renda_bruta == 'S' %}Sim{% else %}Não{% endif %}</td></tr>
+                {% endif %}
+                {% if c.ensino_fundamental_publico and c.ensino_fundamental_publico != 'N' %}
+                <tr><th>O candidato cursou o ensino fundamental integralmente em escola pública?</th><td>{% if c.ensino_fundamental_publico == 'S' %}Sim{% else %}Não{% endif %}</td></tr>
+                {% endif %}
+                {% if c.ensino_medio_publico and c.ensino_medio_publico != 'N' %}
+                <tr><th>O candidato cursou o ensino médio integralmente em escola pública?</th><td>{% if c.ensino_medio_publico == 'S' %}Sim{% else %}Não{% endif %}</td></tr>
+                {% endif %}
+                {% if c.ip %}<tr><th>IP</th><td>{{ c.ip }}</td></tr>{% endif %}
+                {% if c.chave %}<tr><th>Chave</th><td>{{ c.chave }}</td></tr>{% endif %}
+
+                {% if c.file_termo_para_vagas_reservadas %}
+                <tr><th>Anexo 1</th><td><a href="{{ c.file_termo_para_vagas_reservadas.url }}" target="_blank">{{ c.file_termo_para_vagas_reservadas.name }}</a></td></tr>
+                {% endif %}
+                {% if c.file_necessidade %}
+                <tr><th>Anexo 2</th><td><a href="{{ c.file_necessidade.url }}" target="_blank">{{ c.file_necessidade.name }}</a></td></tr>
+                {% endif %}
+                {% if c.file_tempo_excedente %}
+                <tr><th>Anexo 3</th><td><a href="{{ c.file_tempo_excedente.url }}" target="_blank">{{ c.file_tempo_excedente.name }}</a></td></tr>
+                {% endif %}
+            </table>
+        </div>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<script>
+let aberto = null;
+function toggleDetalhes(event, id) {
+    event.stopPropagation(); // evita que clique suba para outros elementos
+
+    const detalhes = document.getElementById('detalhes-' + id);
+
+    if (aberto && aberto !== detalhes) {
+        aberto.style.display = 'none';
+    }
+
+    if (detalhes.style.display === 'block') {
+        detalhes.style.display = 'none';
+        aberto = null;
+    } else {
+        detalhes.style.display = 'block';
+        aberto = detalhes;
+    }
+}
+
+// função para normalizar (remove acentos e espaços)
+function normalizeText(str) {
+    if (!str) return "";
+    return str
+        .normalize('NFD')                 // separa diacríticos
+        .replace(/[\u0300-\u036f]/g, '')  // remove diacríticos
+        .toLowerCase()
+        .trim();
+}
+
+// filtro em tempo real (usa apenas o span.nome-text)
+document.getElementById("filtroNome").addEventListener("input", function() {
+    const filtro = normalizeText(this.value);
+    const linhas = document.querySelectorAll("#tabelaCandidatos tbody tr");
+
+    linhas.forEach(linha => {
+        const nomeEl = linha.querySelector(".nome-text");
+        const nome = nomeEl ? normalizeText(nomeEl.textContent) : "";
+
+        if (!filtro || nome.includes(filtro)) {
+            linha.style.display = "";
+        } else {
+            linha.style.display = "none";
+            // garante que detalhes fechados quando linha oculta
+            const det = linha.querySelector('.detalhes');
+            if (det) det.style.display = 'none';
+        }
+    });
+});
+</script>
+</body>
+</html>

@@ -18,23 +18,25 @@
                         <h1 class="display-4 text-center">ADMINISTRATIVO</h1>
                     </div>
                 </div>
-                
-                <div class="row">
-                    <div class="col px-4 d-flex">
-                        <h3 class="text-dark" style="display: inline;">{{edital.nome}}</h3>
-                        <a href="{% url 'adm:adm_relacao_candidatos' %}" class="btn btn-dark ms-auto">
-                            Voltar
-                        </a>
-                    </div>
-                </div>                
+                <div class="row px-4 align-items-center">
+    		   <div class="col">
+                       <h3 class="text-dark">{{edital.nome}}</h3>
+                   </div>
+                   <div class="col-auto">
+                       <a href="{% url 'adm:adm_relacao_candidatos' %}" class="btn btn-dark">
+                          Voltar
+                       </a>
+                   </div>
+                </div>
+
                 
                 <div class="row">
                     <div class="col px-4 pt-5">
                         <ul>
                         <!-- <li><a href="{% url 'adm:envia_email' %}">Envia e-mail</a></li> -->
-                        <li><a href="{% url 'adm:relacao_candidatos' edital.id %}" target="_blank">Imprime relação de candidatos (Dados completos)</a></li>
-                        <li><a href="{% url 'adm:relacao_candidatos_assinatura' edital.id %}" target="_blank">Imprime relação de candidatos (para assinatura)</a></li>
-                        <li><a href="{% url 'adm:relacao_candidatos_porta' edital.id %}" target="_blank">Imprime relação de candidatos (para afixar nas salas)</a></li>
+                        <li><a href="{% url 'adm:relacao_candidatos' edital.id %}" target="_blank">Imprimir relação de candidatos - Dados Completos </a></li>
+                        <li><a href="{% url 'adm:relacao_candidatos_assinatura' edital.id %}" target="_blank">Imprimir relação de candidatos para assinatura </a></li>
+                        <li><a href="{% url 'adm:relacao_candidatos_porta' edital.id %}" target="_blank">Imprimir relação de candidatos para afixar nas portas das salas </a></li>
                         </ul>
                         <br>
                     </div>                    

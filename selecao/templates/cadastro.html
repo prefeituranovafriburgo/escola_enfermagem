@@ -21,7 +21,7 @@
                 
                 <div class="row">      
                     <div class="col text-right px-4 d-flex">
-                        <a href="{% url 'edital' id %}" class="btn btn-dark ms-auto" role="button">
+                        <a href="{% url 'editais:edital' id %}" class="btn btn-dark ms-auto" role="button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
                             </svg>
@@ -276,4 +276,82 @@
         text-align: justify;
     }    
 </style>
+
+<!-- 🔹 Modal de Atenção -->
+<div id="alertaModal" class="alerta-overlay">
+    <div class="alerta-content">
+        <span class="alerta-fechar">&times;</span>
+        <h2 class="alerta-titulo">
+            ⚠️ Atenção ⚠️
+        </h2>
+        <p>
+            O candidato que desejar concorrer às vagas reservadas deverá preencher, assinar e anexar em PDF o
+            <b>Termo de Adesão (anexo I)</b> corretamente, sob pena de exclusão do processo seletivo.
+        </p>
+        <p>
+            De acordo com o Edital, item 1.3:
+            <i>“As informações prestadas no formulário de inscrição são de inteira responsabilidade do candidato, reservando-se à Comissão o direito de excluir do Processo Seletivo Público aquele que não preencher esse documento oficial de forma completa e correta, e/ou fornecer dados inverídicos ou falsos”.</i>
+        </p>
+    </div>
+</div>
+
+<style>
+/* 🔹 CSS do modal */
+.alerta-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    backdrop-filter: blur(2px);
+}
+.alerta-content {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: #f8d7da;
+    border: 1px solid #f5c2c7;
+    color: #842029;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    width: 90%; max-width: 700px;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.3);
+    font-size: 1.1rem;
+    text-align: justify; /* 🔹 Texto justificado */
+}
+.alerta-titulo {
+    text-align: center; /* 🔹 Centraliza título */
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.alerta-fechar {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #842029;
+}
+.alerta-fechar:hover { color: #000; }
+</style>
+
+<script>
+/* 🔹 JS para abrir/fechar o modal (sempre aparece ao carregar) */
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("alertaModal").style.display = "block";
+
+    document.querySelector(".alerta-fechar").onclick = function() {
+        document.getElementById("alertaModal").style.display = "none";
+    };
+
+    window.onclick = function(event) {
+        const modal = document.getElementById("alertaModal");
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+});
+</script>
+
 {% endblock %}

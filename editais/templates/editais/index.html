@@ -1,21 +1,106 @@
 {% extends 'template.html' %}
-{% load static%}
+{% load static %}
 {% block title %}ESCOLA DE ENFERMAGEM{% endblock %}
+
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+<style>
+/* Banner original */
+#banner {
+    height: 500px; /* altura base */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* h1 mantém cor e tamanho originais */
+#banner h1 {
+    font-size: 90pt;
+    color: #76D5CB;
+    margin: 0;
+}
+
+/* h4 mantém cor e estilo originais */
+#banner h4 {
+    color: rgb(87, 87, 87);
+    margin: 0;
+}
+
+/* Para telas maiores que Full HD (ex: 1920px) */
+@media (min-width: 1600px) {
+    #banner {
+        height: 550px; /* cresce só um cadin */
+    }
+}
+
+/* Ajuste para laptops e tablets grandes */
+@media (max-width: 1200px) {
+    #banner {
+        height: 480px;
+    }
+    #banner h1 {
+        font-size: 80pt;
+    }
+    #banner h4 {
+        font-size: 28pt;
+    }
+}
+
+/* Tablets médios */
+@media (max-width: 992px) {
+    #banner {
+        height: 400px;
+    }
+    #banner h1 {
+        font-size: 70pt;
+    }
+    #banner h4 {
+        font-size: 24pt;
+    }
+}
+
+/* Tablets pequenos e celulares grandes */
+@media (max-width: 768px) {
+    #banner {
+        height: 300px;
+    }
+    #banner h1 {
+        font-size: 50pt;
+    }
+    #banner h4 {
+        font-size: 18pt;
+    }
+}
+
+/* Celulares pequenos */
+@media (max-width: 480px) {
+    #banner {
+        height: 250px;
+    }
+    #banner h1 {
+        font-size: 35pt;
+    }
+    #banner h4 {
+        font-size: 14pt;
+    }
+}
+</style>
 {% endblock %}
+
 {% block index %}fw-bold{% endblock %}
+
 {% block main %}
 <div id="banner" class="row">
     <div class="col d-flex flex-column">
-        
-
         <h1 class="mt-auto mx-auto pb-2">
             BEM-VINDO
         </h1>
-        <h4 class="mb-auto mx-auto pb-2" style="color: rgb(87, 87, 87);">
+        <h4 class="mb-auto mx-auto pb-2">
           Escola de Enfermagem Nossa Srª de Fátima
         </h4>
     </div>
-</div> 
+</div>
 {% endblock %}

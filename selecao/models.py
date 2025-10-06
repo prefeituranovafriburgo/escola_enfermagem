@@ -1,6 +1,7 @@
 from email.policy import default
 from django.db import models
 from .functions import validate_CPF
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
@@ -190,7 +191,11 @@ class Nota(models.Model):
         ordering = ['nota']
         verbose_name_plural = "Notas"
 
-    nota = models.FloatField()
+    nota = models.FloatField(
+        validators=[
+            MinValueValidator(0),   # impede valores negativos
+            MaxValueValidator(100)   # se quiser limitar até 10
+        ]
+    )
     candidato = models.ForeignKey(Candidato, on_delete=models.PROTECT, null=True, blank=True)
     dt_inclusao = models.DateTimeField(auto_now_add=True)
-

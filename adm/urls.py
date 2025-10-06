@@ -11,5 +11,6 @@ urlpatterns = [
     path('relacao_candidatos', views.adm_relacao_candidatos, name='adm_relacao_candidatos'),
     path('relacao_candidatos/<id>/assinatura', views.relacao_candidatos_assinatura, name='relacao_candidatos_assinatura'),
     path('relacao_candidatos/<id>/porta', views.relacao_candidatos_porta, name='relacao_candidatos_porta'),
+    path('candidatos/', views.candidatos_lista, name='candidatos_lista'),
     path('sair', views.sair, name='sair'),
 ]

@@ -9,43 +9,49 @@
 {% block editais %}fw-bold{% endblock %}
 {% block main %}
 <div class="row" id="edital">
-    <div class="col d-flex py-5"> 
+    <div class="col d-flex py-5">
         <div class="row w-100">
+            <!-- Container branco centralizado -->
             <div class="col-10 pb-4 m-auto bg-white">
+
+                <!-- Cabeçalho do edital -->
                 <div class="row py-3 px-4">
                     <div class="col bg p-5">
                         <h1 class="display-4 text-center">INFORMAÇÕES DO EDITAL</h1>
                     </div>
-                </div>                
-                
+                </div>
+
+                <!-- Informações principais -->
                 <div class="row d-flex">
                     <div class="col d-flex flex-column px-4 pt-5 text-dark text-justify mx-auto" style="font-size: 16pt; max-width: 900px;">
                         <h1 class="text-center mb-3">{{edital.nome}}</h1>
-                        <a style="font-size: 10pt;" class="mx-auto" target="_blank" href="{{edital.link_diario_oficial}}">Link da publicação no Diário Oficial do Município</a>
-                        <!-- <p class="mt-5" >O processo seletivo para o curso de Técnico em Enfermagem, da Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima, ofereceu 20 (vinte) vagas, no turno da noite. O resultado foi publicado no Diário Oficial do Município no dia 08 de dezembro, e também pode ser baixado do link acima.</p>
-                        <p>Os primeiros 20 colocados deverão efetivar suas matrículas entre os dias 02/02/2022 e 03/02/2022, das 14h às 20h na secretaria da Escola.</p>
-                        <p>Somente serão realizadas matrículas dos candidatos que apresentarem toda a documentação em cópia simples e legível, junto com o documento original no ato da matrícula, conforme previsto em edital.</p>                        
-                        <p>No ato da matrícula, o aluno deverá assinar termo de compromisso da disponibilidade de cumprimento de 600 horas de estágio concomitante ao período de aulas do curso, que será realizado de segunda a sexta-feira, manhã e/ou tarde.</p>
-                        <p>Encerrado o período de matrícula em 1ª chamada, se houver vagas excedentes, as mesmas serão oferecidas aos demais candidatos por ordem classificatória.</p> -->
+                        <!-- Link para o diário oficial -->
+                        <a style="font-size: 10pt;" class="mx-auto" target="_blank" href="{{edital.link_diario_oficial}}">
+                            Link da publicação no Diário Oficial do Município
+                        </a>
+                        <!-- Texto descritivo do edital -->
                         <div class="pt-4">
                             {% for linha in descricao %}
                                 <p>{{linha}}</p>
                             {% endfor %}
                         </div>
                     </div>
-                    
                 </div>
+
+                <!-- Se houver resultado publicado -->
                 {% if exibir_resultado %}
-                <div class="row">                    
+                <div class="row">
                     <div class="col px-4 text-dark mx-auto d-flex flex-column" style="font-size: 16pt; max-width: 900px;">
                         <hr>
-                            <h3 class="mb-5">RESULTADO</h3>
-                            <a href="{{edital.link_resultado}}" class="btn btn-success mx-auto mb-5 px-5 py-3">
-                                Visualizar resultado
-                            </a>
+                        <h3 class="mb-5">RESULTADO</h3>
+                        <a href="{{edital.link_resultado}}" class="btn btn-success mx-auto mb-5 px-5 py-3">
+                            Visualizar resultado
+                        </a>
                     </div>
                 </div>
                 {% endif %}
+
+                <!-- Área de downloads -->
                 <div class="row">
                     <div class="col px-4 text-dark mx-auto" style="font-size: 16pt; max-width: 900px;">
                         <hr>
@@ -62,43 +68,37 @@
                                 <p class="text-center">Nenhum link disponível até o momento.</p>
                             </li>
                             {% endfor %}
-                                                       
                         </ul>
                         <hr>
                     </div>
                 </div>
+
+                <!-- Área de inscrição -->
                 {% if inscricao %}
                 <div class="row">
                     <div class="col px-4 text-dark mx-auto d-flex flex-column" style="font-size: 16pt; max-width: 900px;">
                         <h3 class="mb-5">INSCRIÇÃO</h3>
-                        <a href="{% url 'selecao:cadastro' edital.id %}" class="btn btn-info mb-5 mx-auto px-5 py-3" style="background-color: #77D5CA;">INSCREVER-SE</a>
+                        <a href="{% url 'selecao:cadastro' edital.id %}"
+                           class="btn btn-info mb-5 mx-auto px-5 py-3"
+                           style="background-color: #77D5CA;">
+                            INSCREVER-SE
+                        </a>
                     </div>
                 </div>
                 {% elif encerrar_inscricao %}
+                <!-- Caso as inscrições tenham sido encerradas -->
                 <div class="row">
                     <div class="col px-4 text-dark mx-auto d-flex flex-column" style="font-size: 16pt; max-width: 900px;">
                         <h3 class="mb-4">INSCRIÇÃO ENCERRADA</h3>
                         <h5 class="mb-5 text-center">
-				<a target="_blank" href="https://drive.google.com/file/d/1UydfIybLQqZqdSaUl7m5ZZCHvWA1k4U7/view?usp=sharing">
-					<i class="fa-solid fa-download me-3"></i>Pubilcação local de prova Enfermagem
-				</a>
-				<!--<p>
-					A prova de seleção será realizada no dia 06 de novembro de 2022, na Escola Municipal Iza Saippa Ranucci, localizada na Rua Benjamin Constant, nº 115, Duas Pedras, Nova Friburgo.
-				</p>
-				<p>
-					Para os candidatos cujo nome se inicia com a letra "A" até a letra "K" a prova será aplicada às 8h. A prova tem duração de 1h e 30min.
-				</p>
-				<p>
-					Para os candidatos cujo nome se inicia com a letra "L" até a letra "Z" a prova será aplicada às 10h. A prova tem duração de 1h e 30min.
-				</p>
-				<p>
-					O candidato deverá comparecer ao local designado par ao processo seletivo, com antecedência de 30 minutos, munido do protocolo de inscrição (impresso ou diretamente no celular), documento de identificação com foto e caneta esferográfiac de corpo transparente de tinta azul ou preta, conforme previsto no edital.
-				</p>-->
-
-			</h5>
+                            <a target="_blank" href="#">
+                                <i class="fa-solid fa-download me-3"></i>Clique aqui para ver o local da prova!
+                            </a>
+                        </h5>
                     </div>
                 </div>
                 {% else %}
+                <!-- Período de inscrição (caso ainda não tenha iniciado ou esteja em andamento) -->
                 <div class="row">
                     <div class="col px-4 text-dark mx-auto d-flex flex-column" style="font-size: 16pt; max-width: 900px;">
                         <h3 class="mb-2">INSCRIÇÃO</h3>
@@ -110,7 +110,9 @@
         </div>
     </div>
 </div>
+
 <style>
+    /* Estilo do texto justificado */
     #edital .text-justify p:first-child{
         margin-top: 30px;
     }
@@ -119,10 +121,136 @@
         margin-bottom: 30px;
     }
     #edital .text-justify ul{
-        margin-bottom: 20px;    
+        margin-bottom: 20px;
     }
     #edital .text-justify ul li{
         list-style: circle !important;
+    }
+
+    /* 🔹 Ajustes para tablets e celulares */
+    @media (max-width: 991px) {
+        /* Container ocupa mais espaço na tela */
+        #edital .col-10 {
+            width: 95% !important;
+        }
+        /* Centralizar títulos */
+        #edital h1, #edital h3, #edital h5 {
+            text-align: center !important;
+        }
+        /* Fonte menor */
+        #edital .col {
+            font-size: 14pt !important;
+            padding: 15px !important;
+        }
+        /* Botões mais largos */
+        #edital .btn {
+            width: 100% !important;
+            font-size: 14pt !important;
+            padding: 12px !important;
+        }
+    }
+
+    /* 🔹 Ajustes para celulares pequenos */
+    @media (max-width: 576px) {
+        /* Reduz ainda mais o tamanho da fonte */
+        #edital .col {
+            font-size: 12pt !important;
+        }
+        #edital h1 {
+            font-size: 22px !important;
+        }
+        #edital h3 {
+            font-size: 18px !important;
+        }
+        #edital h5 {
+            font-size: 16px !important;
+        }
+        /* Botões compactos */
+        #edital .btn {
+            font-size: 12pt !important;
+            padding: 10px !important;
+        }
+        #edital a {
+            font-size: 11pt !important;
+        }
+    }
 </style>
+
+<!-- 🔹 Modal de Atenção -->
+<div id="alertaModal" class="alerta-overlay">
+    <div class="alerta-content">
+        <span class="alerta-fechar">&times;</span>
+        <h2 class="alerta-titulo">
+            ⚠️ Atenção ⚠️
+        </h2>
+        <p>
+            O candidato que desejar concorrer às vagas reservadas deverá preencher, assinar e anexar em PDF o
+            <b>Termo de Adesão (anexo I)</b> corretamente, sob pena de exclusão do processo seletivo.
+        </p>
+        <p>
+            De acordo com o Edital, item 1.3:
+            <i>“As informações prestadas no formulário de inscrição são de inteira responsabilidade do candidato, reservando-se à Comissão o direito de excluir do Processo Seletivo Público aquele que não preencher esse documento oficial de forma completa e correta, e/ou fornecer dados inverídicos ou falsos”.</i>
+        </p>
+    </div>
+</div>
+
+<style>
+/* 🔹 CSS do modal */
+.alerta-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    backdrop-filter: blur(2px);
+}
+.alerta-content {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: #f8d7da;
+    border: 1px solid #f5c2c7;
+    color: #842029;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    width: 90%; max-width: 700px;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.3);
+    font-size: 1.1rem;
+    text-align: justify; /* 🔹 Texto justificado */
+}
+.alerta-titulo {
+    text-align: center; /* 🔹 Centraliza título */
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.alerta-fechar {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #842029;
+}
+.alerta-fechar:hover { color: #000; }
+</style>
+
+<script>
+/* 🔹 JS para abrir/fechar o modal (sempre aparece ao carregar) */
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("alertaModal").style.display = "block";
+
+    document.querySelector(".alerta-fechar").onclick = function() {
+        document.getElementById("alertaModal").style.display = "none";
+    };
+
+    window.onclick = function(event) {
+        const modal = document.getElementById("alertaModal");
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+});
+</script>
 
 {% endblock %}

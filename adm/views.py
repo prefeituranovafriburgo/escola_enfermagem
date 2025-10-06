@@ -105,12 +105,15 @@ def envia(request, id):
 @login_required
 def relacao_candidatos(request, id):
     try:
-        edital=Edital.objects.get(id=id)
-        alocacoes = Alocacao.objects.filter(edital=edital).order_by('candidato__nome')
-    except:
+        edital = Edital.objects.get(id=id)
+        # Ordena por sala primeiro e depois por nome do candidato
+        alocacoes = Alocacao.objects.filter(edital=edital).select_related(
+            'candidato', 'sala', 'sala__horario'
+        ).order_by('sala__id', 'candidato__nome')
+    except Edital.DoesNotExist:
         return redirect('adm:adm_relacao_candidatos')
 
-    return render(request, "adm/relacao_candidatos.html",{"alocacoes" : alocacoes})
+    return render(request, "adm/relacao_candidatos.html", {"alocacoes": alocacoes})
 
 @login_required
 def adm_relacao_candidatos(request):
@@ -119,34 +122,61 @@ def adm_relacao_candidatos(request):
         context={
             "edital" : Edital.objects.get(id=request.POST['edital'])
             }
-        return render(request, "adm/adm_relacao_candidatos_opcoes.html", context)    
-    
+        return render(request, "adm/adm_relacao_candidatos_opcoes.html", context)
+
     editais=Edital.objects.all()
     context={"editais" : editais}
-    
-    return render(request, "adm/adm_relacao_candidatos.html", context)
 
+    return render(request, "adm/adm_relacao_candidatos.html", context)
 
 
 @login_required
 def relacao_candidatos_assinatura(request, id):
-
     try:
-        edital=Edital.objects.get(id=id)
-        alocacoes = Alocacao.objects.filter(edital=edital).order_by('candidato__nome')
-    except:
+        edital = Edital.objects.get(id=id)
+        # Ordena por sala primeiro e depois pelo nome do candidato
+        alocacoes = Alocacao.objects.filter(edital=edital).select_related(
+            'candidato', 'sala', 'sala__horario'
+        ).order_by('sala__id', 'candidato__nome')
+    except Edital.DoesNotExist:
         return redirect('adm:adm_relacao_candidatos')
 
-    return render(request, "adm/relacao_candidatos_assinatura.html",{"alocacoes" : alocacoes})
+    return render(
+        request,
+        "adm/relacao_candidatos_assinatura.html",
+        {"alocacoes": alocacoes}
+    )
 
 
 @login_required
 def relacao_candidatos_porta(request, id):
-
     try:
-        edital=Edital.objects.get(id=id)
-        alocacoes = Alocacao.objects.filter(edital=edital).order_by('candidato__nome')
-    except:
+        edital = Edital.objects.get(id=id)
+        # Ordena por sala primeiro e depois pelo nome do candidato
+        alocacoes = Alocacao.objects.filter(edital=edital).select_related(
+            'candidato', 'sala', 'sala__horario'
+        ).order_by('sala__id', 'candidato__nome')
+    except Edital.DoesNotExist:
         return redirect('adm:adm_relacao_candidatos')
 
-    return render(request, "adm/relacao_candidatos_porta.html",{"alocacoes" : alocacoes})
+    return render(
+        request,
+        "adm/relacao_candidatos_porta.html",
+        {"alocacoes": alocacoes}
+    )
+
+@login_required
+def candidatos_lista(request):
+    campo = request.GET.get('campo', '')  # ID, nome, cpf
+    busca = request.GET.get('busca', '')  # texto digitado
+    candidatos = Candidato.objects.all().order_by('id')
+
+    if campo and busca:
+        if campo == 'id' and busca.isdigit():
+            candidatos = candidatos.filter(id=int(busca))
+        elif campo == 'nome':
+            candidatos = candidatos.filter(nome__icontains=busca)
+        elif campo == 'cpf':
+            candidatos = candidatos.filter(cpf__icontains=busca)
+
+    return render(request, "adm/candidatos_lista.html", {"candidatos": candidatos, "campo": campo, "busca": busca})

@@ -1,53 +1,158 @@
 {% load template_filters %}
-
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Inscrição do Processo Seletivo para Curso de Técnico em Enfermagem</title>
-        <style type="text/css">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inscrição do Processo Seletivo para Curso de Técnico em Enfermagem</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #fdfdfd;
+        }
+        .container {
+            width: 650px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: left; /* logo no canto esquerdo */
+            margin-bottom: 10px;
+        }
+        .header img {
+            max-width: 180px;
+        }
+        .titulo {
+            display: flex;
+            justify-content: center; /* centraliza conteúdo */
+            gap: 40px;
+            align-items: center;
+            background-color: #e0f0ff; /* azul claro */
+            color: #000;
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-weight: bold;
+            font-size: 18px;
+            -webkit-print-color-adjust: exact !important; 
+            print-color-adjust: exact !important;
+        }
+        .dados {
+            border-collapse: collapse;
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 0 6px rgba(0,0,0,0.15);
+        }
+        .dados th, .dados td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .dados th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            width: 220px;
+        }
+        .protocolo {
+            margin-top: 25px;
+            padding: 15px;
+            border: 1px dashed #666;
+            background: #fafafa;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+            .container {
+                margin: 0 auto;
+                width: 650px;
+            }
             .titulo {
-                float: left;
-                font-weight: bold;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                background-color: #e0f0ff !important;
+                color: #000 !important;
             }
-            .numero {
-                float: right;
-            }
-        </style>
-    </head>
+        }
+    </style>
+</head>
 
-    <body>
-        <img src="{% static 'logo_prefeitura_transparente.png' %}" alt="Logo PMNF" title="Logo Cáritas"  style="margin:20px 0 0 15px;position: relative;left: 5px;" width="300px" />
-<br>
-        <div class="titulo" style="margin-top: 20px; margin-left: 30px;">FICHA DE INSCRIÇÃO</div> <div class="numero">N° de inscrição {{ candidato.id }}</div><br>
-        <br>
-        <div style="text-align: justify; margin-left: 30px; margin-top: 20px;">        
-        Nome: {{ candidato.nome }}<br>
-        Data Nascimento: {{ candidato.dt_nascimento | date:"SHORT_DATE_FORMAT" }}<br>
-        CPF: {{ candidato.cpf | formata_cpf }}<br>
-        Celular: {{ candidato.celular | formata_tel }}<br>
-        Telefone: {{ candidato.tel | formata_tel }}<br>
-        E-mail: {{ candidato.email }}<br>
-        Possui deficiência: {% if candidato.deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
-        {% if candidato.qual_deficiencia %}Deficiência: {{ candidato.qual_deficiencia }}<br>{% endif %}
-        {% if candidato.necessidade %}Informe se necessita de alguma condição especial para a realização da prova: {{ candidato.necessidade }}<br>{% endif %}
-        Data Cadastro: {{ candidato.dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
-        IP: {{ candidato.ip }}
-        <div style="margin-top: 20px;">
-            Protocolo de inscrição: <br>{{candidato.chave}}<br>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="{% static 'logo_prefeitura_transparente.png' %}" alt="Logo PMNF" title="Logo Cáritas"/>
         </div>
+
+        <div class="titulo">
+            <span>FICHA DE INSCRIÇÃO - N° de inscrição: {{ candidato.id }}</span>
         </div>
-        <br>
-    </body>
 
-    <SCRIPT LANGUAGE="JavaScript">
-        window.print();
-        setTimeout(function(){
-            window.close();
-        },2000);
-    </SCRIPT>
+        <table class="dados">
+            <tr>
+                <th>Nome</th>
+                <td>{{ candidato.nome }}</td>
+            </tr>
+            <tr>
+                <th>Data de Nascimento</th>
+                <td>{{ candidato.dt_nascimento | date:"SHORT_DATE_FORMAT" }}</td>
+            </tr>
+            <tr>
+                <th>CPF</th>
+                <td>{{ candidato.cpf | formata_cpf }}</td>
+            </tr>
+            <tr>
+                <th>Celular</th>
+                <td>{{ candidato.celular | formata_tel }}</td>
+            </tr>
+            <tr>
+                <th>Telefone</th>
+                <td>{{ candidato.tel | formata_tel }}</td>
+            </tr>
+            <tr>
+                <th>E-mail</th>
+                <td>{{ candidato.email }}</td>
+            </tr>
+            <tr>
+                <th>Possui deficiência</th>
+                <td>{% if candidato.deficiencia == 'S' %}Sim{% else %}Não{% endif %}</td>
+            </tr>
+            {% if candidato.qual_deficiencia %}
+            <tr>
+                <th>Deficiência</th>
+                <td>{{ candidato.qual_deficiencia }}</td>
+            </tr>
+            {% endif %}
+            {% if candidato.necessidade %}
+            <tr>
+                <th>Condição especial para prova</th>
+                <td>{{ candidato.necessidade }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th>Data de Cadastro</th>
+                <td>{{ candidato.dt_inclusao | date:"SHORT_DATETIME_FORMAT" }}</td>
+            </tr>
+            <tr>
+                <th>IP de Cadastro</th>
+                <td>{{ candidato.ip }}</td>
+            </tr>
+        </table>
 
+        <div class="protocolo">
+            <strong>Protocolo de inscrição:</strong><br>
+            {{ candidato.chave }}
+        </div>
+    </div>
+</body>
+
+<script>
+    window.print();
+    setTimeout(function(){
+        window.close();
+    },2000);
+</script>
 </html>

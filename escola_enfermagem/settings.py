@@ -17,7 +17,7 @@ debug_mode = env_vars['debug_mode']
 email_user = env_vars['email_sistema']
 email_pass = env_vars['email_pw']
 
-DEBUG = debug_mode
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 

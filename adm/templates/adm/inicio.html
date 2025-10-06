@@ -19,16 +19,19 @@
                     </div>
                 </div>
                 
-                <div class="row">
-                    <div class="col px-4">
-                        <a href="{% url 'adm:adm_relacao_candidatos' %}" class="btn btn-dark">
-                            Relação de Candidatos por Edital
+		<div class="row">
+    		   <div class="col px-4">
+        		<a href="{% url 'adm:adm_relacao_candidatos' %}" class="btn btn-dark">
+            			Relação de Candidatos por Edital
+       			</a>
+        		<a href="{% url 'selecao:cadastro_notas' %}" class="btn btn-dark">
+          			Lançamento de Notas
+        		</a>
+                        <a href="{% url 'adm:candidatos_lista' %}" class="btn btn-dark">
+                                Listagem de Candidatos - 2025
                         </a>
-                        <a href="{% url 'selecao:cadastro_notas' %}" class="btn btn-dark">
-                            Lançamento de notas
-                        </a>
-                    </div>
-                </div>               
+    		    </div>
+		</div>
             </div>
         </div>        
     </div>

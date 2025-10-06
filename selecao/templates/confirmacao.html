@@ -1,56 +1,183 @@
 {% load template_filters %}
-
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Inscrição do Processo Seletivo para Curso de Técnico em Enfermagem</title>
-        <style type="text/css">
-            .titulo {
-                float: left;
-                font-weight: bold;
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comprovante de Inscrição - Técnico em Enfermagem</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            border: 1px solid #cccccc;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+        .header img {
+            width: 200px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        /* Classe específica para os textos do cabeçalho */
+        .header-text {
+            font-size: 1em;
+            display: block;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .titulo {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin: 20px 0;
+            background-color: #e0f0ff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        table, th, td {
+            border: 1px solid #cccccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        .section-title {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Impressão */
+        @media print {
+            @page {
+                margin: 10mm; 
             }
-            .numero {
-                float: right;
+            body {
+                margin: 0;
+                -webkit-print-color-adjust: exact;
             }
-        </style>
-    </head>
+            .container {
+                box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+                border-radius: 10px;
+                border: 1px solid #cccccc;
+                page-break-inside: avoid; 
+            }
+        }
+    </style>
+</head>
 
-    <body>
-        <img src="{% static "logo_prefeitura_transparente.png" %}" alt="Logo PMNF" title="Logo Cáritas"  style="margin:20px 0 0 15px;position: relative;left: 5px;" width="300px" />
-        <br>
-        <b>PROCESSO SELETIVO PARA CURSO DE TÉCNICO EM ENFERMAGEM 2021</b><br>
-        <b>Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima</b><br>
-        <BR>
-        <div class="titulo">COMPROVANTE DE INSCRIÇÃO - N° {{ alocacao.candidato.id }}</div><br>
-        <br>
-        Nome: {{ alocacao.candidato.nome }}<br>
-        Data Nascimento: {{ alocacao.candidato.dt_nascimento | date:"SHORT_DATE_FORMAT" }}<br>
-        CPF: {{ alocacao.candidato.cpf | formata_cpf }}<br>
-        Celular: {{ alocacao.candidato.celular | formata_tel }}<br>
-        Telefone: {{ alocacao.candidato.tel | formata_tel }}<br>
-        E-Mail: {{ alocacao.candidato.email }}<br>
-        Possui deficiência? {% if alocacao.candidato.deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
-        Indique qual deficiência? {{ alocacao.candidato.qual_deficiencia }}<br>
-        Informe se necessita de alguma condição especial para a realização da prova: {{ alocacao.candidato.necessidade }}<br>
-        Data Cadastro: {{ alocacao.candidato.dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
-        IP: {{ alocacao.candidato.ip }}<br>
-        <br>
-        Local: Colégio Estadual Professor Jamil El Jaick<br>
-        Endereço: Rua Dr. Euclides Solon de Pontes, 33, Centro, Nova Friburgo.<br>
-        Data: 31/10/2021<br>
-        <b>Horário: {{ alocacao.sala.horario.horario }}h - sala {{ alocacao.sala.sala }}.</b><br>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="{% static 'logo_prefeitura_transparente.png' %}" alt="Logo PMNF" title="Logo Cáritas">
+            <b class="header-text">PROCESSO SELETIVO PARA CURSO DE TÉCNICO EM ENFERMAGEM 2025</b>
+            <b class="header-text">Escola de Auxiliares e Técnicos de Enfermagem Nossa Senhora de Fátima</b>
+        </div>
 
-    </body>
+        <div class="titulo">COMPROVANTE DE INSCRIÇÃO - N° {{ alocacao.candidato.id }}</div>
 
-    <SCRIPT LANGUAGE="JavaScript">
+        <div class="section-title">Dados do Candidato</div>
+        <table>
+            <tr>
+                <th>Nome</th>
+                <td>{{ alocacao.candidato.nome }}</td>
+            </tr>
+            <tr>
+                <th>Data Nascimento</th>
+                <td>{{ alocacao.candidato.dt_nascimento | date:"SHORT_DATE_FORMAT" }}</td>
+            </tr>
+            <tr>
+                <th>CPF</th>
+                <td>{{ alocacao.candidato.cpf | formata_cpf }}</td>
+            </tr>
+            <tr>
+                <th>Celular</th>
+                <td>{{ alocacao.candidato.celular | formata_tel }}</td>
+            </tr>
+            <tr>
+                <th>Telefone</th>
+                <td>{{ alocacao.candidato.tel | formata_tel }}</td>
+            </tr>
+            <tr>
+                <th>E-Mail</th>
+                <td>{{ alocacao.candidato.email }}</td>
+            </tr>
+            <tr>
+                <th>Possui deficiência?</th>
+                <td>{% if alocacao.candidato.deficiencia == 'S' %}Sim{% else %}Não{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Qual deficiência?</th>
+                <td>{{ alocacao.candidato.qual_deficiencia }}</td>
+            </tr>
+            <tr>
+                <th>Necessidade especial para a prova</th>
+                <td>{{ alocacao.candidato.necessidade }}</td>
+            </tr>
+            <tr>
+                <th>Data Cadastro</th>
+                <td>{{ alocacao.candidato.dt_inclusao | date:"SHORT_DATETIME_FORMAT" }}</td>
+            </tr>
+            <tr>
+                <th>IP</th>
+                <td>{{ alocacao.candidato.ip }}</td>
+            </tr>
+        </table>
+
+        <div class="section-title">Dados da Prova</div>
+        <table>
+            <tr>
+                <th>Local</th>
+                <td>Colégio</td>
+            </tr>
+            <tr>
+                <th>Endereço</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Data</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Horário / Sala</th>
+                <td>{{ alocacao.sala.horario.horario }}h - sala {{ alocacao.sala.sala }}</td>
+            </tr>
+        </table>
+
+        <div class="footer">
+            <small>Este comprovante foi gerado automaticamente pelo sistema de inscrições da Prefeitura Municipal de Nova Friburgo.</small>
+        </div>
+    </div>
+
+    <script>
         window.print();
         setTimeout(function(){
             window.close();
         },2000);
-    </SCRIPT>
-
+    </script>
+</body>
 </html>

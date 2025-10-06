@@ -32,14 +32,14 @@
             CPF: {{ cpf | formata_cpf }}<br>
             Celular: {{ celular | formata_tel }}<br>
             Telefone: {{ tel | formata_tel }}<br>
-            E-mail: {{ candidato.email }}<br>
+            E-mail: {{ email }}<br>
             Possui deficiência: {% if deficiencia == 'S' %}Sim{% else %}Não{% endif %}<br>
             {% if qual_deficiencia %}Deficiência: {{ qual_deficiencia }}<br>{% endif %}
             {% if necessidade %}Informe se necessita de alguma condição especial para a realização da prova: {{ candidato.necessidade }}<br>{% endif %}
             Data Cadastro: {{ dt_inclusao | date:"SHORT_DATETIME_FORMAT" }} - 
             IP: {{ ip }}
             <div style="margin-top: 20px;">
-                Protocolo de inscrição: <br>{{chave}}<br>
+                Protocolo de inscrição: <br>{{ candidato.chave }}<br>
             </div>
             </div>
 	<br>
@@ -47,7 +47,7 @@
 	<br>
 	O local e o horário do processo seletivo será divulgado no dia {{edital.dt_divulgacao}}, no Diário Oficial do Município, através do site da Prefeitura Municipal de Nova Friburgo. Você também pode se manter informado pela nossa plataforma <a target="_blank" href="https://enfermagem.pmnf.rj.gov.br/edital/1">clicando aqui</a>.<br>
     <br>    
-    <span style="color: red;">Caso você precisse corrigir algo no seu cadastro, estaremos disponibilizando a partir do dia 25/10 a possibilidade de corrigir seu cadastro, informe seu CPF e aguarde o email com o link p/ acessar suas informações: https://enfermagem.pmnf.rj.gov.br/selecao/consulta</span>
+    <span style="color: red;">Caso você precisse corrigir algo no seu cadastro, estaremos disponibilizando a partir do dia 30/09 a possibilidade de corrigir seu cadastro, informe seu CPF e aguarde o email com o link p/ acessar suas informações: https://enfermagem.pmnf.rj.gov.br/selecao/consulta</span>
     
     </body>
 </html>

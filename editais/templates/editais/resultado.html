@@ -1,11 +1,11 @@
-{% extends 'template.html' %} {% load bootstrap5 %} {% load static%} 
+{% extends 'template.html' %} {% load bootstrap5 %} {% load static%}
 {% block title %}ENFERMAGEM - RESULTADO{% endblock %} {% block css %}
 <link rel="stylesheet" href="{% static 'css/cursos.css' %}" />
 <script src="{% static 'js/cursos.js' %}"></script>
 {% endblock %} {% block resultado %}fw-bold{% endblock %} {% block main %}
 
 <div class="row">
-    <div class="col d-flex py-5"> 
+    <div class="col d-flex py-5">
         <div class="row w-100">
             <div class="col-10 pb-4 m-auto bg-white">
                 <div class="row py-3 px-4">
@@ -13,28 +13,27 @@
                         <h1 class="display-4 text-center">RESULTADO</h1>
                     </div>
                 </div>
-                
-                
+
+
                 <div class="row d-flex">
                     <div class="col px-4 py-5 text-dark text-center text-justify mx-auto" style="font-size: 16pt; max-width: 900px;">
                         {% comment %} <h6 class="text-secondary text-center">Não há resultados a serem exibidos no momento.</h6> {% endcomment %}
                         <object data="/static/resultado.pdf" type="application/pdf">
-                            <a target="_blank" href="https://drive.google.com/file/d/1I65D5y0GtGsUljLV9CzIsbkic-ZdNabe/view?usp=sharing">
+                            <a target="_blank" href="#">
                                 <i class="fa-solid fa-download me-3"></i>
-                                Baixar PDF com resultado</a>
+                                Baixar PDF com resultado</a> 
                         </object>
                     </div>
-                    
+
                 </div>
                 <div class="row">
                     <div class="col px-4 text-dark">
-                                    
-                        </div>                         
+
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
-        
+
       </div>
     </div>
   </div>
