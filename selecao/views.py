@@ -360,7 +360,7 @@ from django.http import HttpResponse
 def alocacao(request):
     candidatos = Candidato.objects.all().order_by('nome')
 
-    limite_salas = {1: 2, 2: 1, 3: 1, 4: 2, 5: 6}
+    limite_salas = {1: 35, 2: 35, 3: 35, 4: 35, 5: 35}
     sala_ids = [1, 2, 3, 4, 5]
 
     # Candidatos que precisam ir em salas específicas
@@ -402,7 +402,6 @@ def aloca(candidato, sala):
     alocacao = Alocacao(edital=Edital.objects.get(id=4), sala=sala, candidato=candidato)
     alocacao.save()
 
-
 def divulga(request):
     from django.http import HttpResponse
 
@@ -416,7 +415,6 @@ def divulga(request):
 
 
     return HttpResponse("Envio de e-mail concluído.")
-
 
 def envia_email(alocacao):
     from django.template import Context
@@ -457,7 +455,7 @@ def envia_email(alocacao):
     except:
         print('Erro')
         print(dados)
-        exit()
+        # exit()
 
 
 def confirmacao(request, chave):

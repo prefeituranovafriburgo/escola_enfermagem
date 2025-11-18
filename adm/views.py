@@ -180,3 +180,24 @@ def candidatos_lista(request):
             candidatos = candidatos.filter(cpf__icontains=busca)
 
     return render(request, "adm/candidatos_lista.html", {"candidatos": candidatos, "campo": campo, "busca": busca})
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from selecao.models import Candidato
+
+@csrf_exempt
+def api_editar_nome_candidato(request):
+    if request.method == 'POST':
+        try:
+            dados = json.loads(request.body)
+            candidato = Candidato.objects.get(id=dados['id'])
+            candidato.nome = dados['nome']
+            candidato.save()
+            return JsonResponse({'status': 200, 'message': 'Nome atualizado com sucesso'})
+        except Candidato.DoesNotExist:
+            return JsonResponse({'status': 404, 'message': 'Candidato não encontrado'})
+        except Exception as e:
+            return JsonResponse({'status': 500, 'message': f'Erro: {str(e)}'})
+    return JsonResponse({'status': 405, 'message': 'Método não permitido'})
+

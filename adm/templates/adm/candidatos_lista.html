@@ -51,12 +51,8 @@ td.id-col {
     cursor: pointer;
 }
 td.nome-col {
-    cursor: pointer;
-    font-weight: bold;
-    color: #000;
-    text-decoration: none;
+    position: relative;
 }
-/* span que contém apenas o nome visível */
 span.nome-text {
     display: inline-block;
 }
@@ -89,13 +85,54 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* === Edição de nome === */
+.edit-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.edit-input {
+    font-size: 14px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 4px;
+    flex-grow: 1;
+    display: none;
+    margin-right: 5px;
+}
+.edit-icon {
+    cursor: pointer;
+    font-size: 20px;
+    color: black;
+    flex-shrink: 0;
+}
+.edit-icon:hover {
+    color: #444;
+}
+.save-btn {
+    font-size: 14px;
+    padding: 4px 8px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0066cc;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+}
+.save-btn:hover {
+    background-color: #004999;
+}
+.edit-icon {
+    transform: scaleX(-1); /* inverte horizontalmente */
+}
 </style>
 </head>
 <body>
 <div class="container">
 <h1>Lista de Candidatos</h1>
 
-<!-- campo de busca -->
 <input type="text" id="filtroNome" placeholder="Digite um nome para filtrar...">
 
 <table id="tabelaCandidatos">
@@ -109,9 +146,14 @@ a:hover {
 {% for c in candidatos %}
 <tr>
     <td class="id-col" onclick="toggleDetalhes(event, {{ c.id }})">{{ c.id }}</td>
-    <!-- envolvemos apenas o nome visível em .nome-text -->
-    <td class="nome-col" onclick="toggleDetalhes(event, {{ c.id }})">
-        <span class="nome-text">{{ c.nome }}</span>
+    <td class="nome-col">
+        <div class="edit-container" id="edit-container-{{ c.id }}">
+            <span class="nome-text" id="nome-text-{{ c.id }}" onclick="toggleDetalhes(event, {{ c.id }})">{{ c.nome }}</span>
+            <input type="text" class="edit-input" id="input-nome-{{ c.id }}" value="{{ c.nome }}">
+            <span class="edit-icon" onclick="enableEdit({{ c.id }})" title="Editar nome">&#9998;</span>
+            <button class="save-btn" id="save-btn-{{ c.id }}" onclick="saveEdit({{ c.id }})">Salvar</button>
+        </div>
+
         <div class="detalhes" id="detalhes-{{ c.id }}">
             <table onclick="event.stopPropagation()">
                 {% if c.dt_nascimento %}<tr><th>Data de Nascimento</th><td>{{ c.dt_nascimento }}</td></tr>{% endif %}
@@ -160,52 +202,115 @@ a:hover {
 <script>
 let aberto = null;
 function toggleDetalhes(event, id) {
-    event.stopPropagation(); // evita que clique suba para outros elementos
-
+    event.stopPropagation();
     const detalhes = document.getElementById('detalhes-' + id);
-
-    if (aberto && aberto !== detalhes) {
-        aberto.style.display = 'none';
-    }
-
-    if (detalhes.style.display === 'block') {
-        detalhes.style.display = 'none';
-        aberto = null;
-    } else {
-        detalhes.style.display = 'block';
-        aberto = detalhes;
-    }
+    if (aberto && aberto !== detalhes) aberto.style.display = 'none';
+    detalhes.style.display = detalhes.style.display === 'block' ? 'none' : 'block';
+    aberto = detalhes.style.display === 'block' ? detalhes : null;
 }
 
-// função para normalizar (remove acentos e espaços)
 function normalizeText(str) {
     if (!str) return "";
-    return str
-        .normalize('NFD')                 // separa diacríticos
-        .replace(/[\u0300-\u036f]/g, '')  // remove diacríticos
-        .toLowerCase()
-        .trim();
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 }
 
-// filtro em tempo real (usa apenas o span.nome-text)
 document.getElementById("filtroNome").addEventListener("input", function() {
     const filtro = normalizeText(this.value);
-    const linhas = document.querySelectorAll("#tabelaCandidatos tbody tr");
-
-    linhas.forEach(linha => {
-        const nomeEl = linha.querySelector(".nome-text");
-        const nome = nomeEl ? normalizeText(nomeEl.textContent) : "";
-
-        if (!filtro || nome.includes(filtro)) {
+    document.querySelectorAll("#tabelaCandidatos tbody tr").forEach(linha => {
+        const nome = linha.querySelector(".nome-text")?.textContent || "";
+        if (!filtro || normalizeText(nome).includes(filtro)) {
             linha.style.display = "";
         } else {
             linha.style.display = "none";
-            // garante que detalhes fechados quando linha oculta
             const det = linha.querySelector('.detalhes');
             if (det) det.style.display = 'none';
         }
     });
 });
+
+// ==== EDIÇÃO DE NOME ====
+function enableEdit(id) {
+    const nomeSpan = document.getElementById(`nome-text-${id}`);
+    const input = document.getElementById(`input-nome-${id}`);
+    const saveBtn = document.getElementById(`save-btn-${id}`);
+
+    nomeSpan.style.display = 'none';
+    input.style.display = 'inline-block';
+    saveBtn.style.display = 'inline-block';
+    input.focus();
+
+    // dispara salvar se apertar Enter
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            saveEdit(id);
+        }
+    });
+
+    // listener global para fechar se clicar fora
+    function clickOutsideListener(event) {
+        if (!event.target.closest(`#edit-container-${id}`)) {
+            input.style.display = 'none';
+            saveBtn.style.display = 'none';
+            nomeSpan.style.display = 'inline-block';
+            document.removeEventListener('click', clickOutsideListener);
+        }
+    }
+    document.addEventListener('click', clickOutsideListener);
+
+    // evita que clicar no input ou botão dispare o clickOutside
+    input.addEventListener('click', e => e.stopPropagation());
+    saveBtn.addEventListener('click', e => e.stopPropagation());
+}
+
+function saveEdit(id) {
+    const nomeSpan = document.getElementById(`nome-text-${id}`);
+    const input = document.getElementById(`input-nome-${id}`);
+    const saveBtn = document.getElementById(`save-btn-${id}`);
+    const novoNome = input.value.trim();
+
+    if (!novoNome || novoNome === nomeSpan.textContent.trim()) {
+        input.style.display = 'none';
+        saveBtn.style.display = 'none';
+        nomeSpan.style.display = 'inline-block';
+        return;
+    }
+
+    fetch('{% url "adm:api_editar_nome_candidato" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ id: id, nome: novoNome })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 200) nomeSpan.textContent = novoNome;
+        else alert('Erro ao salvar nome!');
+    })
+    .catch(err => alert('Erro de rede ao salvar nome.'))
+    .finally(() => {
+        input.style.display = 'none';
+        saveBtn.style.display = 'none';
+        nomeSpan.style.display = 'inline-block';
+    });
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 </script>
 </body>
 </html>
