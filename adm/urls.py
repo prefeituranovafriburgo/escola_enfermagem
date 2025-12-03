@@ -14,4 +14,6 @@ urlpatterns = [
     path('candidatos/', views.candidatos_lista, name='candidatos_lista'),
     path('sair', views.sair, name='sair'),
     path('api_editar_nome_candidato/', views.api_editar_nome_candidato, name='api_editar_nome_candidato'),
+    path('classificacao/<int:edital_id>/', views.classificacao_resultado, name='classificacao_resultado'),
+    path('classificacao/pdf/<int:edital_id>/', views.classificacao_pdf, name='classificacao_pdf'),
 ]

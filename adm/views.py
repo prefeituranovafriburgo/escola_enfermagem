@@ -201,3 +201,205 @@ def api_editar_nome_candidato(request):
             return JsonResponse({'status': 500, 'message': f'Erro: {str(e)}'})
     return JsonResponse({'status': 405, 'message': 'Método não permitido'})
 
+from datetime import date
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from selecao.models import Edital, Nota
+
+@login_required
+def classificacao_resultado(request, edital_id):
+
+    # Apenas superusuários
+#    if not request.user.is_superuser:
+#        return HttpResponseForbidden("Você não tem permissão para acessar esta página.")
+
+    edital = Edital.objects.get(id=edital_id)
+
+    # Impede acesso antes da data
+    #if edital.dt_resultado > date.today():
+     #   return redirect('/')
+
+    # ---------------------------
+    #      QUERY NORMAL
+    # ---------------------------
+    notas_normais = Nota.objects.raw('''
+        SELECT
+            c.id,
+            c.nome,
+            n.nota,
+            FLOOR(
+                (LENGTH(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                               c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao))
+                 - LENGTH(REPLACE(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                                          c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao), 'S', ''))
+                ) / LENGTH('S')
+            ) AS pontuacao,
+            TIMESTAMPDIFF(YEAR, c.dt_nascimento, CURDATE()) AS idade,
+            c.dt_nascimento
+        FROM selecao_candidato c
+        JOIN selecao_nota n ON c.id = n.candidato_id
+        WHERE FLOOR(
+                (LENGTH(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                               c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao))
+                 - LENGTH(REPLACE(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                                          c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao), 'S', ''))
+                ) / LENGTH('S')
+            ) = 0
+        ORDER BY n.nota DESC, pontuacao DESC, idade DESC;
+    ''')
+
+    notas_classificados = notas_normais[:edital.vagas - edital.vagas_reservadas]
+    notas_nao_classificados = notas_normais[edital.vagas - edital.vagas_reservadas:]
+
+    # ---------------------------
+    #      QUERY RESERVADAS
+    # ---------------------------
+    notas_reservadas = Nota.objects.raw('''
+        SELECT
+            c.id,
+            c.nome,
+            n.nota,
+            FLOOR(
+                (LENGTH(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                               c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao))
+                 - LENGTH(REPLACE(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                                          c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao), 'S', ''))
+                ) / LENGTH('S')
+            ) AS pontuacao,
+            TIMESTAMPDIFF(YEAR, c.dt_nascimento, CURDATE()) AS idade,
+            c.dt_nascimento
+        FROM selecao_candidato c
+        JOIN selecao_nota n ON c.id = n.candidato_id
+        WHERE FLOOR(
+                (LENGTH(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                               c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao))
+                 - LENGTH(REPLACE(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                                          c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao), 'S', ''))
+                ) / LENGTH('S')
+            ) > 0
+        ORDER BY n.nota DESC, pontuacao DESC, idade DESC;
+    ''')
+
+    notas_reservadas_classificados = notas_reservadas[:edital.vagas_reservadas]
+    notas_reservadas_nao_classificados = notas_reservadas[edital.vagas_reservadas:]
+
+    context = {
+        'edital': edital,
+        'notas_classificados': notas_classificados,
+        'notas_nao_classificados': notas_nao_classificados,
+        'notas_reservadas_classificados': notas_reservadas_classificados,
+        'notas_reservadas_nao_classificados': notas_reservadas_nao_classificados,
+    }
+
+    return render(request, "adm/classificacao_resultado.html", context)
+
+from django.template.loader import render_to_string
+from weasyprint import HTML
+from django.http import HttpResponse, HttpResponseForbidden
+
+@login_required
+def classificacao_pdf(request, edital_id):
+
+    if not request.user.is_superuser:
+        return HttpResponseForbidden("Sem permissão.")
+
+    edital = Edital.objects.get(id=edital_id)
+
+    # ================================
+    # AMPLA CONCORRÊNCIA
+    # ================================
+    notas_normais = list(Nota.objects.raw('''
+        SELECT
+            c.id,
+            c.nome,
+            n.nota,
+            FLOOR(
+                (LENGTH(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                               c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao))
+                 - LENGTH(REPLACE(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                                          c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao), 'S', ''))
+                ) / LENGTH('S')
+            ) AS pontuacao,
+            TIMESTAMPDIFF(YEAR, c.dt_nascimento, CURDATE()) AS idade
+        FROM selecao_candidato c
+        JOIN selecao_nota n ON c.id = n.candidato_id
+        WHERE FLOOR(
+                (LENGTH(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                               c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao))
+                 - LENGTH(REPLACE(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                                          c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao), 'S', ''))
+                ) / LENGTH('S')
+            ) = 0
+        ORDER BY n.nota DESC, pontuacao DESC, idade DESC;
+    '''))
+
+    # Separação
+    notas_classificados = notas_normais[:edital.vagas - edital.vagas_reservadas]
+    notas_nao_classificados = notas_normais[edital.vagas - edital.vagas_reservadas:]
+
+    # Numeração correta
+    for i, n in enumerate(notas_classificados, start=1):
+        n.colocacao = i
+
+    start = len(notas_classificados) + 1
+    for i, n in enumerate(notas_nao_classificados, start=start):
+        n.colocacao = i
+
+    # ================================
+    # RESERVADAS
+    # ================================
+    notas_reservadas = list(Nota.objects.raw('''
+        SELECT
+            c.id,
+            c.nome,
+            n.nota,
+            FLOOR(
+                (LENGTH(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                               c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao))
+                 - LENGTH(REPLACE(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                                          c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao), 'S', ''))
+                ) / LENGTH('S')
+            ) AS pontuacao,
+            TIMESTAMPDIFF(YEAR, c.dt_nascimento, CURDATE()) AS idade
+        FROM selecao_candidato c
+        JOIN selecao_nota n ON c.id = n.candidato_id
+        WHERE FLOOR(
+                (LENGTH(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                               c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao))
+                 - LENGTH(REPLACE(CONCAT(c.deficiencia, c.ensino_fundamental_publico,
+                                          c.ensino_medio_publico, c.renda_bruta, c.autodeclaracao), 'S', ''))
+                ) / LENGTH('S')
+            ) > 0
+        ORDER BY n.nota DESC, pontuacao DESC, idade DESC;
+    '''))
+
+    notas_reservadas_classificados = notas_reservadas[:edital.vagas_reservadas]
+    notas_reservadas_nao_classificados = notas_reservadas[edital.vagas_reservadas:]
+
+    # Numeração reservadas (começa em 1 de novo)
+    for i, n in enumerate(notas_reservadas_classificados, start=1):
+        n.colocacao = i
+
+    start_res = len(notas_reservadas_classificados) + 1
+    for i, n in enumerate(notas_reservadas_nao_classificados, start=start_res):
+        n.colocacao = i
+
+    # ================================
+    # RENDERIZAÇÃO
+    # ================================
+    html_string = render_to_string(
+        "adm/classificacao_pdf.html",
+        {
+            "edital": edital,
+            "notas_classificados": notas_classificados,
+            "notas_nao_classificados": notas_nao_classificados,
+            "notas_reservadas_classificados": notas_reservadas_classificados,
+            "notas_reservadas_nao_classificados": notas_reservadas_nao_classificados,
+        }
+    )
+
+    pdf = HTML(string=html_string).write_pdf()
+
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = f'inline; filename="classificacao_{edital_id}.pdf"'
+    return response
