@@ -6,6 +6,21 @@ from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
+
+def _get_client_ip(request):
+    try:
+        from ipware import get_client_ip
+
+        client_ip, _is_routable = get_client_ip(request)
+    except ImportError:
+        forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if forwarded_for:
+            client_ip = forwarded_for.split(',')[0].strip()
+        else:
+            client_ip = request.META.get('REMOTE_ADDR')
+
+    return client_ip or '0.0.0.0'
+
 def inicio_teste(request):
     return render(request, 'inicio.html')
 
@@ -36,7 +51,6 @@ def cadastro(request, id):
     from django.template.loader import render_to_string, get_template
     from django.core.mail import EmailMessage
     import uuid
-    from ipware import get_client_ip
     
 
 
@@ -59,21 +73,7 @@ def cadastro(request, id):
 
                 # Busca IP
 
-                client_ip, is_routable = get_client_ip(request)
-                if client_ip is None:
-                    # Unable to get the client's IP address
-                    print(client_ip)
-                    client_ip = '0.0.0.0'
-                else:
-                    # We got the client's IP address
-                    if is_routable:
-                        print('sim:', is_routable)
-                        # The client's IP address is publicly routable on the Internet
-                    else:
-                        print('não:', is_routable)
-                        # The client's IP address is privat
-
-                cadastro.ip = client_ip
+                cadastro.ip = _get_client_ip(request)
 
                 cadastro.save()
 
@@ -217,7 +217,6 @@ def cadastro_corrige(request, chave):
     from django.template.loader import render_to_string, get_template
     from django.core.mail import EmailMessage
     import uuid
-    from ipware import get_client_ip
 
     try:
         candidato = Candidato.objects.get(chave=chave)
@@ -237,21 +236,7 @@ def cadastro_corrige(request, chave):
 
             # Busca IP
 
-            client_ip, is_routable = get_client_ip(request)
-            if client_ip is None:
-                # Unable to get the client's IP address
-                print(client_ip)
-                client_ip = '0.0.0.0'
-            else:
-                # We got the client's IP address
-                if is_routable:
-                    print('sim:', is_routable)
-                    # The client's IP address is publicly routable on the Internet
-                else:
-                    print('não:', is_routable)
-                    # The client's IP address is privat
-
-            cadastro.ip = client_ip
+            cadastro.ip = _get_client_ip(request)
 
             cadastro.save()
 
@@ -459,28 +444,10 @@ def envia_email(alocacao):
 
 
 def confirmacao(request, chave):
-    from ipware import get_client_ip
-
     candidato = Candidato.objects.get(chave=chave)
     alocacao = Alocacao.objects.get(candidato=candidato)
 
-    # Busca IP
-
-    client_ip, is_routable = get_client_ip(request)
-    if client_ip is None:
-        # Unable to get the client's IP address
-        print(client_ip)
-        client_ip = '0.0.0.0'
-    else:
-        # We got the client's IP address
-        if is_routable:
-            print('sim:', is_routable)
-            # The client's IP address is publicly routable on the Internet
-        else:
-            print('não:', is_routable)
-            # The client's IP address is privat
-
-    acesso = Acesso(candidato=candidato, ip=client_ip)
+    acesso = Acesso(candidato=candidato, ip=_get_client_ip(request))
     acesso.save()
 
     return render(request, 'confirmacao.html', { 'alocacao': alocacao })

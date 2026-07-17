@@ -294,11 +294,19 @@ def classificacao_resultado(request, edital_id):
     return render(request, "adm/classificacao_resultado.html", context)
 
 from django.template.loader import render_to_string
-from weasyprint import HTML
 from django.http import HttpResponse, HttpResponseForbidden
 
 @login_required
 def classificacao_pdf(request, edital_id):
+
+    try:
+        from weasyprint import HTML
+    except ImportError:
+        return HttpResponse(
+            "WeasyPrint nao esta instalado. Instale a dependencia 'weasyprint' para gerar PDFs.",
+            status=500,
+            content_type='text/plain; charset=utf-8'
+        )
 
     if not request.user.is_superuser:
         return HttpResponseForbidden("Sem permissão.")
